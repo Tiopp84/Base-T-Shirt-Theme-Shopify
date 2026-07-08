@@ -1,0 +1,159 @@
+{% doc %}
+  Renders a size guide popup button and modal as a theme block.
+{% enddoc %}
+
+<div class="size-guide" {{ block.shopify_attributes }}>
+  <button type="button" class="size-guide__button" aria-haspopup="dialog" aria-expanded="false" aria-controls="SizeGuideModal-{{ block.id }}">
+    {% render 'icon-ruler' %}
+    <span>{{ block.settings.button_text | default: 'Hướng dẫn chọn size' }}</span>
+  </button>
+</div>
+
+<dialog id="SizeGuideModal-{{ block.id }}" class="size-guide__modal" aria-modal="true" aria-labelledby="SizeGuideTitle-{{ block.id }}">
+  <div class="size-guide__modal-inner">
+    <div class="size-guide__modal-header">
+      <h2 id="SizeGuideTitle-{{ block.id }}">{{ block.settings.button_text | default: 'Bảng Size' }}</h2>
+      <button type="button" class="size-guide__close" aria-label="Close" onclick="this.closest('dialog').close()">
+        {% render 'icon-close' %}
+      </button>
+    </div>
+    <div class="size-guide__modal-content rte">
+      {%- if block.settings.page != blank -%}
+        {{ block.settings.page.content }}
+      {%- else -%}
+        <p>Vui lòng chọn trang hiển thị bảng kích thước trong cài đặt block.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</dialog>
+
+{% stylesheet %}
+  .size-guide {
+    margin-bottom: 1.5rem;
+  }
+  
+  .size-guide__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    color: rgba(var(--color-foreground), 0.75);
+    transition: color 0.2s ease;
+  }
+  
+  .size-guide__button:hover {
+    color: rgba(var(--color-foreground), 1);
+  }
+  
+  .size-guide__button svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  
+  .size-guide__modal {
+    padding: 0;
+    border: none;
+    border-radius: var(--popup-corner-radius, 12px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 650px;
+    margin: auto;
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+  }
+  
+  .size-guide__modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+  }
+  
+  .size-guide__modal-inner {
+    padding: 3rem;
+  }
+  
+  .size-guide__modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+    padding-bottom: 1.5rem;
+  }
+  
+  .size-guide__modal-header h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  
+  .size-guide__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+  
+  .size-guide__close:hover {
+    background-color: rgba(var(--color-foreground), 0.05);
+    transform: scale(1.1);
+  }
+  
+  .size-guide__close svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.size-guide__button');
+    
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const controls = button.getAttribute('aria-controls');
+        const dialog = document.getElementById(controls);
+        if (dialog) dialog.showModal();
+      });
+    });
+
+    // Close on backdrop click
+    const dialogs = document.querySelectorAll('.size-guide__modal');
+    dialogs.forEach(dialog => {
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Size Guide",
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Hướng dẫn chọn size"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "Size Guide Page"
+    }
+  ]
+}
+{% endschema %}

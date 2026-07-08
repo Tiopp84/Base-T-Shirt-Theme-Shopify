@@ -1,0 +1,60 @@
+/* T-Shirt Base Theme Custom Styles - Minimalist & Animated */
+
+:root {
+  --popup-corner-radius: 12px;
+  --card-corner-radius: 8px;
+}
+
+/* Smooth Image Hover Effects */
+.media--hover-effect img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-wrapper:hover .media--hover-effect img {
+  transform: scale(1.05);
+}
+
+/* Button Micro-Animations */
+.button, .shopify-payment-button__button {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s ease, background-color 0.2s ease !important;
+}
+
+.button:hover, .shopify-payment-button__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+}
+
+.button:active, .shopify-payment-button__button:active {
+  transform: translateY(0);
+}
+
+/* Minimalist Clean UI Details */
+.card-information {
+  padding-top: 1.5rem;
+}
+
+.card__heading {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.price {
+  font-weight: 600;
+}
+
+/* Variant Pill specific animation */
+.product-form__input--pill input[type="radio"]:checked + label {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  transform: scale(1.05);
+}
+
+.product-form__input--pill label {
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 6px;
+}
+
+.product-form__input--pill label:hover {
+  background-color: rgba(var(--color-foreground), 0.05);
+  transform: scale(1.05);
+}

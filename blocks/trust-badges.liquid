@@ -1,0 +1,84 @@
+{% doc %}
+  Renders trust badges as a theme block.
+{% enddoc %}
+
+<div class="trust-badges trust-badges-{{ block.id }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.show_secure_payment -%}
+  <div class="trust-badge">
+    {% render 'icon-shield' %}
+    <span>{{ 'products.product.secure_payment' | t }}</span>
+  </div>
+  {%- endif -%}
+  {%- if block.settings.show_returns -%}
+  <div class="trust-badge">
+    {% render 'icon-return' %}
+    <span>{{ 'products.product.easy_returns' | t }}</span>
+  </div>
+  {%- endif -%}
+  {%- if block.settings.show_shipping -%}
+  <div class="trust-badge">
+    {% render 'icon-shipping' %}
+    <span>{{ 'products.product.free_shipping' | t }}</span>
+  </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    row-gap: 1.2rem;
+    margin: 2.5rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(var(--color-foreground), 0.08);
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+  
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgba(var(--color-foreground), 0.85);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .trust-badge:hover {
+    color: rgba(var(--color-foreground), 1);
+    transform: translateY(-2px);
+  }
+  
+  .trust-badge svg {
+    width: 2.2rem;
+    height: 2.2rem;
+    color: rgba(var(--color-foreground), 1);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_secure_payment",
+      "label": "Show Secure Payment",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_returns",
+      "label": "Show Returns",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping",
+      "label": "Show Shipping",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

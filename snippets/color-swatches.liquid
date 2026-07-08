@@ -1,0 +1,81 @@
+{% doc %}
+  Renders color swatches for product options.
+
+  @param {object} option - The product option object
+  @param {boolean} [show_swatches] - Global setting to show swatches
+  @param {string} [product_form_id] - Form ID to attach the input to
+
+  @example
+  {% render 'color-swatches', product: product, option: option, show_swatches: settings.enable_color_swatches, product_form_id: product_form_id %}
+{% enddoc %}
+
+{%- liquid
+  assign is_color = false
+  assign option_name = option.name | downcase
+  if option_name contains 'color' or option_name contains 'colour' or option_name contains 'màu'
+    assign is_color = true
+  endif
+-%}
+
+{%- if show_swatches and is_color -%}
+  <fieldset class="js product-form__input color-swatches">
+    <legend class="form__label">{{ option.name }}</legend>
+    <div class="color-swatches__container">
+      {%- for value in option.values -%}
+        <input type="radio" id="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}"
+              name="{{ option.name }}"
+              value="{{ value | escape }}"
+              form="{{ product_form_id }}"
+              {% if option.selected_value == value %}checked{% endif %}
+        >
+        <label for="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}" 
+               class="color-swatch-label" 
+               style="background-color: {{ value | split: ' ' | last | downcase }}; background-image: url({{ value | handle | append: '.png' | asset_img_url: '50x' }});"
+               title="{{ value | escape }}">
+          <span class="visually-hidden">{{ value | escape }}</span>
+        </label>
+      {%- endfor -%}
+    </div>
+  </fieldset>
+{%- endif -%}
+  
+{% stylesheet %}
+    .color-swatches__container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    
+    .color-swatches input[type="radio"] {
+      clip: rect(0, 0, 0, 0);
+      overflow: hidden;
+      position: absolute;
+      height: 1px;
+      width: 1px;
+    }
+    
+    .color-swatch-label {
+      display: inline-block;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%; /* Circle shape */
+      border: 1px solid rgba(0,0,0,0.1);
+      cursor: pointer;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.2s ease;
+      position: relative;
+    }
+    
+    .color-swatch-label:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    
+    .color-swatches input[type="radio"]:checked + .color-swatch-label {
+      border: 1px solid #111;
+      box-shadow: 0 0 0 3px #fff inset, 0 0 0 1px #111;
+      transform: scale(1.1);
+    }
+  {% endstylesheet %}
