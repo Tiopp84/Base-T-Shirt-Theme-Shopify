@@ -1,0 +1,45 @@
+{% schema %}
+{
+  "name": "Product Text",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "default": "t:sections.main-product.blocks.text.settings.text.default",
+      "label": "t:sections.main-product.blocks.text.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.options__1.label"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.options__2.label"
+        },
+        {
+          "value": "uppercase",
+          "label": "t:sections.main-product.blocks.text.settings.text_style.options__3.label"
+        }
+      ],
+      "default": "body",
+      "label": "t:sections.main-product.blocks.text.settings.text_style.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Text"
+    }
+  ]
+}
+{% endschema %}
+
+<p
+  class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {{- block.settings.text -}}
+</p>
