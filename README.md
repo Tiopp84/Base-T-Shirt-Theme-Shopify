@@ -1,99 +1,88 @@
-# Dawn
+# Shopify Base Theme (Horizontal Architecture)
 
-[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
+This project is a custom Shopify Theme built upon the foundation of Dawn (v15.5.0), heavily refactored to fully embrace the **Shopify Horizontal Architecture (Theme Blocks)**.
 
-[Getting started](#getting-started) |
-[Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
-[Developer tools](#developer-tools) |
-[Contributing](#contributing) |
-[Code of conduct](#code-of-conduct) |
-[Theme Store submission](#theme-store-submission) |
-[License](#license)
+Unlike older architectures where sections control their nested blocks via static switch statements (`case block.type`), this theme separates concerns: Sections provide the layout and context, while reusable independent Theme Blocks provide the granular features.
 
-Dawn represents a HTML-first, JavaScript-only-as-needed approach to theme development. It's Shopify's first source available theme with performance, flexibility, and [Online Store 2.0 features](https://www.shopify.com/partners/blog/shopify-online-store) built-in and acts as a reference for building Shopify themes.
+## 🏗 Architecture Overview
 
-* **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
-* **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
-* **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
-* **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+### 1. Sections (`/sections`)
+Sections in this theme primarily act as structural wrappers.
+- They **do not** manually loop through blocks and check their types.
+- They render all child Theme Blocks using the native injection tag: `{% content_for 'blocks' %}`.
+- To allow merchants to add Theme Blocks to a section, the section's schema must include:
+  ```json
+  "blocks": [
+    {
+      "type": "@theme"
+    }
+  ]
+  ```
 
-You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
+### 2. Theme Blocks (`/blocks`)
+Functional components (such as `product-title`, `product-price`, `quantity-selector`, `collapsible-tab`, etc.) have been extracted out of `main-product.liquid` into completely independent `.liquid` files living in the `/blocks/` directory.
 
-## Getting started
-We recommend using Dawn as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
+> **CRITICAL RULE FOR AI & DEVS**: 
+> - **DO NOT USE APP BLOCK SCHEMA**: Never add `"target": "section"` to the schema of a file in the `/blocks/` directory. These are Theme Blocks, not App Blocks.
+> - **PRESETS ARE MANDATORY**: For a Theme Block to be visible and selectable in the Shopify Theme Editor's "Add block" menu, its `{% schema %}` **must** contain a `"presets"` array. Without `"presets"`, the block can only be rendered if hardcoded in JSON templates, but merchants won't be able to add it manually.
 
-> If you're building a theme for the Shopify Theme Store, then you can use Dawn as a starting point. However, the theme that you submit needs to be [substantively different from Dawn](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Dawn](https://shopify.dev/themes/tools/dawn#ways-to-use-dawn).
+**Example of a valid Theme Block schema (`blocks/product-title.liquid`):**
+```liquid
+{% schema %}
+{
+  "name": "Product Title",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Title"
+    }
+  ]
+}
+{% endschema %}
 
-Please note that the main branch may include code for features not yet released. The "stable" version of Dawn is available in the theme store.
-
-## Staying up to date with Dawn changes
-
-Say you're building a new theme off Dawn but you still want to be able to pull in the latest changes, you can add a remote `upstream` pointing to this Dawn repository.
-
-1. Navigate to your local theme folder.
-2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
-```sh
-git remote -v
-```
-3. If you don't see an `upstream`, you can add one that points to Shopify's Dawn repository:
-```sh
-git remote add upstream https://github.com/Shopify/dawn.git
-```
-4. Pull in the latest Dawn changes into your repository:
-```sh
-git fetch upstream
-git pull upstream main
+<h1>{{ product.title | escape }}</h1>
 ```
 
-## Developer tools
+## 🛠 Developer & AI Guidelines
 
-There are a number of really useful tools that the Shopify Themes team uses during development. Dawn is already set up to work with these tools.
+When writing or modifying code in this project, you **must** adhere to the following rules (also referenced in `AGENTS.md`):
 
-### Shopify CLI
+1. **Strict Theme Block Compliance**:
+   - Only use valid fields supported by the Shopify Theme Block schema.
+   - If a section needs to allow blocks, configure it using `{"type": "@theme"}` in the section schema. 
 
-[Shopify CLI](https://github.com/Shopify/shopify-cli) helps you build Shopify themes faster and is used to automate and enhance your local development workflow. It comes bundled with a suite of commands for developing Shopify themes—everything from working with themes on a Shopify store (e.g. creating, publishing, deleting themes) or launching a development server for local theme development.
+2. **Styling (CSS) & JavaScript**:
+   - Use `{% stylesheet %}` and `{% javascript %}` tags directly inside snippets, blocks, and sections to encapsulate styles and scripts.
+   - **Good Practice**: For single-property settings (e.g., `gap`), map them to CSS variables `style="--gap: {{ block.settings.gap }}px"`. For multiple properties, use CSS classes (e.g., `collection--full-width`).
 
-You can follow this [quick start guide for theme developers](https://shopify.dev/docs/themes/tools/cli) to get started.
+3. **Liquid Syntax & Best Practices**:
+   - Use whitespace stripping `{{- ... -}}` and `{%- ... -%}` to avoid excessive spaces in the HTML output.
+   - Liquid does not support ternary conditionals. Always use nested `{% if %}` or `{% unless %}` tags.
+   - For string logic, use the `contains` operator. Note that `contains` only works with strings, not objects inside arrays.
 
-### Theme Check
+4. **Component Documentation (LiquidDoc)**:
+   - When a block or snippet is rendered statically, include a `{% doc %}` tag at the top of the file documenting its purpose, `@param`, and providing an `@example`.
 
-We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
+## ✅ Validation
 
-We've added Theme Check to Dawn's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
+Always validate your JSON schemas and Liquid files against Shopify's official standards. Since this architecture avoids App Blocks, passing the **Shopify Theme Check** is mandatory before any deployment.
 
-You can also run it from a terminal with the following Shopify CLI command:
-
+Run the linter locally:
 ```bash
 shopify theme check
 ```
 
-### Continuous Integration
+## 📁 Directory Structure
+```
+.
+├── assets          # Static assets (critical.css, global JS, fonts)
+├── blocks          # Modular, reusable Theme Blocks (e.g., product-price.liquid)
+├── config          # Global theme settings (settings_schema.json)
+├── layout          # Global HTML shells (theme.liquid)
+├── locales         # Translations (en.default.json)
+├── sections        # Structural wrappers (main-product.liquid)
+├── snippets        # Reusable logic / HTML fragments
+└── templates       # JSON structures mapping sections & blocks
+```
 
-Dawn uses [GitHub Actions](https://github.com/features/actions) to maintain the quality of the theme. [This is a starting point](https://github.com/Shopify/dawn/blob/main/.github/workflows/ci.yml) and what we suggest to use in order to ensure you're building better themes. Feel free to build off of it!
-
-#### Shopify/lighthouse-ci-action
-
-We love fast websites! Which is why we created [Shopify/lighthouse-ci-action](https://github.com/Shopify/lighthouse-ci-action). This runs a series of [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) audits for the home, product and collections pages on a store to ensure code that gets added doesn't degrade storefront performance over time.
-
-#### Shopify/theme-check-action
-
-Dawn runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
-
-## Contributing
-
-Want to make commerce better for everyone by contributing to Dawn? We'd love your help! Please read our [contributing guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bug fixes and improvements, and how to build for Dawn.
-
-## Code of conduct
-
-All developers who wish to contribute through code or issues, please first read our [Code of Conduct](https://github.com/Shopify/dawn/blob/main/.github/CODE_OF_CONDUCT.md).
-
-## Theme Store submission
-
-The [Shopify Theme Store](https://themes.shopify.com/) is the place where Shopify merchants find the themes that they'll use to showcase and support their business. As a theme partner, you can create themes for the Shopify Theme Store and reach an international audience of an ever-growing number of entrepreneurs.
-
-Ensure that you follow the list of [theme store requirements](https://shopify.dev/themes/store/requirements) if you're interested in becoming a [Shopify Theme Partner](https://themes.shopify.com/services/themes/guidelines) and building themes for the Shopify platform.
-
-## License
-
-Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
+*Built to be lean, functional, and extremely modular. Happy coding!*
