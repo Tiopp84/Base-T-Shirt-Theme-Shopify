@@ -1,0 +1,33 @@
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.popup.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "default": "t:sections.main-product.blocks.popup.settings.link_label.default",
+      "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+    },
+    {
+      "id": "page",
+      "type": "page",
+      "label": "t:sections.main-product.blocks.popup.settings.page.label"
+    }
+  ]
+}
+{% endschema %}
+
+<modal-opener
+  class="product-popup-modal__opener quick-add-hidden"
+  data-modal="#PopupModal-{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
+  <button
+    id="ProductPopup-{{ block.id }}"
+    class="product-popup-modal__button link"
+    type="button"
+    aria-haspopup="dialog"
+  >
+    {{ block.settings.text | default: block.settings.page.title | escape }}
+  </button>
+</modal-opener>

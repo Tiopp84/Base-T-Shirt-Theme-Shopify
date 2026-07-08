@@ -1,0 +1,23 @@
+{% schema %}
+{
+  "name": "t:sections.main-product.blocks.share.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "t:sections.main-product.blocks.share.settings.text.label",
+      "default": "t:sections.main-product.blocks.share.settings.text.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.main-product.blocks.share.name"
+    }
+  ]
+}
+{% endschema %}
+
+{% liquid
+  assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+  render 'share-button', block: block, share_link: share_url
+%}
