@@ -38,7 +38,7 @@
       assign brand_empty = true
     endif
 
-    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
+    if section.blocks.size == 1 and section.blocks[0].type == 'footer-brand-information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
       assign only_empty_brand = true
     endif
   -%}
@@ -237,7 +237,16 @@
   "name": "t:sections.footer.name",
   "blocks": [
     {
-      "type": "@theme"
+      "type": "footer-link-list"
+    },
+    {
+      "type": "footer-text"
+    },
+    {
+      "type": "footer-image"
+    },
+    {
+      "type": "footer-brand-information"
     },
     {
       "type": "@app"
@@ -354,10 +363,10 @@
   "default": {
     "blocks": [
       {
-        "type": "link_list"
+        "type": "footer-link-list"
       },
       {
-        "type": "text"
+        "type": "footer-text"
       }
     ]
   }
