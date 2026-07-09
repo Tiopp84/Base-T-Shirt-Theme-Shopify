@@ -26,6 +26,9 @@
               name="{{ option.name }}"
               value="{{ value | escape }}"
               form="{{ product_form_id }}"
+              data-product-url="{{ value.product_url }}"
+              data-option-value-id="{{ value.id }}"
+              data-option-name="{{ option.name | escape }}"
               {% if option.selected_value == value %}checked{% endif %}
         >
         <label for="{{ product_form_id }}-{{ option.position }}-{{ forloop.index0 }}" 

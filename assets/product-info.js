@@ -163,7 +163,8 @@ if (!customElements.get('product-info')) {
           params.push(`option_values=${optionValues.join(',')}`);
         }
 
-        return `${url}?${params.join('&')}`;
+        const hasQueryString = url.includes('?');
+        return `${url}${hasQueryString ? '&' : '?'}${params.join('&')}`;
       }
 
       updateOptionValues(html) {
