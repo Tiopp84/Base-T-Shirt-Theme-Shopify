@@ -1,15 +1,13 @@
-{% comment %}
+{% doc %}
   Renders share button.
-  Accepts:
-  - block: {Object} passes in the block information.
-  - share_link: {String} url to be added to the input the user will get/copy.
 
-  Usage:
-  {% render 'share-button',
-    block: block,
-    share_link: share_url
-  %}
-{% endcomment %}
+  @param {object} block - Passes in the block information.
+  @param {string} share_link - Url to be added to the input the user will get/copy.
+  @param {object} [section] - Parent section object.
+
+  @example
+  {% render 'share-button', block: block, share_link: share_url %}
+{% enddoc %}
 <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
 
 <share-button id="Share-{{ section.id }}" class="share-button quick-add-hidden" {{ block.shopify_attributes }}>

@@ -1,13 +1,12 @@
-{% comment %}
+{% doc %}
   Renders cart notification
 
-  Accepts:
-  - color_scheme: {String} sets the color scheme of the notification (optional)
-  - desktop_menu_type: {String} passes the desktop menu type which allows us to use the right css class (optional)
+  @param {string} [color_scheme] - Sets the color scheme of the notification
+  @param {string} [desktop_menu_type] - Passes the desktop menu type which allows us to use the right css class
 
-  Usage:
+  @example
   {% render 'cart-notification' %}
-{% endcomment %}
+{% enddoc %}
 
 <cart-notification>
   <div class="cart-notification-wrapper{% if desktop_menu_type != 'drawer' %} page-width{% endif %}">

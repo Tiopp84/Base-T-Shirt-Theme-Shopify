@@ -1,13 +1,17 @@
-{% comment %}
+{% doc %}
   Variant List Row
 
-  Accepts:
-  - item: {Object} Variant or Product object
-  - sku: {String} Sku of Product or Variant (optional)
-  - image: {Object} Product or Variant image (optional)
-  Usage:
-  {% render 'quick-order-list-row' variant: variant %}
-{% endcomment %}
+  @param {object} item - Variant or Product object
+  @param {string} [sku] - Sku of Product or Variant
+  @param {object} [image] - Product or Variant image
+  @param {object} variant - Variant object
+  @param {boolean} show_image - Whether to show variant image
+  @param {boolean} show_sku - Whether to show SKU
+  @param {boolean} [is_modal] - Whether row is rendered inside a modal
+
+  @example
+  {% render 'quick-order-list-row', variant: variant %}
+{% enddoc %}
 
 {% # theme-check-disable %}
 {% assign cart_qty = cart | item_count_for_variant: variant.id %}

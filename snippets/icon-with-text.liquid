@@ -1,15 +1,11 @@
-{% comment %}
+{% doc %}
   Renders icon with text block
 
-  Accepts:
-  - block: {Object} passes in the block information.
+  @param {object} block - Passes in the block information.
 
-
-  Usage:
-  {% render 'icon-with-text',
-    block: block
-  %}
-{% endcomment %}
+  @example
+  {% render 'icon-with-text', block: block %}
+{% enddoc %}
 {%- liquid
   assign heading_1_empty = false
   assign heading_2_empty = false

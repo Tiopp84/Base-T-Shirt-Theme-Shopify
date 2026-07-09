@@ -1,15 +1,17 @@
-{% comment %}
-  Renders product buy-buttons.
-  Accepts:
-  - product: {Object} product object.
-  - block: {Object} passing the block information.
-  - product_form_id: {String} product form id.
-  - section_id: {String} id of section to which this snippet belongs.
-  - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+{% doc %}
+  Renders product buy buttons.
 
-  Usage:
-  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
-{% endcomment %}
+  @param {object} product - Product object.
+  @param {object} block - Block settings and attributes.
+  @param {string} product_form_id - Product form id.
+  @param {string} section_id - Section id.
+  @param {boolean} [show_pickup_availability] - Whether to render pickup availability.
+  @param {boolean} [quantity_rule_soldout] - Whether the quantity rule is sold out.
+  @param {object} [section] - Parent section object.
+
+  @example
+  {% render 'buy-buttons', product: product, block: block, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true, section: section %}
+{% enddoc %}
 <div {{ block.shopify_attributes }}>
   {%- if product != blank -%}
     {%- liquid

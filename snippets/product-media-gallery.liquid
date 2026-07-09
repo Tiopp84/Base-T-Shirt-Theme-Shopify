@@ -1,15 +1,16 @@
-{% comment %}
+{% doc %}
   Renders a product media gallery. Should be used with 'media-gallery.js'
   Also see 'product-media-modal'
 
-  Accepts:
-  - product: {Object} Product liquid object
-  - variant_images: {Array} Product images associated with a variant
-  - limit: {Number} (optional) When passed, limits the number of media items to render
+  @param {object} product - Product object
+  @param {object} [first_3d_model] - First 3D model object
+  @param {object} variant_images - Array of variant images associated with a variant
+  @param {number} [limit] - When passed, limits the number of media items to render
+  @param {object} [section] - Parent section object.
 
-  Usage:
+  @example
   {% render 'product-media-gallery' %}
-{% endcomment %}
+{% enddoc %}
 
 {%- liquid
   if section.settings.hide_variants and variant_images.size == product.media.size

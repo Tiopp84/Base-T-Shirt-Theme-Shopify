@@ -1,29 +1,30 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-{% comment %}
+{% doc %}
   Renders a product thumbnail with a modal-opener
 
-  Accepts:
-  - media: {Object} Product Media object
-  - media_count: {Number} Number of media objects
-  - position: {String} Position of the media. Used for accessible label.
-  - desktop_layout: {String} Layout of the media for desktop.
-  - mobile_layout: {String} Layout of the media for mobile.
-  - loop: {Boolean} Enable video looping (optional)
-  - modal_id: {String} The product modal that will be shown by clicking the thumbnail
-  - xr_button: {Boolean} Renders the "View in your space" button (shopify-xr-button) if the media is a 3D Model
-  - constrain_to_viewport: {Boolean} Force media height to fit within viewport
-  - media_fit: {String} Method ("contain" or "cover") to fit image into container
-  - media_width: {Float} The width percentage that the media column occupies on desktop.
-  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+  @param {object} media - Product Media object
+  @param {number} media_count - Number of media objects
+  @param {string} position - Position of the media. Used for accessible label.
+  @param {string} desktop_layout - Layout of the media for desktop.
+  @param {string} mobile_layout - Layout of the media for mobile.
+  @param {boolean} [loop] - Enable video looping
+  @param {string} modal_id - The product modal that will be shown by clicking the thumbnail
+  @param {boolean} xr_button - Renders the "View in your space" button (shopify-xr-button) if the media is a 3D Model
+  @param {boolean} constrain_to_viewport - Force media height to fit within viewport
+  @param {string} media_fit - Method ("contain" or "cover") to fit image into container
+  @param {number} media_width - The width percentage that the media column occupies on desktop.
+  @param {boolean} [lazy_load] - Image should be lazy loaded. Default: true
+  @param {object} [section] - Parent section object.
+  @param {object} [product] - Product liquid object.
 
-  Usage:
+  @example
   {% render 'product-thumbnail',
     media: media,
     position: forloop.index,
     loop: section.settings.enable_video_looping,
     modal_id: section.id
   %}
-{% endcomment %}
+{% enddoc %}
 
 {%- liquid
   unless lazy_load == false

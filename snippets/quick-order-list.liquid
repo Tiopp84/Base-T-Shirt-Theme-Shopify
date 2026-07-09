@@ -1,14 +1,15 @@
-{% comment %}
+{% doc %}
   Renders a list of product's variants
 
-  Accepts:
-  - product: {Object} Product Liquid object
-  - show_image: {Boolean} Shows image of the variant in the row
-  - is_modal: {Boolean} Defines if this snippet lives in a modal (optional)
+  @param {object} product - Product Liquid object
+  @param {boolean} show_image - Shows image of the variant in the row
+  @param {boolean} [show_sku] - Shows sku of the variant in the row
+  @param {boolean} [is_modal] - Defines if this snippet lives in a modal
+  @param {object} [section] - Parent section object.
 
-  Usage:
+  @example
   {% render 'quick-order-list', product: product %}
-{% endcomment %}
+{% enddoc %}
 
 {% comment %} TODO: enable theme-check once `line_items_for` is accepted as valid filter {% endcomment %}
 {% # theme-check-disable %}

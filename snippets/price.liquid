@@ -1,17 +1,16 @@
-{% comment %}
+{% doc %}
   Renders a list of product's price (regular, sale)
 
-  Accepts:
-  - product: {Object} Product Liquid object (optional)
-  - placeholder: {Boolean} Renders a placeholder price (optional)
-  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
-  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
-  - price_class: {String} Adds a price class to the price element (optional)
-  - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
+  @param {object} [product] - Product Liquid object
+  @param {boolean} [placeholder] - Renders a placeholder price
+  @param {boolean} [use_variant] - Renders selected or first variant price instead of overall product pricing
+  @param {boolean} [show_badges] - Renders 'Sale' and 'Sold Out' tags if the product matches the condition
+  @param {string} [price_class] - Adds a price class to the price element
+  @param {boolean} [show_compare_at_price] - Renders the compare at price if the product matches the condition
 
-  Usage:
+  @example
   {% render 'price', product: product %}
-{% endcomment %}
+{% enddoc %}
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant

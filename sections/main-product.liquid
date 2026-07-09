@@ -77,14 +77,14 @@
     <div class="page-width">
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
-          {% render 'product-media-gallery', variant_images: variant_images %}
+          {% render 'product-media-gallery', variant_images: variant_images, product: product %}
         </div>
         <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
           <section
             id="ProductInfo-{{ section.id }}"
             class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
           >
-            {%- assign product_form_id = 'product-form-' | append: section.id -%}
+            {% comment %} {%- assign product_form_id = 'product-form-' | append: section.id -%} {% endcomment %}
 
             {% content_for 'blocks' %}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -95,9 +95,9 @@
         </div>
       </div>
 
-      {% render 'product-media-modal', variant_images: variant_images %}
+      {% render 'product-media-modal', variant_images: variant_images, product: product %}
 
-      {% assign popups = section.blocks | where: 'type', 'popup' %}
+      {% assign popups = section.blocks | where: 'type', 'product-popup' %}
       {%- for block in popups -%}
         <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
           <div
@@ -134,7 +134,6 @@
         </script>
         <script src="{{ 'product-model.js' | asset_url }}" defer></script>
       {%- endif -%}
-
 
       <script type="application/ld+json">
         {{ product | structured_data }}
