@@ -34,13 +34,13 @@
     style="--animation-order: {{ block_index | plus: 1 }};"
   {% endif %}
 >
-              {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
-              {% render 'card-collection',
-                card_collection: block.settings.collection,
-                media_aspect_ratio: 'adapt',
-                columns: 2,
-                extend_height: true,
-                wrapper_class: section.settings.card_styles,
-                placeholder_image: placeholder_image
-              %}
+  {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+  {% render 'card-collection',
+    card_collection: block.settings.collection,
+    media_aspect_ratio: 'adapt',
+    columns: 2,
+    extend_height: true,
+    wrapper_class: section.settings.card_styles,
+    placeholder_image: placeholder_image
+  %}
 </div>
