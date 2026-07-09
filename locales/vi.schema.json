@@ -1,0 +1,62 @@
+{
+  "settings_schema": {
+    "colors": {
+      "name": "Màu sắc"
+    },
+    "typography": {
+      "name": "Kiểu chữ"
+    },
+    "social_media": {
+      "name": "Mạng xã hội"
+    },
+    "currency_format": {
+      "name": "Định dạng tiền tệ"
+    },
+    "cart": {
+      "name": "Giỏ hàng"
+    }
+  },
+  "sections": {
+    "header": {
+      "name": "Đầu trang (Header)"
+    },
+    "footer": {
+      "name": "Chân trang (Footer)"
+    },
+    "main-product": {
+      "name": "Chi tiết sản phẩm",
+      "blocks": {
+        "title": {
+          "name": "Tiêu đề sản phẩm"
+        },
+        "price": {
+          "name": "Giá bán"
+        },
+        "buy_buttons": {
+          "name": "Nút mua hàng"
+        },
+        "description": {
+          "name": "Mô tả"
+        },
+        "variant_picker": {
+          "name": "Tùy chọn phiên bản"
+        },
+        "quantity_selector": {
+          "name": "Số lượng"
+        },
+        "share": {
+          "name": "Nút chia sẻ"
+        }
+      }
+    },
+    "featured-collection": {
+      "name": "Bộ sưu tập nổi bật"
+    },
+    "image-banner": {
+      "name": "Banner hình ảnh"
+    },
+    "rich-text": {
+      "name": "Văn bản đa dạng"
+    }
+  }
+}

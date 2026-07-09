@@ -1,9 +1,11 @@
-{% comment %}
+{% doc %}
   Renders a header drawer menu for mobile and desktop.
 
-  Usage:
+  @param {object} [section] - Parent section object.
+
+  @example
   {% render 'header-drawer' %}
-{% endcomment %}
+{% enddoc %}
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">

@@ -1,12 +1,11 @@
-{% comment %}
+{% doc %}
   Renders a header search modal. Should be used with 'header.liquid'
 
-  Accepts:
-  - input_id: {String} Id for the search input element (required)
+  @param {string} input_id - Id for the search input element
 
-  Usage:
-  {% render 'header-search', input_id: 'My-Id'%}
-{% endcomment %}
+  @example
+  {% render 'header-search', input_id: 'My-Id' %}
+{% enddoc %}
 
 <details-modal class="header__search">
   <details>

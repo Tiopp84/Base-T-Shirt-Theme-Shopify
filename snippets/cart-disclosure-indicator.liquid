@@ -1,10 +1,9 @@
-{% comment %}
+{% doc %}
   Renders a cart disclosure indicator when the product has a disclosure configured for the cart surface.
 
-  Accepts:
-  - product: {Object} Product object
-  - modal_id: {String} Unique modal id for this cart line
-{% endcomment %}
+  @param {object} product - Product object
+  @param {string} modal_id - Unique modal id for this cart line
+{% enddoc %}
 
 {%- liquid
   assign disclosures = product.metafields.shopify.disclosure.value

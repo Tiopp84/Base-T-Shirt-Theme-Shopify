@@ -1,13 +1,11 @@
-{% comment %}
+{% doc %}
   Renders social icons.
-  Accepts:
-  - class: {String} a class to be added to the <ul> element (optional).
 
-  Usage:
-  {% render 'social-icons',
-    class: 'my-class'
-  %}
-{% endcomment %}
+  @param {string} [class] - A class to be added to the <ul> element.
+
+  @example
+  {% render 'social-icons', class: 'my-class' %}
+{% enddoc %}
 
 <ul class="list-unstyled list-social{% if class %} {{ class}}{% endif %}" role="list">
   {%- if settings.social_facebook_link != blank -%}

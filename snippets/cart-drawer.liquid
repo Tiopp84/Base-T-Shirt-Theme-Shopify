@@ -1,9 +1,11 @@
-{% comment %}
+{% doc %}
   Renders cart drawer
 
-  Usage:
+  @param {object} [block] - Block object.
+
+  @example
   {% render 'cart-drawer' %}
-{% endcomment %}
+{% enddoc %}
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}

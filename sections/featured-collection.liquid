@@ -100,7 +100,7 @@
         role="list"
         aria-label="{{ 'general.slider.name' | t }}"
       >
-        {% assign skip_card_product_styles = false %}
+
 
         {%- if section.settings.collection.products.size > 0 -%}
           {% assign lazy_load = false %}
@@ -117,11 +117,15 @@
                   style="--animation-order: {{ forloop.index }};"
                 {% endif %}
               >
-                {% render 'product-card-custom',
+                {% render 'card-product',
                   card_product: product,
                   media_aspect_ratio: section.settings.image_ratio,
+                  image_shape: section.settings.image_shape,
                   show_secondary_image: section.settings.show_secondary_image,
-                  show_vendor: section.settings.show_vendor
+                  show_vendor: section.settings.show_vendor,
+                  show_rating: section.settings.show_rating,
+                  quick_add: false,
+                  section_id: section.id
                 %}
               </li>
             {%- endfor -%}
@@ -150,7 +154,10 @@
                 media_aspect_ratio: section.settings.image_ratio,
                 image_shape: section.settings.image_shape,
                 lazy_load: false,
-                placeholder_image: placeholder_image
+                placeholder_image: placeholder_image,
+                show_rating: section.settings.show_rating,
+                quick_add: false,
+                section_id: section.id
               %}
             </li>
           {%- endfor -%}

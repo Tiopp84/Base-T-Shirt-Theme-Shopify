@@ -1,21 +1,19 @@
-{% comment %}
+{% doc %}
   Renders product variant options
 
-  Accepts:
-  - product: {Object} product object.
-  - option: {Object} current product_option object.
-  - block: {Object} block object.
-  - picker_type: {String} type of picker to dispay
+  @param {object} option - Option object.
+  @param {object} block - Block object.
+  @param {string} picker_type - Type of picker to dispay
+  @param {object} [section] - Parent section object.
 
-
-  Usage:
+  @example
   {% render 'product-variant-options',
     product: product,
     option: option,
     block: block
     picker_type: picker_type
   %}
-{% endcomment %}
+{% enddoc %}
 {%- liquid
   assign product_form_id = 'product-form-' | append: section.id
 -%}

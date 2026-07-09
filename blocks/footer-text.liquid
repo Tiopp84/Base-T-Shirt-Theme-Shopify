@@ -1,0 +1,40 @@
+{% schema %}
+{
+  "name": "t:sections.footer.blocks.text.name",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "t:sections.footer.blocks.text.settings.heading.default",
+      "label": "t:sections.footer.blocks.text.settings.heading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "default": "t:sections.footer.blocks.text.settings.subtext.default",
+      "label": "t:sections.footer.blocks.text.settings.subtext.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text"
+    }
+  ]
+}
+{% endschema %}
+
+<div
+  class="footer-block grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  {%- if block.settings.heading != blank -%}
+    <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
+  {%- endif -%}
+
+  <div class="footer-block__details-content rte">
+    {{ block.settings.subtext }}
+  </div>
+</div>

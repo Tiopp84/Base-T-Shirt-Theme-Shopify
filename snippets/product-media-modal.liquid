@@ -1,13 +1,13 @@
-{% comment %}
+{% doc %}
   Renders a product media modal. Also see 'product-media-gallery'
 
-  Accepts:
-  - product: {Object} Product liquid object
-  - variant_images: {Array} Product images associated with a variant
+  @param {object} product - Product liquid object
+  @param {object} variant_images - Product images associated with a variant
+  @param {object} [section] - Parent section object.
 
-  Usage:
+  @example
   {% render 'product-media-modal' %}
-{% endcomment %}
+{% enddoc %}
 
 <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
   <div

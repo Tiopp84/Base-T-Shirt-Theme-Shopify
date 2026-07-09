@@ -1,15 +1,14 @@
-{% comment %}
+{% doc %}
   Renders a set of links for paginated results. Must be used within paginate tags.
 
-  Usage:
+  @param {object} paginate - Paginate object
+  @param {string} [anchor] - This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+
+  @example
   {% paginate results by 2 %}
     {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
   {% endpaginate %}
-
-  Accepts:
-  - paginate: {Object}
-  - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
-{% endcomment %}
+{% enddoc %}
 
 {{ 'component-pagination.css' | asset_url | stylesheet_tag }}
 

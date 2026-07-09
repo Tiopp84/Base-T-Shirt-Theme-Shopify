@@ -1,0 +1,34 @@
+{% schema %}
+{
+  "name": "t:sections.main-article.blocks.share.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "t:sections.main-article.blocks.share.settings.text.label",
+      "default": "t:sections.main-article.blocks.share.settings.text.default"
+    },
+    {
+      "type": "paragraph",
+      "content": "Share your article on social media."
+    },
+    {
+      "type": "paragraph",
+      "content": "Use the social sharing links to share this article."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Share"
+    }
+  ]
+}
+{% endschema %}
+
+        <div
+          class="article-template__social-sharing page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {% assign share_url = request.origin | append: article.url %}
+          {% render 'share-button', block: block, share_link: share_url %}
+        </div>

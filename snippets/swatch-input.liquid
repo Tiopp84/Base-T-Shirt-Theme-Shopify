@@ -1,29 +1,22 @@
-{% comment %}
+{% doc %}
   Renders a swatch input component.
-  Accepts:
-  - id: {String} unique input id
-  - type: {String} input type. Accepts 'radio' or 'checkbox', defaults to 'radio' (optional)
-  - name: {String} input name,
-  - value: {ProductOptionValueDrop} input value
-  - swatch: {SwatchDrop} the swatch drop
-  - product_form_id: {String} id of the form associted with the input
-  - checked: {Boolean} default checked status
-  - disabled: {Boolean} default disabled status (optional)
-  - visually_disabled: {Boolean} style the swatch as disabled, but leave the input enabled (optional)
-  - shape: {String} swatch shape. Accepts 'square', defaults to circle (optional)
-  - help_text: {String} additional content to render inside the label (optional)
-  - additional_props: {String} (optional) additional properties to attach to the input
 
-  Usage:
-   {% render 'swatch-input',
-      id: input_id,
-      name: input_name,
-      value: input_value,
-      swatch: swatch,
-      product_form_id: product_form_id,
-      checked: checked
-    %}
-{% endcomment %}
+  @param {string} id - Unique input id
+  @param {string} [type] - Input type. Accepts 'radio' or 'checkbox', defaults to 'radio'
+  @param {string} name - Input name
+  @param {object} value - Input value
+  @param {object} swatch - The swatch drop
+  @param {string} product_form_id - Id of the form associted with the input
+  @param {boolean} checked - Default checked status
+  @param {boolean} [disabled] - Default disabled status
+  @param {boolean} [visually_disabled] - Style the swatch as disabled, but leave the input enabled
+  @param {string} [shape] - Swatch shape. Accepts 'square', defaults to circle
+  @param {string} [help_text] - Additional content to render inside the label
+  @param {string} [additional_props] - Additional properties to attach to the input
+
+  @example
+  {% render 'swatch-input', id: input_id, name: input_name, value: input_value, swatch: swatch, product_form_id: product_form_id, checked: checked %}
+{% enddoc %}
 
 <input
   type="{{ type | default: 'radio' }}"

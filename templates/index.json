@@ -4,14 +4,14 @@
       "type": "image-banner",
       "blocks": {
         "heading": {
-          "type": "heading",
+          "type": "banner-heading",
           "settings": {
             "heading": "Browse our latest products",
             "heading_size": "h0"
           }
         },
         "button": {
-          "type": "buttons",
+          "type": "banner-buttons",
           "settings": {
             "button_label_1": "Shop all",
             "button_link_1": "shopify://collections/all",

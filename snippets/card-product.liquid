@@ -1,25 +1,27 @@
-{% comment %}
+{% doc %}
   Renders a product card
 
-  Accepts:
-  - card_product: {Object} Product Liquid object (optional)
-  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
-  - image_shape: {String} Image mask to apply to the product image card. Values are "arch", "blob", "chevronleft", "chevronright", "diamond", "parallelogram", and "round". (optional)
-  - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
-  - show_vendor: {Boolean} Show the product vendor. Default: false
-  - show_rating: {Boolean} Show the product rating. Default: false
-  - extend_height: {Boolean} Card height extends to available container space. Default: true (optional)
-  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
-  - skip_styles: {Boolean} Don't include component styles. Useful when rendering multiple product cards in a loop. Default: false (optional)
-  - quick_add: {Boolean} Show the quick add button.
-  - section_id: {String} The ID of the section that contains this card.
-  - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
-  - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
-  - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
+  @param {object} [card_product] - Product Liquid object
+  @param {string} [media_aspect_ratio] - Size of the product image card. Values are "square" and "portrait". Default is "square"
+  @param {string} [image_shape] - Image mask to apply to the product image card. Values are "arch", "blob", "chevronleft", "chevronright", "diamond", "parallelogram", and "round".
+  @param {boolean} [show_secondary_image] - Show the secondary image on hover. Default: false
+  @param {boolean} show_vendor - Show the product vendor. Default: false
+  @param {boolean} show_rating - Show the product rating. Default: false
+  @param {boolean} [extend_height] - Card height extends to available container space. Default: true
+  @param {boolean} [lazy_load] - Image should be lazy loaded. Default: true
+  @param {boolean} [skip_styles] - Don't include component styles. Useful when rendering multiple product cards in a loop. Default: false
+  @param {boolean} quick_add - Show the quick add button.
+  @param {string} section_id - The ID of the section that contains this card.
+  @param {boolean} [horizontal_class] - Add a card--horizontal class if set to true. Default: false
+  @param {boolean} [horizontal_quick_add] - Changes the quick add button styles when set to true. Default: false
+  @param {string} [placeholder_image] - The placeholder image to use when no product exists. Default: 'product-apparel-2'
+  @param {object} [section] - Parent section object.
+  @param {object} [block] - Parent block object.
+  @param {string} [product_view_context] - Context for the product view event.
 
-  Usage:
+  @example
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
-{% endcomment %}
+{% enddoc %}
 {%- unless skip_styles -%}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}

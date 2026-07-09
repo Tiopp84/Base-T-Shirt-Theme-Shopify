@@ -278,12 +278,7 @@
         </a>
       {%- endif -%}
 
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when '@app' -%}
-            {% render block %}
-        {%- endcase -%}
-      {%- endfor -%}
+      {% content_for 'blocks' %}
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
@@ -650,6 +645,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@theme"
+    },
     {
       "type": "@app"
     }

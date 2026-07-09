@@ -1,0 +1,46 @@
+{% schema %}
+{
+  "name": "t:sections.collage.blocks.collection.name",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.collage.blocks.collection.settings.collection.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection"
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign block_index = 0
+  for b in section.blocks
+    if b.id == block.id
+      assign block_index = forloop.index0
+    endif
+  endfor
+  assign placeholder_image_index = block_index | modulo: 4 | plus: 1
+-%}
+
+<div
+  class="collage__item collage__item--collection collage__item--{{ section.settings.desktop_layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ block_index | plus: 1 }};"
+  {% endif %}
+>
+              {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
+              {% render 'card-collection',
+                card_collection: block.settings.collection,
+                media_aspect_ratio: 'adapt',
+                columns: 2,
+                extend_height: true,
+                wrapper_class: section.settings.card_styles,
+                placeholder_image: placeholder_image
+              %}
+</div>

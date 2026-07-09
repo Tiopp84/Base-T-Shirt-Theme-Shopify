@@ -1,3 +1,11 @@
+{% doc %}
+  Renders an accordion icon.
+
+  @param {string} icon - The icon name
+
+  @example
+  {% render 'icon-accordion', icon: 'check_mark' %}
+{% enddoc %}
 {%- if icon != 'none' -%}
   {%- assign file = icon | replace: '_', '-' | prepend: 'icon-' | append: '.svg' -%}
   <span class="svg-wrapper">{{ file | inline_asset_content }}</span>

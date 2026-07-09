@@ -1,0 +1,38 @@
+{% schema %}
+{
+  "name": "t:sections.email-signup-banner.blocks.paragraph.name",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.email-signup-banner.blocks.paragraph.settings.paragraph.default",
+      "label": "t:sections.email-signup-banner.blocks.paragraph.settings.paragraph.label"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "t:sections.email-signup-banner.blocks.paragraph.settings.text_style.options__1.label"
+        },
+        {
+          "value": "subtitle",
+          "label": "t:sections.email-signup-banner.blocks.paragraph.settings.text_style.options__2.label"
+        }
+      ],
+      "default": "body",
+      "label": "t:sections.email-signup-banner.blocks.paragraph.settings.text_style.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.email-signup-banner.blocks.paragraph.name"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="newsletter__subheading rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+  {{ block.settings.text }}
+</div>

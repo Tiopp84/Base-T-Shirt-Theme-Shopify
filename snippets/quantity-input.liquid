@@ -1,14 +1,13 @@
-{% comment %}
+{% doc %}
   Quantity input
 
-  Accepts:
-  - variant: {Object} Variant object
-  - variant_id: {String} Variant ID (optional)
-  - min: {Number} Min (optional)
+  @param {object} variant - Variant object
+  @param {string} [variant_id] - Variant ID
+  @param {number} [min] - Min
 
-  Usage:
-  {% render 'quantity-input' variant: variant %}
-{% endcomment %}
+  @example
+  {% render 'quantity-input', variant: variant %}
+{% enddoc %}
 
 <quantity-input class="quantity cart-quantity">
   <button class="quantity__button" name="minus" type="button" data-target="decrement-{{ variant.id }}">

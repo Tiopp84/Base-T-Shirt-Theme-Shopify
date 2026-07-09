@@ -1,0 +1,71 @@
+{% schema %}
+{
+  "name": "t:sections.footer.blocks.brand_information.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.footer.blocks.brand_information.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "Social links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
+      "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand information"
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign has_social_icons = true
+  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+    assign has_social_icons = false
+  endif
+-%}
+
+<div
+  class="footer-block grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  <div class="footer-block__brand-info">
+    {%- if settings.brand_image != blank -%}
+      {%- assign brand_image_height = settings.brand_image_width | divided_by: settings.brand_image.aspect_ratio -%}
+      <div
+        class="footer-block__image-wrapper"
+        style="max-width: min(100%, {{ settings.brand_image_width }}px);"
+      >
+        {{
+          settings.brand_image
+          | image_url: width: 1100
+          | image_tag:
+            loading: 'lazy',
+            widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
+            height: brand_image_height,
+            width: settings.brand_image_width
+        }}
+      </div>
+    {%- endif -%}
+    {%- if settings.brand_headline != blank -%}
+      <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>
+    {%- endif -%}
+    {%- if settings.brand_description != blank -%}
+      <div class="rte">{{ settings.brand_description }}</div>
+    {%- endif -%}
+    {%- if block.settings.show_social and has_social_icons -%}
+      {%- render 'social-icons', class: 'footer__list-social' -%}
+    {%- endif -%}
+  </div>
+</div>

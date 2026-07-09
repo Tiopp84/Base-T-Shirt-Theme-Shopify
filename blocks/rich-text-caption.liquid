@@ -1,0 +1,61 @@
+{% schema %}
+{
+  "name": "t:sections.rich-text.blocks.caption.name",
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "default": "t:sections.rich-text.blocks.caption.settings.text.default",
+      "label": "t:sections.rich-text.blocks.caption.settings.text.label"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        {
+          "value": "subtitle",
+          "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__1.label"
+        },
+        {
+          "value": "caption-with-letter-spacing",
+          "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__2.label"
+        }
+      ],
+      "default": "caption-with-letter-spacing",
+      "label": "t:sections.rich-text.blocks.caption.settings.text_style.label"
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__3.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.rich-text.blocks.caption.settings.caption_size.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rich-text.blocks.caption.name"
+    }
+  ]
+}
+{% endschema %}
+
+<p
+  class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {{ block.settings.caption | escape }}
+</p>

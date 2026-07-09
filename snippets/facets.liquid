@@ -1,16 +1,15 @@
-{% comment %}
+{% doc %}
   Renders facets (filtering and sorting)
 
-  Accepts:
-  - results: {Object} Collection or Search object
-  - enable_filtering: {Boolean} Show filtering when true
-  - enable_sorting: {Boolean} Show sorting when true
-  - filter_type: {String} Type of filter
-  - paginate: {Object}
+  @param {object} results - Collection or Search object
+  @param {boolean} enable_filtering - Show filtering when true
+  @param {boolean} enable_sorting - Show sorting when true
+  @param {string} filter_type - Type of filter
+  @param {object} [section] - Parent section object.
 
-  Usage:
+  @example
   {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, filter_type: 'vertical', paginate: paginate %}
-{% endcomment %}
+{% enddoc %}
 
 {{ 'component-show-more.css' | asset_url | stylesheet_tag }}
 {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -725,7 +724,7 @@
                 <div
                   id="Details-Mobile-SortBy-{{ section.id }}"
                   class="mobile-facets__details js-filter{% if filter_type == 'drawer' %} medium-hide large-up-hide{% endif %}"
-                  data-index="mobile-{{ forloop.index }}"
+                  data-index="mobile-sort"
                 >
                   <div class="mobile-facets__summary">
                     <div class="mobile-facets__sort">

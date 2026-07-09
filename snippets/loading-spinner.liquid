@@ -1,11 +1,11 @@
-{% comment %}
+{% doc %}
   Renders loading-spinner.
-  Accepts:
-    - class: {string} css classes to replace the default ones (optional)
 
-  Usage:
+  @param {string} [class] - Css classes to replace the default ones
+
+  @example
   {% render 'loading-spinner' %}
-{% endcomment %}
+{% enddoc %}
 
 <div class="{% if class %}{{ class }}{% else %}loading__spinner hidden{% endif %}">
   {{ 'loading-spinner.svg' | inline_asset_content }}

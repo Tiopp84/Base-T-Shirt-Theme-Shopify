@@ -1,0 +1,55 @@
+{% schema %}
+{
+  "name": "t:sections.collage.blocks.product.name",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:sections.collage.blocks.product.settings.product.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "second_image",
+      "default": false,
+      "label": "t:sections.collage.blocks.product.settings.second_image.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product"
+    }
+  ]
+}
+{% endschema %}
+
+{%- liquid
+  assign block_index = 0
+  for b in section.blocks
+    if b.id == block.id
+      assign block_index = forloop.index0
+    endif
+  endfor
+  assign placeholder_image_index = block_index | modulo: 4 | plus: 1
+-%}
+
+<div
+  class="collage__item collage__item--product collage__item--{{ section.settings.desktop_layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+    style="--animation-order: {{ block_index | plus: 1 }};"
+  {% endif %}
+>
+              {%- assign placeholder_image = 'product-apparel-' | append: placeholder_image_index -%}
+              {% render 'card-product',
+                card_product: block.settings.product,
+                media_aspect_ratio: 'adapt',
+                show_secondary_image: block.settings.second_image,
+                show_vendor: false,
+                show_rating: false,
+                quick_add: false,
+                section_id: section.id,
+                extend_height: true,
+                placeholder_image: placeholder_image
+              %}
+</div>
