@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -8,61 +17,73 @@
           "settings": {
             "text": "{{ product.vendor }}",
             "text_style": "uppercase"
-          }
+          },
+          "blocks": {}
         },
         "title": {
-          "type": "product-title"
+          "type": "product-title",
+          "settings": {},
+          "blocks": {}
+        },
+        "description": {
+          "type": "product-description",
+          "settings": {},
+          "blocks": {}
         },
         "price": {
-          "type": "product-price"
+          "type": "product-price",
+          "settings": {},
+          "blocks": {}
         },
         "variant_picker": {
           "type": "product-variant-picker",
           "settings": {
             "picker_type": "button",
             "swatch_shape": "circle"
-          }
+          },
+          "blocks": {}
         },
         "quantity_selector": {
-          "type": "product-quantity-selector"
+          "type": "product-quantity-selector",
+          "settings": {},
+          "blocks": {}
         },
         "buy_buttons": {
           "type": "product-buy-buttons",
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
-          }
-        },
-        "description": {
-          "type": "product-description"
+          },
+          "blocks": {}
         },
         "share": {
           "type": "product-share",
           "settings": {
             "share_label": "Share"
-          }
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "vendor",
         "title",
+        "description",
         "price",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
         "share"
       ],
       "settings": {
         "enable_sticky_info": true,
-        "color_scheme": "scheme-1",
-        "media_position": "left",
-        "gallery_layout": "stacked",
+        "color_scheme": "scheme-6c488916-ff0e-4581-ba9d-f9d1c5d5dffe",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "image_zoom": "lightbox",
+        "gallery_layout": "stacked",
         "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "hover",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
@@ -72,6 +93,10 @@
     "disclosures": {
       "type": "disclosures",
       "settings": {
+        "heading": "Disclosures",
+        "heading_size": "h2",
+        "open_by_default": false,
+        "color_scheme": "",
         "padding_top": 36,
         "padding_bottom": 0
       }
@@ -83,13 +108,13 @@
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 28
       }
