@@ -22,7 +22,8 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "color_scheme": "scheme-6c488916-ff0e-4581-ba9d-f9d1c5d5dffe",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": false,
@@ -32,7 +33,6 @@
         "enable_filtering": true,
         "filter_type": "horizontal",
         "enable_sorting": true,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 36
       }
