@@ -17,14 +17,12 @@
       },
       "blocks": {
         "subtotal": {
-          "type": "subtotal",
-          "settings": {
-          }
+          "type": "main-cart-footer-subtotal",
+          "settings": {}
         },
         "buttons": {
-          "type": "buttons",
-          "settings": {
-          }
+          "type": "main-cart-footer-buttons",
+          "settings": {}
         }
       },
       "block_order": [

@@ -1,0 +1,25 @@
+{% schema %}
+{
+  "name": "t:sections.rich-text.blocks.text.name",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "t:sections.rich-text.blocks.text.settings.text.default",
+      "label": "t:sections.rich-text.blocks.text.settings.text.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rich-text.blocks.text.name"
+    }
+  ]
+}
+{% endschema %}
+
+<div
+  class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {{ block.settings.text }}
+</div>
