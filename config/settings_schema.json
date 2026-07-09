@@ -26,6 +26,26 @@
         "label": "t:settings_schema.logo.settings.logo_width.label"
       },
       {
+        "type": "select",
+        "id": "logo_shape",
+        "label": "Hình dáng logo (Logo Shape)",
+        "options": [
+          {
+            "value": "default",
+            "label": "Mặc định (Vuông/Chữ nhật)"
+          },
+          {
+            "value": "circle",
+            "label": "Tròn (Circle)"
+          },
+          {
+            "value": "rounded",
+            "label": "Bo góc (Rounded)"
+          }
+        ],
+        "default": "default"
+      },
+      {
         "type": "image_picker",
         "id": "favicon",
         "label": "t:settings_schema.logo.settings.favicon.label",
