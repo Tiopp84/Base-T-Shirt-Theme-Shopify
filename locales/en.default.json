@@ -110,6 +110,7 @@
       "easy_returns": "Easy 30-day returns",
       "free_shipping": "Free worldwide shipping",
       "size_guide": "Size guide",
+      "size_guide_empty": "Select a page in this block's settings to show size guide content.",
       "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
@@ -332,6 +333,9 @@
     "featured_collection": {
       "view_all": "View all",
       "view_all_label": "View all products in the {{ collection_name }} collection"
+    },
+    "lookbook": {
+      "view_product": "View {{ product_name }}"
     },
     "collection_list": {
       "view_all": "View all"
