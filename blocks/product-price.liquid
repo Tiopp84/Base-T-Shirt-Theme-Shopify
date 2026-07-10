@@ -1,3 +1,12 @@
+{% doc %}
+  Renders product pricing, tax policy text, and installment payment terms.
+
+  Context:
+  - Requires the parent section to provide the global `product`, `section`, `block`, `cart`, and `shop` objects.
+  - Depends on the selected or first available variant for price and installment state.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {% schema %}
 {
   "name": "Product Price",
@@ -44,3 +53,9 @@
     {{ form | payment_terms }}
   {%- endform -%}
 </div>
+
+{% stylesheet %}
+  .product__tax {
+    margin-top: -1.4rem;
+  }
+{% endstylesheet %}

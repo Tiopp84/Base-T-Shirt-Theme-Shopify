@@ -1,3 +1,12 @@
+{% doc %}
+  Renders inventory status for the selected product variant.
+
+  Context:
+  - Requires the parent section to provide the global `product`, `section`, and `block` objects.
+  - Depends on the selected or first available variant inventory fields.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {% schema %}
 {
   "name": "t:sections.main-product.blocks.inventory.name",
@@ -96,3 +105,33 @@
     {%- endif -%}
   {%- endif -%}
 </p>
+
+{% stylesheet %}
+  .product__inventory {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .product__inventory .svg-wrapper,
+  .product__inventory svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .product--no-media .product__inventory {
+    justify-content: center;
+  }
+
+  .product__inventory.visibility-hidden:empty {
+    display: block;
+  }
+
+  .product__inventory.visibility-hidden:empty::after {
+    content: '#';
+  }
+
+  .product__inventory .icon-inventory-status circle:first-of-type {
+    opacity: 0.3;
+  }
+{% endstylesheet %}

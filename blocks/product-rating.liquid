@@ -1,3 +1,12 @@
+{% doc %}
+  Renders product review rating metafields.
+
+  Context:
+  - Requires the parent section to provide the global `product` object.
+  - Depends on `product.metafields.reviews.rating` and `product.metafields.reviews.rating_count`.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {% schema %}
 {
   "name": "t:sections.main-product.blocks.rating.name",

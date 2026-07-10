@@ -1,3 +1,12 @@
+{% doc %}
+  Renders the product quantity selector block for a product page.
+
+  Context:
+  - Requires the parent section to provide the global `product`, `section`, `block`, and `cart` objects.
+  - Depends on the selected or first available variant for quantity rules and cart quantity state.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
 {% schema %}
@@ -224,3 +233,17 @@
     </volume-pricing>
   {%- endif -%}
 </div>
+
+{% stylesheet %}
+  .product-form__quantity .form__label {
+    margin-bottom: 0.6rem;
+  }
+
+  .price-per-item__label.form__label {
+    margin-bottom: 0;
+  }
+
+  .product-form__quantity-top .form__label {
+    margin-bottom: 1.2rem;
+  }
+{% endstylesheet %}

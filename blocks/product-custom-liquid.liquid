@@ -1,3 +1,12 @@
+{% doc %}
+  Renders merchant-authored custom Liquid inside a product page block.
+
+  Context:
+  - Requires the parent section to provide the global `block` object.
+  - Merchant Liquid may reference product-page globals depending on where this block is rendered.
+  - Intended for controlled internal use or trusted merchants.
+{% enddoc %}
+
 {% schema %}
 {
   "name": "t:sections.custom-liquid.name",

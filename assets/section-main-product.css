@@ -231,33 +231,6 @@ product-info {
   margin: 2.5rem 0;
 }
 
-.product__text {
-  margin-bottom: 0;
-}
-
-a.product__text {
-  display: block;
-  text-decoration: none;
-  color: rgba(var(--color-foreground), 0.75);
-}
-
-.product__text.caption-with-letter-spacing {
-  text-transform: uppercase;
-}
-
-.product__title {
-  word-break: break-word;
-  margin-bottom: 1.5rem;
-}
-
-.product__title > * {
-  margin: 0;
-}
-
-.product__title > a {
-  display: none;
-}
-
 .product__title + .product__text.caption-with-letter-spacing {
   margin-top: -1.5rem;
 }
@@ -315,10 +288,6 @@ a.product__text {
   padding: 0;
 }
 
-.product__tax {
-  margin-top: -1.4rem;
-}
-
 .product--no-media .share-button {
   max-width: 100%;
 }
@@ -346,18 +315,6 @@ a.product__text {
 .product--no-media .product-form__quantity {
   flex-direction: column;
   max-width: 100%;
-}
-
-.product-form__quantity .form__label {
-  margin-bottom: 0.6rem;
-}
-
-.price-per-item__label.form__label {
-  margin-bottom: 0rem;
-}
-
-.product-form__quantity-top .form__label {
-  margin-bottom: 1.2rem;
 }
 
 .product-form__buttons {
@@ -1026,44 +983,6 @@ a.product__text {
   flex-shrink: 0;
 }
 
-/* Inventory status */
-
-.product__inventory {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.product__inventory .svg-wrapper,
-.product__inventory svg {
-  width: 15px;
-  height: 15px;
-}
-
-.product--no-media .product__inventory {
-  justify-content: center;
-}
-
-/* This keeps the container from getting display: none; applied to it and to make sure we're not introducing some layout shift when switching to an unavailable variant */
-.product__inventory.visibility-hidden:empty {
-  display: block;
-}
-
-.product__inventory.visibility-hidden:empty::after {
-  content: '#';
-}
-
-.product__inventory .icon-inventory-status circle:first-of-type {
-  opacity: .3;
-}
-
-
-/* SKU block */
-
-.product__sku.visibility-hidden::after {
-  content: '#';
-}
-
 /* Product-thumbnail snippet */
 
 .product-media-container {
@@ -1146,126 +1065,3 @@ a.product__text {
   }
 }
 
-/* Recipient form */
-.recipient-form {
-  /* (2.88[line-height] - 1.6rem) / 2 */
-  --recipient-checkbox-margin-top: 0.64rem;
-
-  display: block;
-  position: relative;
-  max-width: 44rem;
-  margin-bottom: 2.5rem;
-}
-
-.recipient-form-field-label {
-  margin: 0.6rem 0;
-}
-
-.recipient-form-field-label--space-between {
-  display: flex;
-  justify-content: space-between;
-}
-
-.recipient-checkbox {
-  flex-grow: 1;
-  font-size: 1.6rem;
-  display: flex;
-  word-break: break-word;
-  align-items: flex-start;
-  max-width: inherit;
-  position: relative;
-  cursor: pointer;
-}
-
-.recipient-form > input[type='checkbox'] {
-  position: absolute;
-  width: 1.6rem;
-  height: 1.6rem;
-  margin: var(--recipient-checkbox-margin-top) 0;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-.recipient-fields__field {
-  margin: 0 0 2rem 0;
-}
-
-.recipient-fields .field__label {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: calc(100% - 3.5rem);
-  overflow: hidden;
-}
-
-.recipient-checkbox > svg {
-  margin-top: var(--recipient-checkbox-margin-top);
-  margin-right: 1.2rem;
-  flex-shrink: 0;
-}
-
-.recipient-form .icon-checkmark {
-  visibility: hidden;
-  position: absolute;
-  left: 0.28rem;
-  z-index: 5;
-  top: 0.4rem;
-  width: 10px;
-  height: 9px;
-}
-
-.recipient-form > input[type='checkbox']:checked + label .icon-checkmark {
-  visibility: visible;
-}
-
-.js .recipient-fields {
-  display: none;
-}
-
-.recipient-fields hr {
-  margin: 1.6rem auto;
-}
-
-.recipient-form > input[type='checkbox']:checked ~ .recipient-fields {
-  display: block;
-  animation: animateMenuOpen var(--duration-default) ease;
-}
-.recipient-form > input[type='checkbox']:not(:checked, :disabled) ~ .recipient-fields,
-.recipient-email-label {
-  display: none;
-}
-
-.js .recipient-email-label.required {
-  display: inline;
-}
-
-.recipient-form ul {
-  line-height: calc(1 + 0.6 / var(--font-body-scale));
-  padding-left: 4.4rem;
-  text-align: left;
-}
-
-.recipient-form ul a {
-  display: inline;
-}
-
-.recipient-form .error-message::first-letter {
-  text-transform: capitalize;
-}
-
-@media screen and (forced-colors: active) {
-  .recipient-fields > hr {
-    border-top: 0.1rem solid rgb(var(--color-background));
-  }
-
-  .recipient-checkbox > svg {
-    background-color: inherit;
-    border: 0.1rem solid rgb(var(--color-background));
-  }
-
-  .recipient-form > input[type='checkbox']:checked + label .icon-checkmark {
-    border: none;
-  }
-}
