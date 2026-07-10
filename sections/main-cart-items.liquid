@@ -24,6 +24,10 @@
 {%- endunless -%}
 
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+{%- if cart != empty -%}
+  <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 
 <cart-items
   class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}"

@@ -1,4 +1,8 @@
 (function () {
+  if (window.cartDisclosureTooltipInitialized) return;
+
+  window.cartDisclosureTooltipInitialized = true;
+
   // Keeps the cart disclosure hover tooltip within the viewport.
   // On hover we measure the tooltip and set a `--cart-disclosure-tooltip-shift`
   // custom property that nudges it back into view;

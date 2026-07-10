@@ -1,88 +1,196 @@
-# Shopify Base Theme (Horizontal Architecture)
+# Shopify Production Theme
 
-This project is a custom Shopify Theme built upon the foundation of Dawn (v15.5.0), heavily refactored to fully embrace the **Shopify Horizontal Architecture (Theme Blocks)**.
+This project is a production-oriented Shopify Online Store 2.0 theme based on Dawn 15.5.0 and evolved toward a reusable Horizontal Architecture using Theme Blocks.
 
-Unlike older architectures where sections control their nested blocks via static switch statements (`case block.type`), this theme separates concerns: Sections provide the layout and context, while reusable independent Theme Blocks provide the granular features.
+The goal is to build a modern, high-performance, merchant-friendly theme that can be sold commercially or reused internally across multiple Shopify stores.
 
-## 🏗 Architecture Overview
+## Goals
 
-### 1. Sections (`/sections`)
-Sections in this theme primarily act as structural wrappers.
-- They **do not** manually loop through blocks and check their types.
-- They render all child Theme Blocks using the native injection tag: `{% content_for 'blocks' %}`.
-- To allow merchants to add Theme Blocks to a section, the section's schema must include:
-  ```json
-  "blocks": [
-    {
-      "type": "@theme"
-    }
-  ]
-  ```
+- Production quality for real stores, not a demo theme.
+- Strong Shopify compatibility and clean Theme Check results.
+- Horizontal Architecture: reusable blocks, lean sections, editable JSON templates.
+- Fast storefront performance with minimal global CSS and JavaScript.
+- Accessible, responsive, polished UX across core commerce flows.
+- Easy extension by developers and AI agents without breaking architecture.
+- Safe foundation for optional Alpine.js enhancements.
 
-### 2. Theme Blocks (`/blocks`)
-Functional components (such as `product-title`, `product-price`, `quantity-selector`, `collapsible-tab`, etc.) have been extracted out of `main-product.liquid` into completely independent `.liquid` files living in the `/blocks/` directory.
+## Architecture
 
-> **CRITICAL RULE FOR AI & DEVS**: 
-> - **DO NOT USE APP BLOCK SCHEMA**: Never add `"target": "section"` to the schema of a file in the `/blocks/` directory. These are Theme Blocks, not App Blocks.
-> - **PRESETS ARE MANDATORY**: For a Theme Block to be visible and selectable in the Shopify Theme Editor's "Add block" menu, its `{% schema %}` **must** contain a `"presets"` array. Without `"presets"`, the block can only be rendered if hardcoded in JSON templates, but merchants won't be able to add it manually.
+The theme is organized around sections, Theme Blocks, snippets, and JSON templates.
 
-**Example of a valid Theme Block schema (`blocks/product-title.liquid`):**
-```liquid
-{% schema %}
-{
-  "name": "Product Title",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Product Title"
-    }
-  ]
-}
-{% endschema %}
-
-<h1>{{ product.title | escape }}</h1>
+```text
+assets/     Static CSS, JS, SVG, image, and library files served by Shopify CDN
+blocks/     Reusable merchant-editable Theme Blocks
+config/     Global settings schema and theme editor data
+layout/     Top-level HTML shells
+locales/    Storefront and theme editor translations
+sections/   Structural page modules
+snippets/   Reusable Liquid fragments
+templates/  JSON templates composing sections and blocks
 ```
 
-## 🛠 Developer & AI Guidelines
+## Horizontal Architecture Rules
 
-When writing or modifying code in this project, you **must** adhere to the following rules (also referenced in `AGENTS.md`):
+Sections should provide layout and context. Theme Blocks should provide reusable features.
 
-1. **Strict Theme Block Compliance**:
-   - Only use valid fields supported by the Shopify Theme Block schema.
-   - If a section needs to allow blocks, configure it using `{"type": "@theme"}` in the section schema. 
+A section that supports Theme Blocks should render:
 
-2. **Styling (CSS) & JavaScript**:
-   - Use `{% stylesheet %}` and `{% javascript %}` tags directly inside snippets, blocks, and sections to encapsulate styles and scripts.
-   - **Good Practice**: For single-property settings (e.g., `gap`), map them to CSS variables `style="--gap: {{ block.settings.gap }}px"`. For multiple properties, use CSS classes (e.g., `collection--full-width`).
+```liquid
+{% content_for 'blocks' %}
+```
 
-3. **Liquid Syntax & Best Practices**:
-   - Use whitespace stripping `{{- ... -}}` and `{%- ... -%}` to avoid excessive spaces in the HTML output.
-   - Liquid does not support ternary conditionals. Always use nested `{% if %}` or `{% unless %}` tags.
-   - For string logic, use the `contains` operator. Note that `contains` only works with strings, not objects inside arrays.
+and include:
 
-4. **Component Documentation (LiquidDoc)**:
-   - When a block or snippet is rendered statically, include a `{% doc %}` tag at the top of the file documenting its purpose, `@param`, and providing an `@example`.
+```json
+"blocks": [
+  {
+    "type": "@theme"
+  }
+]
+```
 
-## ✅ Validation
+Theme Blocks in `blocks/` must:
 
-Always validate your JSON schemas and Liquid files against Shopify's official standards. Since this architecture avoids App Blocks, passing the **Shopify Theme Check** is mandatory before any deployment.
+- Include `presets` so merchants can add them in the theme editor.
+- Never use app block schema such as `"target": "section"`.
+- Keep merchant-facing settings in schema.
+- Use scoped `{% stylesheet %}` and `{% javascript %}` when practical.
+- Use LiquidDoc when statically rendered or when parameters/context need documentation.
 
-Run the linter locally:
+## Production Standards
+
+The theme should not contain:
+
+- Demo widgets
+- Debug UI
+- `console.log`, `debugger`, or `alert`
+- Remote runtime scripts
+- Hardcoded storefront copy outside locale files
+- Large page-specific UI inside `layout/theme.liquid`
+- Unused assets loaded globally
+
+The theme should contain:
+
+- Polished default templates
+- Mobile-first responsive layouts
+- Accessible forms, drawers, modals, and controls
+- Locale-backed storefront text
+- Predictable schema settings
+- Shopify CDN-served assets
+- Clear component ownership
+
+## CSS and JavaScript
+
+Prefer component-scoped CSS and JavaScript:
+
+- Use `{% stylesheet %}` and `{% javascript %}` in sections, blocks, and snippets where appropriate.
+- Keep `assets/base.css` for global foundations only.
+- Load feature assets only where the feature appears.
+- Avoid inline styles except for CSS custom properties generated from schema settings.
+- Avoid remote CSS and JS in production.
+
+For single-property settings, map schema values to CSS variables:
+
+```liquid
+<div class="grid" style="--grid-gap: {{ section.settings.gap }}px">
+```
+
+For multi-property variants, use classes:
+
+```liquid
+<div class="media media--{{ section.settings.layout }}">
+```
+
+## Alpine.js Direction
+
+Alpine.js may be used as a small progressive enhancement layer, but it is not the primary application framework.
+
+Recommended use cases:
+
+- Tabs
+- Accordions
+- Disclosure panels
+- Simple popups
+- Local UI toggles
+- Lightweight block-level interactions
+
+Avoid using Alpine.js for:
+
+- Cart orchestration
+- Product form submission
+- Variant availability
+- Media gallery state
+- Predictive search internals
+- Any behavior already owned by Dawn custom elements
+
+Production rules:
+
+- Do not load Alpine.js from a public CDN.
+- If Alpine.js is used, pin a version in `assets/` and serve it through `asset_url`.
+- Prefer loading Alpine.js only on sections/templates that need it.
+- Do not leave Alpine demo UI in the theme.
+
+## Validation
+
+Run Theme Check before handoff or deployment:
+
 ```bash
 shopify theme check
 ```
 
-## 📁 Directory Structure
-```
-.
-├── assets          # Static assets (critical.css, global JS, fonts)
-├── blocks          # Modular, reusable Theme Blocks (e.g., product-price.liquid)
-├── config          # Global theme settings (settings_schema.json)
-├── layout          # Global HTML shells (theme.liquid)
-├── locales         # Translations (en.default.json)
-├── sections        # Structural wrappers (main-product.liquid)
-├── snippets        # Reusable logic / HTML fragments
-└── templates       # JSON structures mapping sections & blocks
+Minimum release checks:
+
+- Theme Check has zero unapproved warnings.
+- Core templates render: home, product, collection, cart, search, page, blog, article, customer pages.
+- Theme editor can add, remove, reorder, and configure new sections/blocks.
+- No demo UI is visible.
+- No remote runtime dependency is loaded.
+- No production console output remains.
+- User-facing copy is translated through locales.
+- Mobile product discovery, product detail, and cart flows are usable.
+
+## Development Workflow
+
+Use Shopify CLI for local development:
+
+```bash
+shopify theme dev
 ```
 
-*Built to be lean, functional, and extremely modular. Happy coding!*
+Use Theme Check for linting:
+
+```bash
+shopify theme check
+```
+
+Recommended review flow:
+
+1. Identify the target section, block, snippet, or asset owner.
+2. Preserve existing Dawn-compatible behavior unless intentionally changing it.
+3. Add merchant settings only where they create real flexibility.
+4. Keep CSS/JS scoped and lazy where possible.
+5. Run validation.
+6. Document architectural decisions when they affect future work.
+
+## Current Priorities
+
+1. Remove any demo-only UI from layout and storefront paths.
+2. Replace remote runtime scripts with Shopify CDN-served assets or remove them.
+3. Continue moving reusable UI into Theme Blocks.
+4. Reduce global CSS/JS and load feature assets closer to the component.
+5. Strengthen LiquidDoc and locale coverage.
+6. Keep Alpine.js optional, scoped, and production-safe.
+
+## AI and Developer Guidance
+
+`AGENTS.md` is the authoritative implementation guide for AI models and developers. Any model contributing code should read it before making changes.
+
+The short version:
+
+- Build for production.
+- Keep the theme merchant-editable.
+- Preserve Horizontal Architecture.
+- Favor reusable blocks and snippets.
+- Keep layout lean.
+- Avoid remote dependencies.
+- Validate with Shopify Theme Check.

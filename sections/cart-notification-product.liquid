@@ -1,4 +1,7 @@
 {%- if cart != empty -%}
+  <script src="{{ 'cart-disclosure-modal.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'cart-disclosure-tooltip.js' | asset_url }}" defer="defer"></script>
+
   {%- for item in cart.items -%}
     <div id="cart-notification-product-{{ item.key }}" class="cart-item">
       {%- if item.image -%}

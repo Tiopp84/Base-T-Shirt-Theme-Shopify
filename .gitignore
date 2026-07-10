@@ -11,3 +11,5 @@ Thumbs.db
 node_modules
 *.zip
 .vscode 
+
+Task.md
