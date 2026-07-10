@@ -1,30 +1,30 @@
 {% schema %}
 {
-  "name": "Lookbook",
+  "name": "t:sections.lookbook.name",
   "tag": "section",
   "class": "section",
   "settings": [
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Lookbook Image"
+      "label": "t:sections.lookbook.settings.image.label"
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Shop the Look"
+      "label": "t:sections.lookbook.settings.heading.label",
+      "default": "t:sections.lookbook.settings.heading.default"
     }
   ],
   "blocks": [
     {
       "type": "product_pin",
-      "name": "Product Pin",
+      "name": "t:sections.lookbook.blocks.product_pin.name",
       "settings": [
         {
           "type": "product",
           "id": "product",
-          "label": "Product"
+          "label": "t:sections.lookbook.blocks.product_pin.settings.product.label"
         },
         {
           "type": "range",
@@ -33,7 +33,7 @@
           "max": 100,
           "step": 1,
           "unit": "%",
-          "label": "Position Top",
+          "label": "t:sections.lookbook.blocks.product_pin.settings.top.label",
           "default": 50
         },
         {
@@ -43,7 +43,7 @@
           "max": 100,
           "step": 1,
           "unit": "%",
-          "label": "Position Left",
+          "label": "t:sections.lookbook.blocks.product_pin.settings.left.label",
           "default": 50
         }
       ]
@@ -51,7 +51,7 @@
   ],
   "presets": [
     {
-      "name": "Lookbook"
+      "name": "t:sections.lookbook.name"
     }
   ]
 }
@@ -72,7 +72,7 @@
     {%- for block in section.blocks -%}
       {%- if block.settings.product != blank -%}
         <div class="lookbook__pin" style="top: {{ block.settings.top }}%; left: {{ block.settings.left }}%;" {{ block.shopify_attributes }}>
-          <button class="lookbook__pin-button" aria-label="View {{ block.settings.product.title | escape }}">
+          <button class="lookbook__pin-button" aria-label="{{ 'sections.lookbook.view_product' | t: product_name: block.settings.product.title | escape }}">
             <span class="lookbook__pin-icon"></span>
           </button>
           <div class="lookbook__product-card">

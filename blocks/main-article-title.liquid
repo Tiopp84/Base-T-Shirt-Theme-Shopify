@@ -17,29 +17,29 @@
   ],
   "presets": [
     {
-      "name": "Title"
+      "name": "t:sections.main-article.blocks.title.name"
     }
   ]
 }
 {% endschema %}
 
-        <header
-          class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          <h1
-            class="article-template__title"
-          >
-            {{ article.title | escape }}
-          </h1>
-          {%- if block.settings.blog_show_date -%}
-            <span class="circle-divider caption-with-letter-spacing">
-              {{- article.published_at | time_tag: format: 'date' -}}
-            </span>
-          {%- endif -%}
-          {%- if block.settings.blog_show_author -%}
-            <span class="caption-with-letter-spacing">
-              <span>{{ article.author }}</span>
-            </span>
-          {%- endif -%}
-        </header>
+<header
+  class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <h1
+    class="article-template__title"
+  >
+    {{ article.title | escape }}
+  </h1>
+  {%- if block.settings.blog_show_date -%}
+    <span class="circle-divider caption-with-letter-spacing">
+      {{- article.published_at | time_tag: format: 'date' -}}
+    </span>
+  {%- endif -%}
+  {%- if block.settings.blog_show_author -%}
+    <span class="caption-with-letter-spacing">
+      <span>{{ article.author }}</span>
+    </span>
+  {%- endif -%}
+</header>

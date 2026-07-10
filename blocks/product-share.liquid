@@ -1,3 +1,12 @@
+{% doc %}
+  Renders a product share button block.
+
+  Context:
+  - Requires the parent section to provide the global `product`, `request`, and `block` objects.
+  - Uses the selected variant URL when available and falls back to the product URL.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {% schema %}
 {
   "name": "t:sections.main-product.blocks.share.name",

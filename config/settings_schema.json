@@ -28,19 +28,19 @@
       {
         "type": "select",
         "id": "logo_shape",
-        "label": "Hình dáng logo (Logo Shape)",
+        "label": "t:settings_schema.logo.settings.logo_shape.label",
         "options": [
           {
             "value": "default",
-            "label": "Mặc định (Vuông/Chữ nhật)"
+            "label": "t:settings_schema.logo.settings.logo_shape.options__1.label"
           },
           {
             "value": "circle",
-            "label": "Tròn (Circle)"
+            "label": "t:settings_schema.logo.settings.logo_shape.options__2.label"
           },
           {
             "value": "rounded",
-            "label": "Bo góc (Rounded)"
+            "label": "t:settings_schema.logo.settings.logo_shape.options__3.label"
           }
         ],
         "default": "default"
@@ -1473,35 +1473,35 @@
     ]
   },
   {
-    "name": "T-Shirt Base Settings",
+    "name": "t:settings_schema.t_shirt_base.name",
     "settings": [
       {
         "type": "header",
-        "content": "Color Swatches"
+        "content": "t:settings_schema.t_shirt_base.settings.color_swatches.content"
       },
       {
         "type": "checkbox",
         "id": "enable_color_swatches",
-        "label": "Enable color swatches",
+        "label": "t:settings_schema.t_shirt_base.settings.enable_color_swatches.label",
         "default": true
       },
       {
         "type": "header",
-        "content": "Size Guide"
+        "content": "t:settings_schema.t_shirt_base.settings.size_guide.content"
       },
       {
         "type": "page",
         "id": "size_guide_page",
-        "label": "Size guide page"
+        "label": "t:settings_schema.t_shirt_base.settings.size_guide_page.label"
       },
       {
         "type": "header",
-        "content": "Trust Badges"
+        "content": "t:settings_schema.t_shirt_base.settings.trust_badges.content"
       },
       {
         "type": "checkbox",
         "id": "enable_trust_badges",
-        "label": "Enable trust badges on product page",
+        "label": "t:settings_schema.t_shirt_base.settings.enable_trust_badges.label",
         "default": true
       }
     ]

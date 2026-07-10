@@ -1,10 +1,18 @@
+{% doc %}
+  Renders the product title block for a product page.
+
+  Context:
+  - Requires the parent section to provide the global `product` and `block` objects.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {% schema %}
 {
-  "name": "Product Title",
+  "name": "t:sections.main-product.blocks.title.name",
   "settings": [],
   "presets": [
     {
-      "name": "Product Title"
+      "name": "t:sections.main-product.blocks.title.name"
     }
   ]
 }
@@ -18,3 +26,18 @@
     </h2>
   </a>
 </div>
+
+{% stylesheet %}
+  .product__title {
+    word-break: break-word;
+    margin-bottom: 1.5rem;
+  }
+
+  .product__title > * {
+    margin: 0;
+  }
+
+  .product__title > a {
+    display: none;
+  }
+{% endstylesheet %}

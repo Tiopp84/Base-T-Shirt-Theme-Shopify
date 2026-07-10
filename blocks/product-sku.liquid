@@ -1,3 +1,12 @@
+{% doc %}
+  Renders the selected product variant SKU.
+
+  Context:
+  - Requires the parent section to provide the global `product`, `section`, and `block` objects.
+  - Depends on the selected or first available variant SKU.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {% schema %}
 {
   "name": "t:sections.main-product.blocks.sku.name",
@@ -40,3 +49,9 @@
   <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
   {{- product.selected_or_first_available_variant.sku -}}
 </p>
+
+{% stylesheet %}
+  .product__sku.visibility-hidden::after {
+    content: '#';
+  }
+{% endstylesheet %}

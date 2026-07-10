@@ -147,6 +147,18 @@
         "logo_width": {
           "label": "Width"
         },
+        "logo_shape": {
+          "label": "Logo shape",
+          "options__1": {
+            "label": "Default (square/rectangle)"
+          },
+          "options__2": {
+            "label": "Circle"
+          },
+          "options__3": {
+            "label": "Rounded"
+          }
+        },
         "favicon": {
           "label": "Favicon",
           "info": "Displayed at 32 x 32px"
@@ -359,6 +371,29 @@
         },
         "spacing_grid_vertical": {
           "label": "Vertical space"
+        }
+      }
+    },
+    "t_shirt_base": {
+      "name": "T-shirt base settings",
+      "settings": {
+        "color_swatches": {
+          "content": "Color swatches"
+        },
+        "enable_color_swatches": {
+          "label": "Enable color swatches"
+        },
+        "size_guide": {
+          "content": "Size guide"
+        },
+        "size_guide_page": {
+          "label": "Size guide page"
+        },
+        "trust_badges": {
+          "content": "Trust badges"
+        },
+        "enable_trust_badges": {
+          "label": "Enable trust badges on product page"
         }
       }
     }
@@ -989,7 +1024,8 @@
               "default": "Quick links"
             },
             "menu": {
-              "label": "Menu"
+              "label": "Menu",
+              "info": "Displays only top-level menu items."
             }
           }
         },
@@ -999,9 +1035,35 @@
             "paragraph": {
               "content": "Manage brand info in [theme settings](/editor?context=theme&category=brand%20information)"
             },
+            "social_links": {
+              "content": "Social links"
+            },
             "show_social": {
               "label": "Social media icons",
               "info": "[Manage social accounts](/editor?context=theme&category=social%20media)"
+            }
+          }
+        },
+        "image": {
+          "name": "Image",
+          "settings": {
+            "image": {
+              "label": "Image"
+            },
+            "image_width": {
+              "label": "Image width"
+            },
+            "alignment": {
+              "label": "Image alignment on large screen",
+              "options__1": {
+                "label": "Left"
+              },
+              "options__2": {
+                "label": "Center"
+              },
+              "options__3": {
+                "label": "Right"
+              }
             }
           }
         },
@@ -1656,6 +1718,7 @@
           "settings": {
             "image_height": {
               "label": "Image height",
+              "info": "Image height",
               "options__1": {
                 "label": "Adapt to image"
               },
@@ -1691,6 +1754,12 @@
             "text": {
               "label": "Text",
               "default": "Share"
+            },
+            "social_media": {
+              "content": "Share your article on social media."
+            },
+            "social_links": {
+              "content": "Use the social sharing links to share this article."
             }
           }
         }
@@ -1918,6 +1987,34 @@
       "settings": {
         "logo_help": {
           "content": "Edit your logo in [theme settings](/editor?context=theme&category=logo)"
+        }
+      }
+    },
+    "lookbook": {
+      "name": "Lookbook",
+      "settings": {
+        "image": {
+          "label": "Lookbook image"
+        },
+        "heading": {
+          "label": "Heading",
+          "default": "Shop the look"
+        }
+      },
+      "blocks": {
+        "product_pin": {
+          "name": "Product pin",
+          "settings": {
+            "product": {
+              "label": "Product"
+            },
+            "top": {
+              "label": "Position top"
+            },
+            "left": {
+              "label": "Position left"
+            }
+          }
         }
       }
     },
@@ -2261,6 +2358,32 @@
             },
             "enable_quick_add": {
               "label": "Quick add"
+            }
+          }
+        },
+        "trust_badges": {
+          "name": "Trust badges",
+          "settings": {
+            "show_secure_payment": {
+              "label": "Show secure payment"
+            },
+            "show_returns": {
+              "label": "Show returns"
+            },
+            "show_shipping": {
+              "label": "Show shipping"
+            }
+          }
+        },
+        "size_guide": {
+          "name": "Size guide",
+          "settings": {
+            "button_text": {
+              "label": "Button text",
+              "default": "Size guide"
+            },
+            "page": {
+              "label": "Size guide page"
             }
           }
         },

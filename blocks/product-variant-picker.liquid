@@ -1,3 +1,12 @@
+{% doc %}
+  Renders the product variant picker block for a product page.
+
+  Context:
+  - Requires the parent section to provide the global `product`, `section`, and `block` objects.
+  - Depends on `section.id` to share a product form id with buy buttons and quantity blocks.
+  - Intended for product-detail sections only.
+{% enddoc %}
+
 {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
 {% schema %}
