@@ -47,7 +47,7 @@
           "type": "size-guide-popup",
           "settings": {
             "button_text": "Size guide",
-            "page": ""
+            "page": "size-chart"
           },
           "blocks": {}
         },

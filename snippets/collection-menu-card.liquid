@@ -1,0 +1,78 @@
+{% doc %}
+  Renders a compact collection discovery card for header mega menus and mobile drawers.
+
+  @param {collection} [collection] - Collection used as the default title, link, and image source.
+  @param {image} [image] - Optional image override.
+  @param {string} [title] - Optional title override.
+  @param {string} [url] - Optional link override.
+  @param {string} [class] - Optional class modifier for the card wrapper.
+
+  @example
+  {% render 'collection-menu-card', collection: section.settings.menu_card_1_collection %}
+{% enddoc %}
+
+{%- liquid
+  assign card_title = title | default: collection.title
+  assign card_url = url | default: collection.url
+  assign card_image = image | default: collection.featured_image
+-%}
+
+{%- if card_title != blank and card_url != blank -%}
+  <a
+    class="collection-menu-card {{ class }}"
+    href="{{ card_url }}"
+  >
+    {%- if card_image != blank -%}
+      <span class="collection-menu-card__media">
+        {{
+          card_image
+          | image_url: width: 560
+          | image_tag:
+            loading: 'lazy',
+            widths: '180, 280, 360, 560',
+            sizes: '(min-width: 990px) 220px, 42vw',
+            class: 'collection-menu-card__image'
+        }}
+      </span>
+    {%- endif -%}
+    <span class="collection-menu-card__title">{{ card_title | escape }}</span>
+  </a>
+{%- endif -%}
+
+{% stylesheet %}
+  .collection-menu-card {
+    color: rgb(var(--color-foreground));
+    display: block;
+    min-width: 0;
+    text-decoration: none;
+  }
+
+  .collection-menu-card__media {
+    aspect-ratio: 4 / 5;
+    background: rgba(var(--color-foreground), 0.04);
+    display: block;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .collection-menu-card__image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--theme-transition-smooth, 220ms ease);
+    width: 100%;
+  }
+
+  .collection-menu-card:hover .collection-menu-card__image,
+  .collection-menu-card:focus-visible .collection-menu-card__image {
+    transform: scale(1.035);
+  }
+
+  .collection-menu-card__title {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+{% endstylesheet %}

@@ -1184,6 +1184,21 @@
             "label": "Always, reduce logo size"
           }
         },
+        "discovery_cards": {
+          "content": "Discovery cards"
+        },
+        "show_discovery_cards": {
+          "label": "Show discovery cards"
+        },
+        "menu_card_image": {
+          "label": "Image override"
+        },
+        "menu_card_title": {
+          "label": "Title override"
+        },
+        "menu_card_link": {
+          "label": "Link override"
+        },
         "header__utilities": {
           "content": "Utilities"
         },

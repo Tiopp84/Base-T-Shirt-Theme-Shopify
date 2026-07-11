@@ -2,17 +2,24 @@
   Renders a size guide popup button and modal as a theme block.
 {% enddoc %}
 
+{%- liquid
+  assign size_guide_label = block.settings.button_text
+  if size_guide_label == blank
+    assign size_guide_label = 'products.product.size_guide' | t
+  endif
+-%}
+
 <div class="size-guide" {{ block.shopify_attributes }}>
   <button type="button" class="size-guide__button" aria-haspopup="dialog" aria-expanded="false" aria-controls="SizeGuideModal-{{ block.id }}">
     {% render 'icon-ruler' %}
-    <span>{{ block.settings.button_text | default: 'products.product.size_guide' | t }}</span>
+    <span>{{ size_guide_label | escape }}</span>
   </button>
 </div>
 
 <dialog id="SizeGuideModal-{{ block.id }}" class="size-guide__modal" aria-modal="true" aria-labelledby="SizeGuideTitle-{{ block.id }}">
   <div class="size-guide__modal-inner">
     <div class="size-guide__modal-header">
-      <h2 id="SizeGuideTitle-{{ block.id }}">{{ block.settings.button_text | default: 'products.product.size_guide' | t }}</h2>
+      <h2 id="SizeGuideTitle-{{ block.id }}">{{ size_guide_label | escape }}</h2>
       <button type="button" class="size-guide__close" aria-label="{{ 'accessibility.close' | t }}" onclick="this.closest('dialog').close()">
         {% render 'icon-close' %}
       </button>

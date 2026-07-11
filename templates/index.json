@@ -47,7 +47,7 @@
         "buttons"
       ],
       "settings": {
-        "image_overlay_opacity": 35,
+        "image_overlay_opacity": 30,
         "image_height": "large",
         "image_behavior": "ambient",
         "desktop_content_position": "bottom-left",
@@ -122,7 +122,7 @@
         "show_secondary_image": true,
         "show_vendor": true,
         "show_rating": true,
-        "quick_add": "standard",
+        "quick_add": "none",
         "columns_mobile": "2",
         "swipe_on_mobile": true,
         "padding_top": 28,
