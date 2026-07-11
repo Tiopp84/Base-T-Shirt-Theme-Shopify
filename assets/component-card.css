@@ -125,7 +125,7 @@
 .card__content {
   display: grid;
   grid-template-rows: minmax(0, 1fr) max-content minmax(0, 1fr);
-  padding: 1rem;
+  padding: calc(var(--theme-card-gap) * 0.55);
   width: 100%;
   flex-grow: 1;
 }
@@ -136,7 +136,7 @@
 
 .card__information {
   grid-row-start: 2;
-  padding: 1.3rem 1rem;
+  padding: 1.2rem 0.8rem;
 }
 
 .card:not(.ratio) > .card__content {
@@ -265,8 +265,8 @@
 
 @media screen and (min-width: 750px) {
   .card__information {
-    padding-bottom: 1.7rem;
-    padding-top: 1.7rem;
+    padding-bottom: 1.5rem;
+    padding-top: 1.5rem;
   }
 }
 
@@ -303,6 +303,8 @@
 .card__heading {
   margin-top: 0;
   margin-bottom: 0;
+  font-size: calc(var(--font-heading-scale) * 1.45rem);
+  line-height: 1.25;
 }
 
 .card__heading:last-child {
@@ -383,12 +385,12 @@
 @media screen and (min-width: 990px) {
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
-    transition: transform var(--duration-long) ease;
+    transition: transform var(--theme-transition-smooth);
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
   .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
-    transform: scale(1.03);
+    transform: scale(1.025);
   }
 
   .card-wrapper:hover .media.media--hover-effect > img:first-child:not(:only-child) {
@@ -397,8 +399,8 @@
 
   .card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
-    transition: transform var(--duration-long) ease;
-    transform: scale(1.03);
+    transition: transform var(--theme-transition-smooth);
+    transform: scale(1.025);
   }
 
   .underline-links-hover:hover a {
@@ -462,7 +464,7 @@
 }
 
 .card-information > * + * {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 }
 
 .card-information {
@@ -476,6 +478,7 @@
 
 .card-information > .price {
   color: rgb(var(--color-foreground));
+  font-weight: 600;
 }
 
 .card--horizontal .card-information > .price {
@@ -495,11 +498,12 @@
 }
 
 .card-information > *:not(.visually-hidden:first-child) + *:not(.rating):not(.card__information-volume-pricing-note) {
-  margin-top: 0.7rem;
+  margin-top: 0.6rem;
 }
 
 .card-information .caption {
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
 }
 
 .card-article-info {

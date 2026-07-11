@@ -25,8 +25,8 @@
           "settings": {},
           "blocks": {}
         },
-        "description": {
-          "type": "product-description",
+        "rating": {
+          "type": "product-rating",
           "settings": {},
           "blocks": {}
         },
@@ -43,6 +43,14 @@
           },
           "blocks": {}
         },
+        "size_guide": {
+          "type": "size-guide-popup",
+          "settings": {
+            "button_text": "Size guide",
+            "page": "size-chart"
+          },
+          "blocks": {}
+        },
         "quantity_selector": {
           "type": "product-quantity-selector",
           "settings": {},
@@ -53,6 +61,54 @@
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
+          },
+          "blocks": {}
+        },
+        "trust_badges": {
+          "type": "trust-badges",
+          "settings": {
+            "show_secure_payment": true,
+            "show_returns": true,
+            "show_shipping": true
+          },
+          "blocks": {}
+        },
+        "description": {
+          "type": "product-description",
+          "settings": {},
+          "blocks": {}
+        },
+        "details": {
+          "type": "product-collapsible-tab",
+          "settings": {
+            "heading": "Details",
+            "icon": "check_mark",
+            "content": "<p>Add product details, materials, care instructions, or sizing notes.</p>",
+            "page": ""
+          },
+          "blocks": {}
+        },
+        "shipping": {
+          "type": "product-collapsible-tab",
+          "settings": {
+            "heading": "Shipping and returns",
+            "icon": "truck",
+            "content": "<p>Share fulfillment timelines, return windows, and exchange policies.</p>",
+            "page": ""
+          },
+          "blocks": {}
+        },
+        "complementary": {
+          "type": "product-complementary",
+          "settings": {
+            "block_heading": "Complete the look",
+            "make_collapsible_row": false,
+            "icon": "price_tag",
+            "product_list_limit": 6,
+            "products_per_page": 3,
+            "pagination_style": "dots",
+            "image_ratio": "square",
+            "enable_quick_add": false
           },
           "blocks": {}
         },
@@ -67,11 +123,17 @@
       "block_order": [
         "vendor",
         "title",
-        "description",
+        "rating",
         "price",
         "variant_picker",
+        "size_guide",
         "quantity_selector",
         "buy_buttons",
+        "trust_badges",
+        "description",
+        "details",
+        "shipping",
+        "complementary",
         "share"
       ],
       "settings": {
@@ -80,24 +142,24 @@
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "stacked",
-        "mobile_thumbnails": "hide",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
         "media_position": "left",
-        "image_zoom": "hover",
+        "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
+        "padding_top": 28,
+        "padding_bottom": 20
       }
     },
     "disclosures": {
       "type": "disclosures",
       "settings": {
-        "heading": "Disclosures",
+        "heading": "Product disclosures",
         "heading_size": "h2",
         "open_by_default": false,
-        "color_scheme": "",
-        "padding_top": 36,
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
         "padding_bottom": 0
       }
     },
@@ -105,18 +167,18 @@
       "type": "related-products",
       "settings": {
         "heading": "You may also like",
-        "heading_size": "h2",
+        "heading_size": "h1",
         "products_to_show": 4,
         "columns_desktop": 4,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
+        "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
+        "show_vendor": true,
+        "show_rating": true,
+        "padding_top": 44,
+        "padding_bottom": 44
       }
     }
   },

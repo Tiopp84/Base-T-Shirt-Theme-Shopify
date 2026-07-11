@@ -8,6 +8,20 @@
 {% enddoc %}
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  {%- liquid
+    assign has_drawer_cards = false
+    if section.settings.show_discovery_cards
+      if section.settings.menu_card_1_title != blank and section.settings.menu_card_1_link != blank
+        assign has_drawer_cards = true
+      endif
+      if section.settings.menu_card_2_title != blank and section.settings.menu_card_2_link != blank
+        assign has_drawer_cards = true
+      endif
+      if section.settings.menu_card_3_title != blank and section.settings.menu_card_3_link != blank
+        assign has_drawer_cards = true
+      endif
+    endif
+  -%}
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
@@ -22,6 +36,28 @@
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
+            {%- if has_drawer_cards -%}
+              <div class="menu-drawer__cards">
+                {%- render 'collection-menu-card',
+                  image: section.settings.menu_card_1_image,
+                  title: section.settings.menu_card_1_title,
+                  url: section.settings.menu_card_1_link,
+                  class: 'collection-menu-card--drawer'
+                -%}
+                {%- render 'collection-menu-card',
+                  image: section.settings.menu_card_2_image,
+                  title: section.settings.menu_card_2_title,
+                  url: section.settings.menu_card_2_link,
+                  class: 'collection-menu-card--drawer'
+                -%}
+                {%- render 'collection-menu-card',
+                  image: section.settings.menu_card_3_image,
+                  title: section.settings.menu_card_3_title,
+                  url: section.settings.menu_card_3_link,
+                  class: 'collection-menu-card--drawer'
+                -%}
+              </div>
+            {%- endif -%}
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
                 <li>
