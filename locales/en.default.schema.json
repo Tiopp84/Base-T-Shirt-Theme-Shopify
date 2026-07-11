@@ -1199,6 +1199,9 @@
         "show_discovery_cards": {
           "label": "Show discovery cards"
         },
+        "menu_card_collection": {
+          "label": "Collection"
+        },
         "menu_card_image": {
           "label": "Image override"
         },

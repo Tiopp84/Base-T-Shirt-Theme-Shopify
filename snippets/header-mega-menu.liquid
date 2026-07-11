@@ -13,13 +13,19 @@
       {%- liquid
         assign has_menu_cards = false
         if section.settings.show_discovery_cards
-          if section.settings.menu_card_1_title != blank and section.settings.menu_card_1_link != blank
+          if section.settings.menu_card_1_collection != blank
+            assign has_menu_cards = true
+          elsif section.settings.menu_card_1_title != blank and section.settings.menu_card_1_link != blank
             assign has_menu_cards = true
           endif
-          if section.settings.menu_card_2_title != blank and section.settings.menu_card_2_link != blank
+          if section.settings.menu_card_2_collection != blank
+            assign has_menu_cards = true
+          elsif section.settings.menu_card_2_title != blank and section.settings.menu_card_2_link != blank
             assign has_menu_cards = true
           endif
-          if section.settings.menu_card_3_title != blank and section.settings.menu_card_3_link != blank
+          if section.settings.menu_card_3_collection != blank
+            assign has_menu_cards = true
+          elsif section.settings.menu_card_3_title != blank and section.settings.menu_card_3_link != blank
             assign has_menu_cards = true
           endif
         endif
@@ -87,18 +93,21 @@
                   {%- if has_menu_cards -%}
                     <div class="mega-menu__cards">
                       {%- render 'collection-menu-card',
+                        collection: section.settings.menu_card_1_collection,
                         image: section.settings.menu_card_1_image,
                         title: section.settings.menu_card_1_title,
                         url: section.settings.menu_card_1_link,
                         class: 'collection-menu-card--mega'
                       -%}
                       {%- render 'collection-menu-card',
+                        collection: section.settings.menu_card_2_collection,
                         image: section.settings.menu_card_2_image,
                         title: section.settings.menu_card_2_title,
                         url: section.settings.menu_card_2_link,
                         class: 'collection-menu-card--mega'
                       -%}
                       {%- render 'collection-menu-card',
+                        collection: section.settings.menu_card_3_collection,
                         image: section.settings.menu_card_3_image,
                         title: section.settings.menu_card_3_title,
                         url: section.settings.menu_card_3_link,
