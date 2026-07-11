@@ -131,8 +131,29 @@
     },
     "lookbook": {
       "type": "lookbook",
+      "blocks": {
+        "product_pin_DVnQRF": {
+          "type": "product_pin",
+          "settings": {
+            "product": "quần-jeans",
+            "top": 62,
+            "left": 75
+          }
+        },
+        "product_pin_AY6zeY": {
+          "type": "product_pin",
+          "settings": {
+            "product": "short-shirt",
+            "top": 38,
+            "left": 24
+          }
+        }
+      },
+      "block_order": [
+        "product_pin_DVnQRF",
+        "product_pin_AY6zeY"
+      ],
       "settings": {
-        "image": "",
         "heading": "Shop the look"
       }
     },
