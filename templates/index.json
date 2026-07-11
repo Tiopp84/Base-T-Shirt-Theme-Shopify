@@ -134,9 +134,7 @@
       "settings": {
         "image": "",
         "heading": "Shop the look"
-      },
-      "blocks": {},
-      "block_order": []
+      }
     },
     "newsletter": {
       "type": "newsletter",

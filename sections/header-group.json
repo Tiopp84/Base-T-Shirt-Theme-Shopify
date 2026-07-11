@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.header.name",
   "type": "header",
@@ -5,44 +14,38 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
         "color_scheme": "scheme-1",
         "show_line_separator": true,
         "show_social": false,
-        "auto_rotate": false,
-        "change_slides_speed": 5,
         "enable_country_selector": false,
         "enable_language_selector": false
-      },
-      "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "scheme-1",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement-bar-0"
-      ]
+      }
     },
     "header": {
       "type": "header",
       "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
         "logo_position": "middle-left",
+        "mobile_logo_position": "center",
         "menu": "main-menu",
         "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
-        "show_discovery_cards": false,
+        "show_discovery_cards": true,
+        "menu_card_1_image": "shopify://shop_images/summers-collection.jpg",
+        "menu_card_1_title": "New  Arrivals",
+        "menu_card_1_link": "shopify://collections/frontpage",
+        "menu_card_2_image": "shopify://shop_images/example.jpg",
+        "menu_card_2_title": "Summer",
+        "menu_card_2_link": "shopify://collections/summer",
+        "menu_card_3_title": "",
+        "menu_card_3_link": "",
         "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
         "enable_country_selector": true,
         "enable_language_selector": true,
         "enable_customer_avatar": true,
-        "mobile_logo_position": "center",
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20
