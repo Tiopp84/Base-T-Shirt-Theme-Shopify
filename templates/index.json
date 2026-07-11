@@ -136,16 +136,16 @@
           "type": "product_pin",
           "settings": {
             "product": "quần-jeans",
-            "top": 62,
-            "left": 75
+            "top": 61,
+            "left": 27
           }
         },
         "product_pin_AY6zeY": {
           "type": "product_pin",
           "settings": {
             "product": "short-shirt",
-            "top": 38,
-            "left": 24
+            "top": 40,
+            "left": 18
           }
         }
       },
@@ -154,6 +154,7 @@
         "product_pin_AY6zeY"
       ],
       "settings": {
+        "image": "shopify://shop_images/slide_look_2.webp",
         "heading": "Shop the look"
       }
     },
