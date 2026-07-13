@@ -83,7 +83,27 @@
           "settings": {
             "heading": "Details",
             "icon": "check_mark",
-            "content": "<p>Add product details, materials, care instructions, or sizing notes.</p>",
+            "content": "<p>Premium heavyweight construction with a relaxed streetwear fit. Use this panel for fabric weight, print method, and garment finish.</p>",
+            "page": ""
+          },
+          "blocks": {}
+        },
+        "materials": {
+          "type": "product-collapsible-tab",
+          "settings": {
+            "heading": "Materials and care",
+            "icon": "washing",
+            "content": "<p>Add cotton composition, wash instructions, shrinkage notes, and care guidance.</p>",
+            "page": ""
+          },
+          "blocks": {}
+        },
+        "fit": {
+          "type": "product-collapsible-tab",
+          "settings": {
+            "heading": "Fit and sizing",
+            "icon": "ruler",
+            "content": "<p>Describe the silhouette, garment measurements, and size recommendation for this product.</p>",
             "page": ""
           },
           "blocks": {}
@@ -93,7 +113,7 @@
           "settings": {
             "heading": "Shipping and returns",
             "icon": "truck",
-            "content": "<p>Share fulfillment timelines, return windows, and exchange policies.</p>",
+            "content": "<p>Share fulfillment timelines, return windows, exchange policies, and free shipping thresholds.</p>",
             "page": ""
           },
           "blocks": {}
@@ -132,6 +152,8 @@
         "trust_badges",
         "description",
         "details",
+        "materials",
+        "fit",
         "shipping",
         "complementary",
         "share"
@@ -141,7 +163,7 @@
         "color_scheme": "scheme-1",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "show",
         "media_position": "left",

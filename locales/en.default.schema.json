@@ -704,6 +704,50 @@
         "name": "Collection list"
       }
     },
+    "collection-tiles": {
+      "name": "Collection tiles",
+      "settings": {
+        "subheading": {
+          "default": "Shop by edit",
+          "label": "Subheading"
+        },
+        "heading": {
+          "default": "Find your next wardrobe move",
+          "label": "Heading"
+        },
+        "columns_desktop": {
+          "label": "Desktop columns"
+        },
+        "show_cta": {
+          "label": "Show CTA"
+        }
+      },
+      "blocks": {
+        "collection_tile": {
+          "name": "Collection tile",
+          "settings": {
+            "collection": {
+              "label": "Collection"
+            },
+            "image": {
+              "label": "Image override"
+            },
+            "heading": {
+              "label": "Heading override"
+            },
+            "cta_label": {
+              "label": "CTA label"
+            },
+            "link": {
+              "label": "Link override"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Collection tiles"
+      }
+    },
     "contact-form": {
       "name": "Contact Form",
       "presets": {
@@ -1199,17 +1243,35 @@
         "show_discovery_cards": {
           "label": "Show discovery cards"
         },
-        "menu_card_collection": {
-          "label": "Collection"
+        "menu_card_collections": {
+          "label": "Selected collections"
         },
-        "menu_card_image": {
-          "label": "Image override"
+        "menu_card_1_image": {
+          "label": "Card 1 image override"
         },
-        "menu_card_title": {
-          "label": "Title override"
+        "menu_card_1_title": {
+          "label": "Card 1 title override"
         },
-        "menu_card_link": {
-          "label": "Link override"
+        "menu_card_1_link": {
+          "label": "Card 1 link override"
+        },
+        "menu_card_2_image": {
+          "label": "Card 2 image override"
+        },
+        "menu_card_2_title": {
+          "label": "Card 2 title override"
+        },
+        "menu_card_2_link": {
+          "label": "Card 2 link override"
+        },
+        "menu_card_3_image": {
+          "label": "Card 3 image override"
+        },
+        "menu_card_3_title": {
+          "label": "Card 3 title override"
+        },
+        "menu_card_3_link": {
+          "label": "Card 3 link override"
         },
         "header__utilities": {
           "content": "Utilities"

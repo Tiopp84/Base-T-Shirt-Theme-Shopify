@@ -16,7 +16,7 @@
 
 <style>
   .template-search__header {
-    margin-bottom: 3rem;
+    margin-bottom: clamp(3.2rem, 5vw, 6.4rem);
   }
 
   .template-search__search {
@@ -25,7 +25,7 @@
   }
 
   .template-search__search .search {
-    margin-top: 3rem;
+    margin-top: 2.4rem;
   }
 
   .template-search--empty {
@@ -34,8 +34,22 @@
 
   @media screen and (min-width: 750px) {
     .template-search__header {
-      margin-bottom: 5rem;
+      margin-bottom: clamp(4rem, 6vw, 7.2rem);
     }
+  }
+
+  .template-search__header h1 {
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+
+  .template-search__header [role='status'] {
+    color: rgba(var(--color-foreground), 0.72);
+    margin-top: 1.6rem;
+  }
+
+  .template-search__results {
+    position: relative;
   }
 
   .search__button .icon {

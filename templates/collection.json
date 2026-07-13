@@ -29,12 +29,12 @@
         "show_secondary_image": true,
         "show_vendor": true,
         "show_rating": true,
-        "quick_add": "none",
+        "quick_add": "standard",
         "enable_filtering": true,
-        "filter_type": "horizontal",
+        "filter_type": "vertical",
         "enable_sorting": true,
-        "padding_top": 24,
-        "padding_bottom": 52
+        "padding_top": 32,
+        "padding_bottom": 64
       }
     }
   },

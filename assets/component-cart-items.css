@@ -30,6 +30,8 @@ cart-items .title-wrapper-with-link {
 .cart-item__image-container {
   display: inline-flex;
   align-items: flex-start;
+  border-radius: var(--urban-radius);
+  overflow: hidden;
 }
 
 .cart-item__nested-line .cart-item__image-container {
@@ -47,6 +49,7 @@ cart-items .title-wrapper-with-link {
 .cart-item__image {
   height: auto;
   max-width: calc(10rem / var(--font-body-scale));
+  background: rgba(var(--color-foreground), 0.04);
 }
 
 @media screen and (min-width: 750px) {
@@ -87,6 +90,7 @@ cart-items .title-wrapper-with-link {
 .cart-item__name {
   text-decoration: none;
   display: block;
+  text-transform: uppercase;
 }
 
 .cart-item__title {
@@ -371,11 +375,12 @@ cart-items .title-wrapper-with-link {
 }
 
 .cart-item__final-price {
-  font-weight: 400;
+  font-weight: var(--font-body-weight-bold);
 }
 
 .product-option {
   font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.72);
   word-break: break-word;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
 }
@@ -478,6 +483,9 @@ cart-remove-button .icon-remove {
 
 .cart-items thead th {
   text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.08rem;
 }
 
 @media screen and (max-width: 749px) {
@@ -500,6 +508,8 @@ cart-remove-button .icon-remove {
     grid-template: repeat(2, auto) / repeat(4, 1fr);
     gap: 1.5rem;
     margin-bottom: 3.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   }
 
   .cart-item:has(+ .cart-item__nested-line) {
@@ -508,6 +518,8 @@ cart-remove-button .icon-remove {
 
   .cart-item:last-child {
     margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
   }
 
   .cart-item__media {
@@ -557,6 +569,15 @@ cart-remove-button .icon-remove {
   .cart-items td {
     vertical-align: top;
     padding-top: 4rem;
+  }
+
+  .cart-item > td {
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    padding-bottom: 4rem;
+  }
+
+  .cart-item:last-child > td {
+    border-bottom: 0;
   }
 
   .cart-items .cart-item__nested-line td {

@@ -344,7 +344,11 @@
       "view_all_label": "View all products in the {{ collection_name }} collection"
     },
     "lookbook": {
+      "eyebrow": "Styled together",
       "view_product": "View {{ product_name }}"
+    },
+    "collection_tiles": {
+      "shop_collection": "Shop Collection"
     },
     "collection_list": {
       "view_all": "View all"

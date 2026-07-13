@@ -435,6 +435,16 @@
 
 .banner__heading {
   margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.banner__text {
+  max-width: 58rem;
+}
+
+.banner__text p {
+  color: rgba(var(--color-foreground), 0.78);
+  line-height: 1.55;
 }
 
 .banner__box .banner__heading + * {

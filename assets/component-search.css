@@ -2,6 +2,11 @@
   padding-right: 9.8rem;
 }
 
+.template-search .field {
+  border-radius: var(--urban-radius);
+  box-shadow: var(--urban-shadow-ambient);
+}
+
 .search__button {
   right: var(--inputs-border-width);
   top: var(--inputs-border-width);
