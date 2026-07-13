@@ -47,6 +47,7 @@
         "buttons"
       ],
       "settings": {
+        "image": "shopify://shop_images/slide_look_2.webp",
         "image_overlay_opacity": 30,
         "image_height": "large",
         "image_behavior": "ambient",
