@@ -186,12 +186,72 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "slideshow_fgcman": {
+      "type": "slideshow",
+      "blocks": {
+        "slideshow_slide_JR49HY": {
+          "type": "slideshow-slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          },
+          "blocks": {}
+        },
+        "slideshow_slide_BCUUi8": {
+          "type": "slideshow-slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
+          "settings": {
+            "image": "shopify://shop_images/winter-collection.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "View now",
+            "link": "shopify://collections/winter",
+            "button_style_secondary": true,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "slideshow_slide_JR49HY",
+        "slideshow_slide_BCUUi8"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 3,
+        "image_behavior": "ambient",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
     }
   },
   "order": [
     "hero",
     "collection_tiles",
     "featured_collection",
-    "image_with_text_FcmanR"
+    "image_with_text_FcmanR",
+    "slideshow_fgcman"
   ]
 }
