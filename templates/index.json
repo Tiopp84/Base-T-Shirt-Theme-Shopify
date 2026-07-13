@@ -66,38 +66,34 @@
         "tile_dresses": {
           "type": "collection_tile",
           "settings": {
-            "collection": "",
-            "image": "",
-            "heading": "Graphic Tees",
+            "collection": "vintage",
+            "heading": "Vintage",
             "cta_label": "Explore Art",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/vintage"
           }
         },
         "tile_new_in": {
           "type": "collection_tile",
           "settings": {
-            "collection": "",
-            "image": "",
-            "heading": "Essentials",
+            "collection": "summer",
+            "heading": "Summer",
             "cta_label": "Daily Basics",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/summer"
           }
         },
         "tile_sale": {
           "type": "collection_tile",
           "settings": {
-            "collection": "",
-            "image": "",
-            "heading": "Oversized",
+            "collection": "frontpage",
+            "heading": "Minimal",
             "cta_label": "Modern Fit",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/frontpage"
           }
         },
         "tile_essentials": {
           "type": "collection_tile",
           "settings": {
             "collection": "",
-            "image": "",
             "heading": "Archive",
             "cta_label": "Limited Drops",
             "link": "shopify://collections/all"
@@ -194,7 +190,6 @@
         "button"
       ],
       "settings": {
-        "image": "",
         "height": "large",
         "desktop_image_width": "medium",
         "layout": "text_first",
