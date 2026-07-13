@@ -89,7 +89,7 @@
             "cta_label": "Modern Fit",
             "link": "shopify://collections/frontpage"
           }
-        },
+        }
       },
       "block_order": [
         "tile_dresses",
@@ -135,11 +135,63 @@
         "padding_top": 28,
         "padding_bottom": 52
       }
+    },
+    "image_with_text_FcmanR": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_with_text_heading_B9xk4A": {
+          "type": "image-with-text-heading",
+          "settings": {
+            "heading": "Winter collection",
+            "heading_size": "h1"
+          },
+          "blocks": {}
+        },
+        "image_with_text_text_CtjgTw": {
+          "type": "image-with-text-text",
+          "settings": {
+            "text": "<p>Embrace the season with our curated winter collection. Discover cozy essentials, timeless pieces, and statement styles designed to keep you warm and stylish through the coldest months.</p>",
+            "text_style": "body"
+          },
+          "blocks": {}
+        },
+        "image_with_text_button_MwYwY8": {
+          "type": "image-with-text-button",
+          "settings": {
+            "button_label": "ViewView",
+            "button_link": "shopify://collections/winter",
+            "button_style_secondary": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "image_with_text_heading_B9xk4A",
+        "image_with_text_text_CtjgTw",
+        "image_with_text_button_MwYwY8"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/winter-collection.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "ambient",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "hero",
     "collection_tiles",
-    "featured_collection"
+    "featured_collection",
+    "image_with_text_FcmanR"
   ]
 }
