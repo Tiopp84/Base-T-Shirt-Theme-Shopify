@@ -25,6 +25,21 @@ slideshow-component .slideshow.banner {
   width: 100%;
 }
 
+.slideshow.banner--small {
+  height: 28rem;
+  min-height: 28rem;
+}
+
+.slideshow.banner--medium {
+  height: 34rem;
+  min-height: 34rem;
+}
+
+.slideshow.banner--large {
+  height: 39rem;
+  min-height: 39rem;
+}
+
 .slideshow-component--full-width .slideshow.banner {
   width: 100vw;
 }
@@ -37,6 +52,8 @@ slideshow-component .slideshow.banner {
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: inherit;
   visibility: visible;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -48,8 +65,15 @@ slideshow-component .slideshow.banner {
   width: 100vw;
 }
 
-.slideshow__slide .slideshow__media,
+.slideshow__slide .slideshow__media {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+}
+
 .slideshow__slide .banner__content {
+  height: 100%;
+  min-height: inherit;
   width: 100%;
 }
 
@@ -59,6 +83,23 @@ slideshow-component .slideshow.banner {
   object-fit: cover;
   object-position: center;
   width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow.banner--small {
+    height: 42rem;
+    min-height: 42rem;
+  }
+
+  .slideshow.banner--medium {
+    height: 56rem;
+    min-height: 56rem;
+  }
+
+  .slideshow.banner--large {
+    height: max(72rem, calc(100vh - var(--header-height, 0px)));
+    min-height: max(72rem, calc(100vh - var(--header-height, 0px)));
+  }
 }
 
 .slideshow.slider--everywhere {
@@ -151,16 +192,38 @@ slideshow-component .slideshow.banner {
 
 .slideshow__controls {
   align-items: center;
-  background: rgba(var(--color-background), 0.86);
+  background: rgba(var(--color-background), 0.42);
   border: 0;
-  bottom: 1.6rem;
-  box-shadow: 0 0.8rem 2.4rem rgba(var(--color-shadow), 0.12);
-  left: 50%;
-  min-height: 4.4rem;
+  bottom: 1.2rem;
+  box-shadow: 0 0.8rem 2.4rem rgba(var(--color-shadow), 0.08);
+  min-height: 3.6rem;
+  opacity: 0.58;
   position: absolute;
-  transform: translateX(-50%);
+  right: 1.2rem;
   width: auto;
   z-index: 3;
+  transition: opacity var(--duration-short) ease, background var(--duration-short) ease;
+}
+
+.slideshow__controls:hover,
+.slideshow__controls:focus-within {
+  background: rgba(var(--color-background), 0.78);
+  opacity: 1;
+}
+
+.slideshow__controls .slider-button {
+  height: 3.6rem;
+  min-width: 3.6rem;
+  width: 3.6rem;
+}
+
+.slideshow__controls .slider-counter {
+  min-width: 3.6rem;
+  padding: 0 0.4rem;
+}
+
+.slideshow__controls .slider-counter.caption {
+  font-size: 1.1rem;
 }
 
 .slideshow__controls--top {
@@ -180,7 +243,8 @@ slideshow-component .slideshow.banner {
 
 @media screen and (min-width: 750px) {
   .slideshow__controls {
-    bottom: 2.4rem;
+    bottom: 2rem;
+    right: 2rem;
   }
 }
 
