@@ -190,26 +190,69 @@
     "slideshow_fgcman": {
       "type": "slideshow",
       "blocks": {
-        "collage_image_CtCY4U": {
-          "type": "collage-image",
-          "name": "t:sections.collage.blocks.image.name",
+        "slideshow_slide_a66bLH": {
+          "type": "slideshow-slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
           "settings": {
-            "image": "shopify://shop_images/winter-collection.jpg"
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
           },
           "blocks": {}
         },
-        "collage_image_nYd648": {
-          "type": "collage-image",
-          "name": "t:sections.collage.blocks.image.name",
+        "slideshow_slide_VJAjNT": {
+          "type": "slideshow-slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
           "settings": {
-            "image": "shopify://shop_images/slide_look_2.webp"
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          },
+          "blocks": {}
+        },
+        "slideshow_slide_HkgTVK": {
+          "type": "slideshow-slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
+          "settings": {
+            "image": "{{ shop.brand.logo }}",
+            "image_overlay_opacity": 30,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "collage_image_CtCY4U",
-        "collage_image_nYd648"
+        "slideshow_slide_a66bLH",
+        "slideshow_slide_VJAjNT",
+        "slideshow_slide_HkgTVK"
       ],
       "name": "t:sections.slideshow.presets.name",
       "settings": {
