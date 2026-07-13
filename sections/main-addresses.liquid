@@ -18,6 +18,12 @@
 
 {%- paginate customer.addresses by 5 -%}
   <div class="customer addresses section-{{ section.id }}-padding" data-customer-addresses>
+    {%- liquid
+      assign account_breadcrumb_title = 'customer.account.title' | t
+      assign addresses_breadcrumb_title = 'customer.addresses.title' | t
+    -%}
+    {% render 'breadcrumbs', parent_title: account_breadcrumb_title, parent_url: routes.account_url, current_title: addresses_breadcrumb_title %}
+
     <h1>{{ 'customer.addresses.title' | t }}</h1>
     <a href="{{ routes.account_url }}">
       {{ 'customer.account.return' | t }}

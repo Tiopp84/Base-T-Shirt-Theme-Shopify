@@ -1854,6 +1854,9 @@
         }
       }
     },
+    "main-404": {
+      "name": "404 page"
+    },
     "main-blog": {
       "name": "Blog posts",
       "settings": {

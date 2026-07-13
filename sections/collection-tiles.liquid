@@ -14,17 +14,17 @@
 
 <div class="collection-tiles color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-tiles__inner page-width section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+    {%- if section.settings.heading != blank or section.settings.view_all_label != blank -%}
       <div class="collection-tiles__header">
-        {%- if section.settings.subheading != blank -%}
-          <p class="collection-tiles__eyebrow caption-with-letter-spacing">
-            {{ section.settings.subheading | escape }}
-          </p>
-        {%- endif -%}
         {%- if section.settings.heading != blank -%}
           <h2 class="collection-tiles__heading {{ section.settings.heading_size }}">
             {{ section.settings.heading | escape }}
           </h2>
+        {%- endif -%}
+        {%- if section.settings.view_all_label != blank -%}
+          <a class="collection-tiles__view-all" href="{{ section.settings.view_all_link | default: routes.collections_url }}">
+            {{ section.settings.view_all_label | escape }}
+          </a>
         {%- endif -%}
       </div>
     {%- endif -%}
@@ -115,23 +115,34 @@
 
 {% stylesheet %}
   .collection-tiles__header {
-    max-width: 72rem;
-    margin-bottom: 2.8rem;
-  }
-
-  .collection-tiles__eyebrow {
-    margin: 0 0 1rem;
-    color: rgba(var(--color-foreground), 0.72);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(3.2rem, 5vw, 6.4rem);
   }
 
   .collection-tiles__heading {
     margin: 0;
+    text-transform: uppercase;
+  }
+
+  .collection-tiles__view-all {
+    border-bottom: 0.2rem solid currentColor;
+    color: rgb(var(--color-foreground));
+    font-size: 1.2rem;
+    font-weight: var(--font-body-weight-bold);
+    letter-spacing: 0.04rem;
+    line-height: 1;
+    padding-bottom: 0.4rem;
+    text-decoration: none;
+    text-transform: uppercase;
   }
 
   .collection-tiles__grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--theme-card-gap, 1.6rem);
+    gap: var(--theme-card-gap, 2.4rem);
     padding: 0;
     margin: 0;
     list-style: none;
@@ -145,6 +156,7 @@
     color: rgb(var(--color-background));
     text-decoration: none;
     background: rgba(var(--color-foreground), 0.06);
+    border-radius: 0;
   }
 
   .collection-tiles__card::after {
@@ -157,7 +169,7 @@
 
   .collection-tiles__media {
     display: block;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 3 / 4;
   }
 
   .collection-tiles__image {
@@ -179,7 +191,8 @@
 
   .collection-tiles__title {
     font-family: var(--font-heading-family);
-    font-size: clamp(2rem, 2.4vw, 3.4rem);
+    font-size: clamp(1.5rem, 1.6vw, 2.4rem);
+    font-weight: 800;
     line-height: 1.05;
     text-transform: uppercase;
   }
@@ -194,6 +207,9 @@
     font-weight: 600;
     letter-spacing: 0.08rem;
     text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(0.8rem);
+    transition: opacity var(--theme-transition-smooth, 300ms ease), transform var(--theme-transition-smooth, 300ms ease);
   }
 
   .collection-tiles__cta .svg-wrapper {
@@ -201,7 +217,13 @@
   }
 
   .collection-tiles__card:hover .collection-tiles__image {
-    transform: scale(1.035);
+    transform: scale(1.08);
+  }
+
+  .collection-tiles__card:hover .collection-tiles__cta,
+  .collection-tiles__card:focus-visible .collection-tiles__cta {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .collection-tiles__card:focus-visible {
@@ -222,8 +244,19 @@
   }
 
   @media screen and (max-width: 749px) {
+    .collection-tiles__header {
+      align-items: flex-start;
+      flex-direction: column;
+      margin-bottom: 2.4rem;
+    }
+
     .collection-tiles__grid {
       grid-template-columns: 1fr;
+    }
+
+    .collection-tiles__cta {
+      opacity: 1;
+      transform: none;
     }
   }
 
@@ -247,12 +280,6 @@
     "groups": ["header", "footer"]
   },
   "settings": [
-    {
-      "type": "text",
-      "id": "subheading",
-      "default": "t:sections.collection-tiles.settings.subheading.default",
-      "label": "t:sections.collection-tiles.settings.subheading.label"
-    },
     {
       "type": "text",
       "id": "heading",
@@ -287,6 +314,17 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.collection-tiles.settings.columns_desktop.label"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
     },
     {
       "type": "checkbox",

@@ -2,12 +2,17 @@ product-info {
   display: block;
 }
 
+product-info .page-width {
+  max-width: 144rem;
+}
+
 .product {
   margin: 0;
 }
 
 .product.grid {
-  gap: var(--theme-card-gap);
+  gap: clamp(3.2rem, 5vw, 6.4rem);
+  align-items: flex-start;
 }
 
 .product--no-media {
@@ -62,14 +67,14 @@ product-info {
 
 @media screen and (min-width: 990px) {
   .product--large:not(.product--no-media) .product__media-wrapper {
-    max-width: 62%;
-    width: calc(62% - var(--grid-desktop-horizontal-spacing) / 2);
+    max-width: calc(58.333% - 3.2rem);
+    width: calc(58.333% - 3.2rem);
   }
 
   .product--large:not(.product--no-media) .product__info-wrapper {
-    padding: 0 0 0 5.6rem;
-    max-width: 38%;
-    width: calc(38% - var(--grid-desktop-horizontal-spacing) / 2);
+    padding: 0;
+    max-width: calc(41.667% - 3.2rem);
+    width: calc(41.667% - 3.2rem);
   }
 
   .product--large:not(.product--no-media).product--right .product__info-wrapper {
@@ -218,7 +223,7 @@ product-info {
 /* Product info */
 
 .product__info-container > * + * {
-  margin: 1.8rem 0;
+  margin: 2.4rem 0;
 }
 
 .product__info-container iframe {
@@ -260,11 +265,11 @@ product-info {
 @media screen and (min-width: 750px) {
   .product__info-container {
     max-width: 56rem;
-    padding: 3.2rem;
-    border: var(--theme-border-subtle);
-    border-radius: var(--urban-radius);
-    background: rgba(255, 255, 255, 0.72);
-    box-shadow: var(--urban-shadow-ambient);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .product__info-container .price--on-sale .price-item--regular {
@@ -278,6 +283,9 @@ product-info {
 
 .product__title h1 {
   margin: 0;
+  font-size: clamp(3.2rem, 4vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.05;
   text-transform: uppercase;
 }
 
@@ -289,7 +297,7 @@ product-info {
 
 .product .price {
   font-family: var(--font-heading-family);
-  font-size: calc(var(--font-heading-scale) * 2.2rem);
+  font-size: calc(var(--font-heading-scale) * 2.4rem);
   font-weight: 700;
 }
 
@@ -303,11 +311,18 @@ product-info {
 
 .product-form__buttons {
   max-width: 100%;
+  display: grid;
+  gap: 1.2rem;
 }
 
 .product-form__submit,
 .shopify-payment-button__button--unbranded {
   width: 100%;
+  min-height: 5.8rem;
+  font-size: 1.3rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
 }
 
 .product__description {
@@ -325,8 +340,8 @@ product-info {
 }
 
 .product__accordion summary {
-  min-height: 5.6rem;
-  padding: 1.6rem 0;
+  min-height: 5.8rem;
+  padding: 1.8rem 0;
 }
 
 .product__accordion .summary__title {
@@ -463,13 +478,51 @@ product-info {
 }
 
 @media screen and (min-width: 750px) {
+  media-gallery[data-desktop-layout='thumbnail_slider'] {
+    align-items: flex-start;
+    display: grid;
+    gap: 1.6rem;
+    grid-template-columns: 8.8rem minmax(0, 1fr);
+  }
+
+  media-gallery[data-desktop-layout='thumbnail_slider'] #GalleryViewer-template--main,
+  media-gallery[data-desktop-layout='thumbnail_slider'] .slider-mobile-gutter:first-of-type {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  media-gallery[data-desktop-layout='thumbnail_slider'] .thumbnail-slider {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--header-height, 8rem) + 2.4rem);
+  }
+
+  .product--thumbnail_slider .thumbnail-slider {
+    align-items: flex-start;
+  }
+
+  .thumbnail-slider .thumbnail-list.slider--tablet-up {
+    display: grid;
+    flex: none;
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+    padding: 0;
+    scroll-padding-left: 0;
+    width: 8.8rem;
+  }
+
+  .thumbnail-list.slider--tablet-up .thumbnail-list__item.slider__slide {
+    width: 8.8rem;
+  }
+
   .product--thumbnail .product__media-list,
   .product--thumbnail_slider .product__media-list {
     padding-bottom: calc(var(--media-shadow-vertical-offset) * var(--media-shadow-visible));
   }
 
   .product__media-list {
-    padding-right: calc(var(--media-shadow-horizontal-offset) * var(--media-shadow-visible));
+    padding-right: 0;
   }
 
   .product--thumbnail .product__media-item:not(.is-active),
@@ -1083,8 +1136,7 @@ product-info {
 }
 
 .product-media-container.constrain-height {
-  /* arbitrary offset value based on average theme spacing and header height */
-  --viewport-offset: 400px;
+  --viewport-offset: 280px;
   --constrained-min-height: 300px;
   --constrained-height: max(var(--constrained-min-height), calc(100vh - var(--viewport-offset)));
   margin-right: auto;
@@ -1152,5 +1204,69 @@ product-info {
   .product-media-container .product__modal-opener:not(.product__modal-opener--image) {
     display: none;
   }
+}
+
+/* Urban Kinetic product detail layout */
+@media screen and (min-width: 750px) {
+  .product--thumbnail_slider .thumbnail-slider .slider-button {
+    display: none;
+  }
+
+  .product--thumbnail_slider .thumbnail-slider {
+    display: block;
+  }
+
+  .product--thumbnail_slider .thumbnail-list.slider--tablet-up {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+    padding: 0;
+    width: 8.8rem;
+  }
+
+  .product--thumbnail_slider .thumbnail-list.slider--tablet-up .thumbnail-list__item.slider__slide {
+    width: 8.8rem;
+  }
+
+  .product--thumbnail_slider .product__media-list .product__media-item {
+    aspect-ratio: 3 / 4;
+  }
+
+  .product--thumbnail_slider .product__media-list .product-media-container,
+  .product--thumbnail_slider .product__media-list .product-media-container .media,
+  .product--thumbnail_slider .product__media-list .product__modal-opener {
+    height: 100%;
+  }
+}
+
+.product-form__input input[type='radio'] + label {
+  min-height: 4.4rem;
+  border-radius: 0.2rem;
+  font-size: 1.2rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.product-form__input input[type='radio']:checked + label {
+  background: var(--urban-primary);
+  border-color: var(--urban-primary);
+  color: #fff;
+}
+
+.product-form__input input[type='radio'].disabled + label,
+.product-form__input input[type='radio']:disabled + label {
+  opacity: 0.45;
+}
+
+.size-guide {
+  margin-top: -1.2rem;
+}
+
+.size-guide__button {
+  color: var(--urban-primary);
+  font-size: 1.2rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
 }
 

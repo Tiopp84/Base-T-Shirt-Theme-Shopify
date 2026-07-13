@@ -15,6 +15,9 @@
 {%- endstyle -%}
 
 <div class="customer register section-{{ section.id }}-padding">
+  {%- assign register_breadcrumb_title = 'customer.register.title' | t -%}
+  {% render 'breadcrumbs', current_title: register_breadcrumb_title %}
+
   <h1>
     {{ 'customer.register.title' | t }}
   </h1>

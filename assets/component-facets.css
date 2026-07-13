@@ -1152,11 +1152,14 @@ input.mobile-facets__checkbox {
   }
 
   .facets__heading--vertical {
-    margin: 0 0 1.8rem 0;
+    align-items: center;
+    display: flex;
+    gap: 0.8rem;
+    margin: 0 0 2.4rem 0;
     color: rgb(var(--color-foreground));
-    font-size: 1.2rem;
+    font-family: var(--font-heading-family);
+    font-size: calc(var(--font-heading-scale) * 2.4rem);
     font-weight: var(--font-body-weight-bold);
-    letter-spacing: 0.08rem;
     text-transform: uppercase;
   }
 
@@ -1224,6 +1227,18 @@ input.mobile-facets__checkbox {
   .facets-vertical .facet-checkbox,
   .facets-vertical .facets__price {
     font-size: 1.3rem;
+  }
+
+  .facets-vertical .facets__summary {
+    border-radius: var(--urban-radius);
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    transition: background-color var(--duration-short) ease, transform var(--duration-short) ease;
+  }
+
+  .facets-vertical .facets__summary:hover {
+    background: rgba(var(--color-foreground), 0.05);
+    transform: translateX(0.2rem);
   }
 
   .facets-vertical .facet-checkbox {

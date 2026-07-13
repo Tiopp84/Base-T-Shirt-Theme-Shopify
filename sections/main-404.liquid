@@ -1,43 +1,304 @@
-<style type="text/css">
-  .template-404 {
-    min-height: 58rem;
-    padding-bottom: clamp(6.4rem, 8vw, 10rem);
-    padding-top: clamp(7.2rem, 10vw, 14rem);
-  }
+{{ 'component-search.css' | asset_url | stylesheet_tag }}
 
-  .template-404 p {
-    color: var(--urban-primary);
-    font-size: 1.2rem;
-    font-weight: var(--font-body-weight-bold);
-    letter-spacing: 0.1rem;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .template-404 .title {
-    margin-bottom: 2.4rem;
-    text-transform: uppercase;
-  }
-
-  .template-404 .title + * {
-    margin-top: 1rem;
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-</style>
 
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+  .template-404 {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .template-404__inner {
+    min-height: 68rem;
+    position: relative;
+  }
+
+  .template-404__hero {
+    align-items: center;
+    display: grid;
+    gap: clamp(3.2rem, 6vw, 8rem);
+    grid-template-columns: 1fr;
+    min-height: 58rem;
+    padding: clamp(3.2rem, 6vw, 7.2rem) 0;
+  }
+
+  .template-404__visual {
+    align-items: center;
+    aspect-ratio: 1;
+    background:
+      linear-gradient(135deg, rgba(var(--color-foreground), 0.08), transparent 42%),
+      var(--urban-surface-container);
+    border: var(--theme-border-subtle);
+    display: flex;
+    isolation: isolate;
+    justify-content: center;
+    max-width: 56rem;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .template-404__visual::before,
+  .template-404__visual::after {
+    background: rgba(var(--color-foreground), 0.08);
+    content: '';
+    position: absolute;
+    transform: rotate(-18deg);
+    width: 160%;
+  }
+
+  .template-404__visual::before {
+    height: 0.1rem;
+    top: 32%;
+  }
+
+  .template-404__visual::after {
+    bottom: 24%;
+    height: 12rem;
+    opacity: 0.7;
+  }
+
+  .template-404__code {
+    color: transparent;
+    font-family: var(--font-heading-family);
+    font-size: clamp(11rem, 22vw, 24rem);
+    font-style: italic;
+    font-weight: 900;
+    line-height: 0.78;
+    margin: 0;
+    position: relative;
+    -webkit-text-stroke: 0.16rem rgb(var(--color-foreground));
+    text-stroke: 0.16rem rgb(var(--color-foreground));
+    z-index: 1;
+  }
+
+  .template-404__eyebrow {
+    color: var(--urban-primary);
+    display: block;
+    font-size: 1.1rem;
+    font-weight: var(--font-body-weight-bold);
+    letter-spacing: 0.16rem;
+    margin-bottom: 1.6rem;
+    text-transform: uppercase;
+  }
+
+  .template-404__title {
+    font-size: clamp(4rem, 6vw, 7.2rem);
+    font-style: italic;
+    font-weight: 900;
+    line-height: 0.95;
+    margin: 0;
+    max-width: 72rem;
+    text-transform: uppercase;
+  }
+
+  .template-404__text {
+    color: rgba(var(--color-foreground), 0.72);
+    font-size: 1.7rem;
+    line-height: 1.7;
+    margin: 2.4rem 0 0;
+    max-width: 56rem;
+  }
+
+  .template-404__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 3.2rem;
+    max-width: 52rem;
+  }
+
+  .template-404__actions .button {
+    min-height: 5.6rem;
+  }
+
+  .template-404__search {
+    border-top: var(--theme-border-subtle);
+    margin-top: 3.2rem;
+    max-width: 52rem;
+    padding-top: 2.4rem;
+  }
+
+  .template-404__search-label {
+    color: rgba(var(--color-foreground), 0.62);
+    display: block;
+    font-size: 1.1rem;
+    font-weight: var(--font-body-weight-bold);
+    letter-spacing: 0.12rem;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .template-404__quick-links {
+    border-top: var(--theme-border-subtle);
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+    margin-top: 4rem;
+    padding-top: 2.4rem;
+  }
+
+  .template-404__quick-link {
+    align-items: center;
+    background: rgba(var(--color-foreground), 0.035);
+    color: rgb(var(--color-foreground));
+    display: flex;
+    justify-content: space-between;
+    min-height: 6.4rem;
+    padding: 1.8rem 2rem;
+    text-decoration: none;
+    transition: background var(--duration-short) ease, color var(--duration-short) ease;
+  }
+
+  .template-404__quick-link:hover {
+    background: var(--urban-primary);
+    color: #fff;
+  }
+
+  .template-404__quick-link span {
+    font-size: 1.2rem;
+    font-weight: var(--font-body-weight-bold);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+  }
+
+  .template-404__quick-link .svg-wrapper {
+    height: 1.4rem;
+    width: 1.4rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404__actions {
+      flex-direction: row;
+    }
+
+    .template-404__quick-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .template-404__hero {
+      grid-template-columns: minmax(32rem, 0.9fr) minmax(0, 1fr);
+    }
+
+    .template-404__content {
+      padding-top: 4rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="template-404 color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="template-404__inner page-width">
+    {%- assign not_found_breadcrumb_title = 'templates.404.title' | t -%}
+    {% render 'breadcrumbs', current_title: not_found_breadcrumb_title %}
+
+    <div class="template-404__hero">
+      <div class="template-404__visual" aria-hidden="true">
+        <p class="template-404__code">{{ 'templates.404.subtext' | t }}</p>
+      </div>
+
+      <div class="template-404__content">
+        <span class="template-404__eyebrow">{{ 'templates.404.eyebrow' | t }}</span>
+        <h1 class="template-404__title">{{ 'templates.404.heading' | t }}</h1>
+        <p class="template-404__text">{{ 'templates.404.description' | t }}</p>
+
+        <div class="template-404__actions">
+          <a href="{{ routes.root_url }}" class="button button--secondary">
+            {{ 'templates.404.back_home' | t }}
+          </a>
+          <a href="{{ routes.all_products_collection_url }}" class="button">
+            {{ 'templates.404.shop_new_arrivals' | t }}
+          </a>
+        </div>
+
+        <div class="template-404__search">
+          <span class="template-404__search-label">{{ 'templates.404.search_label' | t }}</span>
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+            <div class="field">
+              <input
+                class="search__input field__input"
+                id="Search-In-404"
+                type="search"
+                name="q"
+                value=""
+                placeholder="{{ 'general.search.search' | t }}"
+              >
+              <label class="field__label" for="Search-In-404">{{ 'general.search.search' | t }}</label>
+              <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                <span class="svg-wrapper">
+                  {{- 'icon-search.svg' | inline_asset_content -}}
+                </span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="template-404__quick-links" aria-label="{{ 'templates.404.quick_links_label' | t }}">
+      <a class="template-404__quick-link" href="{{ routes.all_products_collection_url }}">
+        <span>{{ 'templates.404.quick_link_shop' | t }}</span>
+        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+      </a>
+      <a class="template-404__quick-link" href="{{ routes.search_url }}">
+        <span>{{ 'templates.404.quick_link_search' | t }}</span>
+        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+      </a>
+      <a class="template-404__quick-link" href="{{ routes.root_url }}">
+        <span>{{ 'templates.404.quick_link_home' | t }}</span>
+        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+      </a>
+    </div>
+  </div>
 </div>
+
+{% schema %}
+{
+  "name": "t:sections.main-404.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ]
+}
+{% endschema %}

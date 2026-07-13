@@ -32,8 +32,13 @@
 <cart-items
   class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}"
   view-event-payload="{{ cart | standard_event_data: 'view', context: 'page' | escape }}"
+  data-currency-code="{{ cart.currency.iso_code }}"
+  data-money-format="{{ shop.money_format | escape }}"
 >
   <div class="page-width">
+    {%- assign cart_breadcrumb_title = 'sections.cart.title' | t -%}
+    {% render 'breadcrumbs', current_title: cart_breadcrumb_title %}
+
     <div class="title-wrapper-with-link">
       <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
       <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
@@ -55,10 +60,14 @@
       {%- endif -%}
     </div>
 
-    <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
-      <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
-        <div class="js-contents">
-          {%- if cart != empty -%}
+    {%- if cart != empty -%}
+      <div class="cart-page__layout">
+    {%- endif -%}
+
+      <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
+        <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
+          <div class="js-contents">
+            {%- if cart != empty -%}
             <table class="cart-items">
               <caption class="visually-hidden">
                 {{ 'sections.cart.title' | t }}
@@ -89,6 +98,8 @@
                   <tr
                     class="cart-item {% if item.parent_relationship.parent != null %}cart-item__nested-line{% endif %}"
                     id="CartItem-{{ item.index | plus: 1 }}"
+                    data-cart-item
+                    data-unit-price="{{ item.final_price }}"
                     {% if item.parent_relationship.parent != null %}
                       aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
                     {% endif %}
@@ -207,12 +218,12 @@
                             <dt class="visually-hidden">
                               {{ 'products.product.price.sale_price' | t }}
                             </dt>
-                            <dd class="price price--end">
+                            <dd class="price price--end" data-cart-line-total>
                               {{ item.final_line_price | money }}
                             </dd>
                           </dl>
                         {%- else -%}
-                          <span class="price price--end">
+                          <span class="price price--end" data-cart-line-total>
                             {{ item.original_line_price | money }}
                           </span>
                         {%- endif -%}
@@ -435,12 +446,12 @@
                             <dt class="visually-hidden">
                               {{ 'products.product.price.sale_price' | t }}
                             </dt>
-                            <dd class="price price--end">
+                            <dd class="price price--end" data-cart-line-total>
                               {{ item.final_line_price | money }}
                             </dd>
                           </dl>
                         {%- else -%}
-                          <span class="price price--end">
+                          <span class="price price--end" data-cart-line-total>
                             {{ item.original_line_price | money }}
                           </span>
                         {%- endif -%}
@@ -454,21 +465,126 @@
                 {%- endfor -%}
               </tbody>
             </table>
-          {%- endif -%}
+            {%- endif -%}
+          </div>
         </div>
-      </div>
 
-      <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
-      <p
-        class="visually-hidden"
-        id="shopping-cart-line-item-status"
-        aria-live="polite"
-        aria-hidden="true"
-        role="status"
-      >
-        {{ 'accessibility.loading' | t }}
-      </p>
-    </form>
+        <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+        <p
+          class="visually-hidden"
+          id="shopping-cart-line-item-status"
+          aria-live="polite"
+          aria-hidden="true"
+          role="status"
+        >
+          {{ 'accessibility.loading' | t }}
+        </p>
+      </form>
+
+    {%- if cart != empty -%}
+        <aside id="CartSummary" class="cart-summary" aria-labelledby="CartSummaryTitle">
+          <h2 id="CartSummaryTitle" class="cart-summary__title">{{ 'sections.cart.summary.title' | t }}</h2>
+
+          <div class="cart-summary__rows">
+            <div class="cart-summary__row">
+              <span>{{ 'sections.cart.summary.subtotal' | t }}</span>
+              <strong data-cart-summary-subtotal>{{ cart.items_subtotal_price | money }}</strong>
+            </div>
+            <div class="cart-summary__row">
+              <span>{{ 'sections.cart.summary.shipping' | t }}</span>
+              <span>{{ 'sections.cart.summary.shipping_note' | t }}</span>
+            </div>
+          </div>
+
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <ul class="discounts list-unstyled cart-summary__discounts" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+              {%- for discount in cart.cart_level_discount_applications -%}
+                <li class="discounts__discount discounts__discount--position">
+                  {{- 'icon-discount.svg' | inline_asset_content -}}
+                  {{ discount.title | escape }}
+                  (-{{ discount.total_allocated_amount | money }})
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          <div class="cart-summary__total">
+            <span>{{ 'sections.cart.estimated_total' | t }}</span>
+            <strong data-cart-summary-total>{{ cart.total_price | money }}</strong>
+          </div>
+
+          {%- if settings.show_cart_note -%}
+            <cart-note class="cart__note field cart-summary__note">
+              <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
+              <textarea
+                class="text-area field__input"
+                name="note"
+                form="cart"
+                id="Cart-note"
+                placeholder="{{ 'sections.cart.note' | t }}"
+              >{{ cart.note }}</textarea>
+            </cart-note>
+          {%- endif -%}
+
+          <small class="tax-note caption-large rte">
+            {%- if cart.duties_included and cart.taxes_included -%}
+              {%- if shop.shipping_policy.body == blank -%}
+                {{ 'sections.cart.duties_and_taxes_included_shipping_at_checkout_without_policy' | t }}
+              {%- else -%}
+                {{
+                  'sections.cart.duties_and_taxes_included_shipping_at_checkout_with_policy_html'
+                  | t: link: shop.shipping_policy.url
+                }}
+              {%- endif -%}
+            {%- elsif cart.duties_included == false and cart.taxes_included -%}
+              {%- if shop.shipping_policy.body == blank -%}
+                {{ 'sections.cart.taxes_included_shipping_at_checkout_without_policy' | t }}
+              {%- else -%}
+                {{ 'sections.cart.taxes_included_shipping_at_checkout_with_policy_html' | t: link: shop.shipping_policy.url }}
+              {%- endif -%}
+            {%- elsif cart.duties_included and cart.taxes_included == false -%}
+              {%- if shop.shipping_policy.body == blank -%}
+                {{ 'sections.cart.duties_included_taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
+              {%- else -%}
+                {{
+                  'sections.cart.duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html'
+                  | t: link: shop.shipping_policy.url
+                }}
+              {%- endif -%}
+            {%- elsif cart.duties_included == false and cart.taxes_included == false -%}
+              {%- if shop.shipping_policy.body == blank -%}
+                {{ 'sections.cart.taxes_at_checkout_shipping_at_checkout_without_policy' | t }}
+              {%- else -%}
+                {{
+                  'sections.cart.taxes_at_checkout_shipping_at_checkout_with_policy_html'
+                  | t: link: shop.shipping_policy.url
+                }}
+              {%- endif -%}
+            {%- endif -%}
+          </small>
+
+          <div class="cart__ctas">
+            <button
+              type="submit"
+              id="checkout"
+              class="cart__checkout-button button"
+              name="checkout"
+              form="cart"
+            >
+              {{ 'sections.cart.checkout' | t }}
+            </button>
+          </div>
+
+          {%- if additional_checkout_buttons -%}
+            <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+              {{ content_for_additional_checkout_buttons }}
+            </div>
+          {%- endif -%}
+
+          <div id="cart-errors"></div>
+        </aside>
+      </div>
+    {%- endif -%}
   </div>
 </cart-items>
 

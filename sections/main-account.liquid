@@ -15,6 +15,9 @@
 {%- endstyle -%}
 
 <div class="customer account section-{{ section.id }}-padding">
+  {%- assign account_breadcrumb_title = 'customer.account.title' | t -%}
+  {% render 'breadcrumbs', current_title: account_breadcrumb_title %}
+
   <div>
     <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
     <a href="{{ routes.account_logout_url }}">

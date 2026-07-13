@@ -80,6 +80,14 @@
 {% paginate search.results by 24 %}
   <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- liquid
+        assign search_breadcrumb_title = 'general.search.search' | t
+        if search.performed
+          assign search_breadcrumb_title = 'templates.search.title' | t
+        endif
+      -%}
+      {% render 'breadcrumbs', current_title: search_breadcrumb_title %}
+
       <h1 class="h2 center">
         {%- if search.performed -%}
           {{- 'templates.search.title' | t -}}

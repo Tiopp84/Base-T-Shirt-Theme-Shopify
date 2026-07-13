@@ -15,7 +15,7 @@
         "vendor": {
           "type": "product-text",
           "settings": {
-            "text": "{{ product.vendor }}",
+            "text": "New Arrival",
             "text_style": "uppercase"
           },
           "blocks": {}
@@ -51,31 +51,12 @@
           },
           "blocks": {}
         },
-        "quantity_selector": {
-          "type": "product-quantity-selector",
-          "settings": {},
-          "blocks": {}
-        },
         "buy_buttons": {
           "type": "product-buy-buttons",
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           },
-          "blocks": {}
-        },
-        "trust_badges": {
-          "type": "trust-badges",
-          "settings": {
-            "show_secure_payment": true,
-            "show_returns": true,
-            "show_shipping": true
-          },
-          "blocks": {}
-        },
-        "description": {
-          "type": "product-description",
-          "settings": {},
           "blocks": {}
         },
         "details": {
@@ -91,19 +72,9 @@
         "materials": {
           "type": "product-collapsible-tab",
           "settings": {
-            "heading": "Materials and care",
-            "icon": "washing",
-            "content": "<p>Add cotton composition, wash instructions, shrinkage notes, and care guidance.</p>",
-            "page": ""
-          },
-          "blocks": {}
-        },
-        "fit": {
-          "type": "product-collapsible-tab",
-          "settings": {
-            "heading": "Fit and sizing",
-            "icon": "ruler",
-            "content": "<p>Describe the silhouette, garment measurements, and size recommendation for this product.</p>",
+            "heading": "Sustainability",
+            "icon": "leaf",
+            "content": "<p>Use this panel for responsible materials, packaging, and production notes.</p>",
             "page": ""
           },
           "blocks": {}
@@ -117,27 +88,6 @@
             "page": ""
           },
           "blocks": {}
-        },
-        "complementary": {
-          "type": "product-complementary",
-          "settings": {
-            "block_heading": "Complete the look",
-            "make_collapsible_row": false,
-            "icon": "price_tag",
-            "product_list_limit": 6,
-            "products_per_page": 3,
-            "pagination_style": "dots",
-            "image_ratio": "square",
-            "enable_quick_add": false
-          },
-          "blocks": {}
-        },
-        "share": {
-          "type": "product-share",
-          "settings": {
-            "share_label": "Share"
-          },
-          "blocks": {}
         }
       },
       "block_order": [
@@ -147,16 +97,10 @@
         "price",
         "variant_picker",
         "size_guide",
-        "quantity_selector",
         "buy_buttons",
-        "trust_badges",
-        "description",
         "details",
-        "materials",
-        "fit",
         "shipping",
-        "complementary",
-        "share"
+        "materials"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -174,21 +118,10 @@
         "padding_bottom": 20
       }
     },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "heading": "Product disclosures",
-        "heading_size": "h2",
-        "open_by_default": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 24,
-        "padding_bottom": 0
-      }
-    },
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "Complete The Look",
         "heading_size": "h1",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -199,14 +132,13 @@
         "show_secondary_image": true,
         "show_vendor": true,
         "show_rating": true,
-        "padding_top": 44,
-        "padding_bottom": 44
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
     "main",
-    "disclosures",
     "related-products"
   ]
 }

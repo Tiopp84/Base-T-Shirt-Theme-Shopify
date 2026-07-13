@@ -75,6 +75,16 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
+      {%- liquid
+        assign shop_breadcrumb_title = 'general.breadcrumbs.shop' | t
+        assign breadcrumb_collection = collection
+        if breadcrumb_collection == blank and product.collections.first != blank
+          assign breadcrumb_collection = product.collections.first
+        endif
+      -%}
+
+      {% render 'breadcrumbs', parent_title: shop_breadcrumb_title, parent_url: routes.all_products_collection_url, child_title: breadcrumb_collection.title, child_url: breadcrumb_collection.url, current_title: product.title %}
+
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
           {% render 'product-media-gallery', variant_images: variant_images, product: product %}

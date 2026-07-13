@@ -3,5 +3,10 @@
 }
 
 .related-products__heading {
-  margin: 0 0 3rem;
+  margin: 0 0 clamp(3.2rem, 5vw, 5.6rem);
+  text-transform: uppercase;
+}
+
+.related-products .product-grid {
+  row-gap: clamp(3.2rem, 5vw, 5.6rem);
 }

@@ -23,7 +23,7 @@
         "text": {
           "type": "banner-text",
           "settings": {
-            "text": "Heavyweight essentials, graphic drops, and oversized silhouettes built for the city.",
+            "text": "",
             "text_style": "subtitle"
           },
           "blocks": {}
@@ -90,31 +90,22 @@
             "link": "shopify://collections/frontpage"
           }
         },
-        "tile_essentials": {
-          "type": "collection_tile",
-          "settings": {
-            "collection": "",
-            "heading": "Archive",
-            "cta_label": "Limited Drops",
-            "link": "shopify://collections/all"
-          }
-        }
       },
       "block_order": [
         "tile_dresses",
         "tile_new_in",
-        "tile_sale",
-        "tile_essentials"
+        "tile_sale"
       ],
       "settings": {
-        "subheading": "Featured collections",
-        "heading": "Built around the uniform",
+        "heading": "Featured Collections",
         "heading_size": "h1",
-        "columns_desktop": 4,
+        "columns_desktop": 3,
+        "view_all_label": "View all",
+        "view_all_link": "shopify://collections/all",
         "show_cta": true,
         "color_scheme": "scheme-1",
-        "padding_top": 48,
-        "padding_bottom": 56
+        "padding_top": 100,
+        "padding_bottom": 100
       }
     },
     "featured_collection": {
@@ -144,141 +135,11 @@
         "padding_top": 28,
         "padding_bottom": 52
       }
-    },
-    "brand_story": {
-      "type": "image-with-text",
-      "blocks": {
-        "caption": {
-          "type": "image-with-text-caption",
-          "settings": {
-            "caption": "Founded for movement",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "medium"
-          },
-          "blocks": {}
-        },
-        "heading": {
-          "type": "image-with-text-heading",
-          "settings": {
-            "heading": "Crafting the perfect silhouette",
-            "heading_size": "h1"
-          },
-          "blocks": {}
-        },
-        "text": {
-          "type": "image-with-text-text",
-          "settings": {
-            "text": "<p>We engineer garments that balance weight, fit, and texture. Designed for daily wear, built with the clarity of a gallery piece.</p>",
-            "text_style": "body"
-          },
-          "blocks": {}
-        },
-        "button": {
-          "type": "image-with-text-button",
-          "settings": {
-            "button_label": "Learn More",
-            "button_link": "shopify://pages/about",
-            "button_style_secondary": true
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "caption",
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "scheme-2",
-        "padding_top": 72,
-        "padding_bottom": 72
-      }
-    },
-    "lookbook": {
-      "type": "lookbook",
-      "blocks": {
-        "product_pin_DVnQRF": {
-          "type": "product_pin",
-          "settings": {
-            "product": "quần-jeans",
-            "top": 61,
-            "left": 27
-          }
-        },
-        "product_pin_AY6zeY": {
-          "type": "product_pin",
-          "settings": {
-            "product": "short-shirt",
-            "top": 40,
-            "left": 18
-          }
-        }
-      },
-      "block_order": [
-        "product_pin_DVnQRF",
-        "product_pin_AY6zeY"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/slide_look_2.webp",
-        "heading": "Shop the look",
-        "color_scheme": "scheme-1",
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "newsletter-heading",
-          "settings": {
-            "heading": "Join the inner circle",
-            "heading_size": "h1"
-          },
-          "blocks": {}
-        },
-        "paragraph": {
-          "type": "newsletter-paragraph",
-          "settings": {
-            "text": "<p>Get early access to drops, limited releases, and seasonal offers.</p>"
-          },
-          "blocks": {}
-        },
-        "form": {
-          "type": "newsletter-form",
-          "settings": {},
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "form"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 56
-      }
     }
   },
   "order": [
     "hero",
     "collection_tiles",
-    "featured_collection",
-    "brand_story",
-    "lookbook",
-    "newsletter"
+    "featured_collection"
   ]
 }

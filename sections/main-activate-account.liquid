@@ -15,6 +15,9 @@
 {%- endstyle -%}
 
 <div class="customer activate section-{{ section.id }}-padding">
+  {%- assign activate_breadcrumb_title = 'customer.activate_account.title' | t -%}
+  {% render 'breadcrumbs', current_title: activate_breadcrumb_title %}
+
   <h1>
     {{ 'customer.activate_account.title' | t }}
   </h1>
