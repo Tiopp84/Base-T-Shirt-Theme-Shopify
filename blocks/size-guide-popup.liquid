@@ -2,6 +2,8 @@
   Renders a size guide popup button and modal as a theme block.
 {% enddoc %}
 
+<script src="{{ 'size-guide.js' | asset_url }}" defer="defer"></script>
+
 {%- liquid
   assign size_guide_label = block.settings.button_text
   if size_guide_label == blank
@@ -121,43 +123,6 @@
     height: 1.6rem;
   }
 {% endstylesheet %}
-
-{% javascript %}
-  if (!window.sizeGuideEventsBound) {
-    window.sizeGuideEventsBound = true;
-
-    document.addEventListener('click', (event) => {
-      if (!(event.target instanceof Element)) return;
-
-      const openButton = event.target.closest('.size-guide__button');
-      if (openButton) {
-        const dialogId = openButton.getAttribute('aria-controls');
-        const dialog = document.getElementById(dialogId);
-
-        if (dialog) {
-          dialog.showModal();
-          openButton.setAttribute('aria-expanded', 'true');
-        }
-        return;
-      }
-
-      const dialog = event.target.closest('.size-guide__modal');
-      if (dialog && event.target === dialog) dialog.close();
-    });
-
-    document.addEventListener(
-      'close',
-      (event) => {
-        if (!(event.target instanceof Element)) return;
-        if (!event.target.matches('.size-guide__modal')) return;
-
-        const button = document.querySelector(`[aria-controls="${CSS.escape(event.target.id)}"]`);
-        button?.setAttribute('aria-expanded', 'false');
-      },
-      true
-    );
-  }
-{% endjavascript %}
 
 {% schema %}
 {
