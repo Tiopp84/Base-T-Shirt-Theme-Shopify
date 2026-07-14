@@ -13,10 +13,22 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_PPd3dh": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_PPd3dh"
+      ],
       "settings": {
-        "auto_rotate": false,
+        "auto_rotate": true,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-6c488916-ff0e-4581-ba9d-f9d1c5d5dffe",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
@@ -32,6 +44,7 @@
         "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_discovery_cards": true,
+        "menu_card_collections": [],
         "menu_card_1_image": "shopify://shop_images/summers-collection.jpg",
         "menu_card_1_title": "New  Arrivals",
         "menu_card_1_link": "shopify://collections/frontpage",
