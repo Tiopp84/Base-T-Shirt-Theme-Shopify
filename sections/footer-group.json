@@ -11,6 +11,37 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "newsletter_rdRUY8": {
+      "type": "newsletter",
+      "blocks": {
+        "image_with_text_heading_3Ue34R": {
+          "type": "image-with-text-heading",
+          "name": "t:sections.image-with-text.blocks.heading.name",
+          "settings": {
+            "heading": "Resgister email",
+            "heading_size": "h1"
+          },
+          "blocks": {}
+        },
+        "newsletter_form_URaXQk": {
+          "type": "newsletter-form",
+          "name": "t:sections.newsletter.blocks.email_form.name",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "image_with_text_heading_3Ue34R",
+        "newsletter_form_URaXQk"
+      ],
+      "name": "t:sections.newsletter.presets.name",
+      "settings": {
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 0,
+        "padding_bottom": 24
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -30,6 +61,7 @@
     }
   },
   "order": [
+    "newsletter_rdRUY8",
     "footer"
   ]
 }
