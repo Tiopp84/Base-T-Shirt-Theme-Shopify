@@ -59,6 +59,20 @@
     row-gap: 6rem;
     margin-bottom: 0;
   }
+
+  .footer__blocks-wrapper.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    column-gap: clamp(3rem, 6vw, 8rem);
+    align-items: start;
+  }
+
+  .footer__blocks-wrapper .footer-block.grid__item {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    text-align: left;
+  }
 }
 
 .footer__content-bottom {
