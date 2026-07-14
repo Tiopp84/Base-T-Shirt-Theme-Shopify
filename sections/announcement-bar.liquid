@@ -33,7 +33,7 @@
         {{ section.blocks.first.shopify_attributes }}
       >
         {%- for block in section.blocks limit: 1 -%}
-          {% render block %}
+          {% render 'announcement-bar-message', announcement: block %}
         {%- endfor -%}
       </div>
     {%- elsif section.blocks.size > 1 -%}
@@ -78,7 +78,7 @@
                   role="region"
                   aria-label="{{ 'sections.header.announcement' | t }}"
                 >
-                  {% render block %}
+                  {% render 'announcement-bar-message', announcement: block %}
                 </div>
               </div>
             {%- endfor -%}

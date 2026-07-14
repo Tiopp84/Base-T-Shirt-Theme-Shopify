@@ -1,0 +1,23 @@
+{% doc %}
+  Renders the text and optional link for a legacy announcement section block.
+
+  @param {object} announcement - Announcement section block containing text and link settings
+{% enddoc %}
+
+{%- if announcement.settings.text != blank -%}
+  {%- if announcement.settings.link != blank -%}
+    <a
+      href="{{ announcement.settings.link }}"
+      class="announcement-bar__link link link--text focus-inset animate-arrow"
+    >
+  {%- endif -%}
+  <p class="announcement-bar__message h5">
+    <span>{{ announcement.settings.text | escape }}</span>
+    {%- if announcement.settings.link != blank -%}
+      {{- 'icon-arrow.svg' | inline_asset_content -}}
+    {%- endif -%}
+  </p>
+  {%- if announcement.settings.link != blank -%}
+    </a>
+  {%- endif -%}
+{%- endif -%}
