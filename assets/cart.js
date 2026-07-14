@@ -20,23 +20,13 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
       document.getElementById('shopping-cart-line-item-status') ||
       document.getElementById('CartDrawer-LineItemStatus');
 
-    const debouncedOnChange = debounce((event) => {
-      this.onChange(event);
-    }, ON_CHANGE_DEBOUNCE_TIMER);
-
-    this.addEventListener('change', (event) => {
-      if (this.tagName === 'CART-DRAWER-ITEMS') {
-        debouncedOnChange.call(this, event);
-        return;
-      }
-
-      this.onChange(event);
-    });
+    this.addEventListener('change', (event) => this.onChange(event));
   }
 
   cartUpdateUnsubscriber = undefined;
   pendingQuantityUpdates = new Map();
   pendingQuantityFlushTimer = null;
+  quantityUpdateInFlight = false;
   quantitySyncInterval = 1000;
 
   static pendingCartDataPromise = null;
@@ -143,11 +133,17 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   flushPendingQuantityUpdates() {
+    if (this.quantityUpdateInFlight) {
+      this.pendingQuantityFlushTimer = null;
+      return;
+    }
+
     const updates = Array.from(this.pendingQuantityUpdates.values());
     this.pendingQuantityUpdates.clear();
     this.pendingQuantityFlushTimer = null;
 
     if (!updates.length) return;
+    this.quantityUpdateInFlight = true;
 
     const cartPerformanceUpdateMarker = CartPerformance.createStartingMarker('change:batched-user-action');
     const cartItemsContainer =
@@ -185,6 +181,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartDrawerWrapper = document.querySelector('cart-drawer');
         if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
+        this.reconcileQuantityUpdates(updates, parsedState);
 
         CartPerformance.measure('change:paint-batched-updated-sections', () => {
           const needsFullRender = this.hasServerAdjustedQuantities(updates, parsedState);
@@ -192,7 +189,9 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
             ? sectionsToRender
             : sectionsToRender.filter(
                 (section) =>
-                  section.id !== 'main-cart-items' && section.id !== 'CartSummary' && section.id !== 'CartDrawer',
+                  section.id !== 'main-cart-items' &&
+                  section.id !== 'CartSummary' &&
+                  section.id !== 'CartDrawer',
               );
 
           this.renderSections(sectionsToPaint, parsedState);
@@ -220,22 +219,87 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
           const lineItem =
             document.getElementById(`CartItem-${update.line}`) ||
             document.getElementById(`CartDrawer-Item-${update.line}`);
-          lineItem?.classList.remove('cart-item--pending');
+          if (!this.pendingQuantityUpdates.has(update.line)) lineItem?.classList.remove('cart-item--pending');
         });
         if (cartItemsContainer) cartItemsContainer.classList.remove('cart__items--updating');
         this.lineItemStatusElement.setAttribute('aria-hidden', true);
+        this.quantityUpdateInFlight = false;
+
+        if (this.pendingQuantityUpdates.size > 0) {
+          if (this.pendingQuantityFlushTimer) clearTimeout(this.pendingQuantityFlushTimer);
+          this.pendingQuantityFlushTimer = null;
+          this.flushPendingQuantityUpdates();
+        }
+
         CartPerformance.measureFromMarker('change:batched-user-action', cartPerformanceUpdateMarker);
       });
   }
 
   rollbackPendingQuantityUpdates(updates) {
     updates.forEach((update) => {
+      const queuedUpdate = this.pendingQuantityUpdates.get(update.line);
+      if (queuedUpdate && queuedUpdate.quantity !== update.quantity) return;
+
       const input =
         document.getElementById(`Quantity-${update.line}`) ||
         document.getElementById(`Drawer-quantity-${update.line}`);
-      if (input && update.previousQuantity != null) input.value = update.previousQuantity;
+      if (!input) return;
+
+      const lastConfirmedQuantity = input.getAttribute('value') || update.previousQuantity;
+      if (lastConfirmedQuantity != null) input.value = lastConfirmedQuantity;
     });
     this.updateOptimisticTotals();
+  }
+
+  reconcileQuantityUpdates(updates, parsedState) {
+    updates.forEach((update) => {
+      const item = parsedState.items.find((cartItem) => {
+        if (update.lineKey) return cartItem.key === update.lineKey;
+        return String(cartItem.variant_id) === String(update.variantId);
+      });
+      if (!item) return;
+
+      const row =
+        document.getElementById(`CartItem-${update.line}`) ||
+        document.getElementById(`CartDrawer-Item-${update.line}`);
+      if (row) row.dataset.unitPrice = item.final_price;
+
+      row?.querySelectorAll('[data-cart-line-total]').forEach((target) => {
+        target.textContent = this.formatCartMoney(item.final_line_price);
+      });
+
+      const input =
+        document.getElementById(`Quantity-${update.line}`) ||
+        document.getElementById(`Drawer-quantity-${update.line}`);
+      if (!input) return;
+
+      input.setAttribute('value', item.quantity);
+      input.dataset.cartQuantity = parsedState.items
+        .filter((cartItem) => String(cartItem.variant_id) === String(item.variant_id))
+        .reduce((quantity, cartItem) => quantity + cartItem.quantity, 0);
+
+      const queuedUpdate = this.pendingQuantityUpdates.get(update.line);
+      if (!queuedUpdate || queuedUpdate.quantity === update.quantity) input.value = item.quantity;
+    });
+
+    if (this.pendingQuantityUpdates.size > 0) {
+      this.updateOptimisticTotals();
+      return;
+    }
+
+    document.querySelectorAll('[data-cart-summary-subtotal]:not([data-cart-summary-total])').forEach((target) => {
+      target.textContent = this.formatCartMoney(
+        parsedState.items_subtotal_price,
+        this.dataset.summaryMoneyFormat || this.dataset.moneyFormat,
+      );
+    });
+
+    document.querySelectorAll('[data-cart-summary-total]').forEach((target) => {
+      target.textContent = this.formatCartMoney(
+        parsedState.total_price,
+        this.dataset.summaryMoneyFormat || this.dataset.moneyFormat,
+      );
+    });
   }
 
   hasServerAdjustedQuantities(updates, parsedState) {
