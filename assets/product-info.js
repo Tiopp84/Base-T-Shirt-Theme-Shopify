@@ -209,14 +209,14 @@ if (!customElements.get('product-info')) {
           updateSourceFromDestination('Volume');
           updateSourceFromDestination('Price-Per-Item', ({ classList }) => classList.contains('hidden'));
 
-          this.updateQuantityRules(this.sectionId, html);
-          this.querySelector(`#Quantity-Rules-${this.dataset.section}`)?.classList.remove('hidden');
-          this.querySelector(`#Volume-Note-${this.dataset.section}`)?.classList.remove('hidden');
-
           this.productForm?.toggleSubmitButton(
             html.getElementById(`ProductSubmitButton-${this.sectionId}`)?.hasAttribute('disabled') ?? true,
             window.variantStrings.soldOut
           );
+
+          this.updateQuantityRules(this.sectionId, html);
+          this.querySelector(`#Quantity-Rules-${this.dataset.section}`)?.classList.remove('hidden');
+          this.querySelector(`#Volume-Note-${this.dataset.section}`)?.classList.remove('hidden');
 
           publish(PUB_SUB_EVENTS.variantChange, {
             data: {
@@ -336,18 +336,28 @@ if (!customElements.get('product-info')) {
         };
 
         let min = data.min;
-        const max = data.max === null ? data.max : data.max - data.cartQuantity;
+        const max = data.max === null ? data.max : Math.max(data.max - data.cartQuantity, 0);
         if (max !== null) min = Math.min(min, max);
         if (data.cartQuantity >= data.min) min = Math.min(min, data.step);
 
         this.quantityInput.min = min;
 
-        if (max) {
+        if (max !== null) {
           this.quantityInput.max = max;
         } else {
           this.quantityInput.removeAttribute('max');
         }
         this.quantityInput.value = min;
+
+        const quantityLimitReached = data.cartQuantity > 0 && max !== null && max < data.min;
+        const submitButton = this.productForm?.submitButton;
+        if (quantityLimitReached) {
+          if (submitButton) submitButton.dataset.quantityLimitReached = 'true';
+          this.productForm?.toggleSubmitButton(true, window.variantStrings.maximumInCart);
+        } else if (submitButton?.dataset.quantityLimitReached === 'true') {
+          delete submitButton.dataset.quantityLimitReached;
+          this.productForm?.toggleSubmitButton(false);
+        }
 
         publish(PUB_SUB_EVENTS.quantityUpdate, undefined);
       }
@@ -369,9 +379,9 @@ if (!customElements.get('product-info')) {
 
       updateQuantityRules(sectionId, html) {
         if (!this.quantityInput) return;
-        this.setQuantityBoundries();
 
         const quantityFormUpdated = html.getElementById(`Quantity-Form-${sectionId}`);
+        if (!quantityFormUpdated) return;
         const selectors = ['.quantity__input', '.quantity__rules', '.quantity__label'];
         for (let selector of selectors) {
           const current = this.quantityForm.querySelector(selector);
@@ -404,6 +414,7 @@ if (!customElements.get('product-info')) {
             }
           }
         }
+        this.setQuantityBoundries();
       }
 
       get productForm() {

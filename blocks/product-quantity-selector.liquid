@@ -8,6 +8,17 @@
 {% enddoc %}
 
 {%- assign product_form_id = 'product-form-' | append: section.id -%}
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign quantity_max = selected_variant.quantity_rule.max
+
+  if selected_variant.inventory_management == 'shopify' and selected_variant.inventory_policy == 'deny'
+    assign inventory_max = selected_variant.inventory_quantity | at_least: 0
+    if quantity_max == null or inventory_max < quantity_max
+      assign quantity_max = inventory_max
+    endif
+  endif
+-%}
 
 {% schema %}
 {
@@ -68,14 +79,14 @@
         name="quantity"
         id="Quantity-{{ section.id }}"
         data-cart-quantity="{{ cart_qty }}"
-        data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-        min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
-        {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
-          data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
-          max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+        data-min="{{ selected_variant.quantity_rule.min }}"
+        min="{{ selected_variant.quantity_rule.min }}"
+        {% if quantity_max != null %}
+          data-max="{{ quantity_max }}"
+          max="{{ quantity_max }}"
         {% endif %}
-        step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
-        value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+        step="{{ selected_variant.quantity_rule.increment }}"
+        value="{{ selected_variant.quantity_rule.min }}"
         form="{{ product_form_id }}"
       >
       <button class="quantity__button" name="plus" type="button">
