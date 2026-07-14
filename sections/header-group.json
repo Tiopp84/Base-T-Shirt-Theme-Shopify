@@ -17,8 +17,8 @@
         "announcement_BUMrmG": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our storstore. Explore your style, favoritfavorite. We provide a highly service on fashion and your feeling!",
-            "link": ""
+            "text": "New season essentials — Explore the latest collection",
+            "link": "shopify://collections/best-sellers"
           }
         }
       },

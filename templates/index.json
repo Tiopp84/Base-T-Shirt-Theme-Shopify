@@ -12,18 +12,19 @@
     "hero": {
       "type": "image-banner",
       "blocks": {
-        "heading": {
-          "type": "banner-heading",
+        "email_signup_banner_heading_p4YJU7": {
+          "type": "email-signup-banner-heading",
+          "name": "t:sections.email-signup-banner.blocks.heading.name",
           "settings": {
-            "heading": "The ultimate T-shirt experience",
-            "heading_size": "h0"
+            "heading": "Modern Layers. Everyday Ease.",
+            "heading_size": "hxxl"
           },
           "blocks": {}
         },
         "text": {
           "type": "banner-text",
           "settings": {
-            "text": "",
+            "text": "A considered edit of refined essentials designed for effortless everyday dressing.",
             "text_style": "subtitle"
           },
           "blocks": {}
@@ -31,8 +32,8 @@
         "buttons": {
           "type": "banner-buttons",
           "settings": {
-            "button_label_1": "Shop Now",
-            "button_link_1": "shopify://collections/all",
+            "button_label_1": "Shop New Arrivals",
+            "button_link_1": "shopify://collections/best-sellers",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -42,19 +43,19 @@
         }
       },
       "block_order": [
-        "heading",
+        "email_signup_banner_heading_p4YJU7",
         "text",
         "buttons"
       ],
       "settings": {
-        "image": "shopify://shop_images/slide_look_2.webp",
+        "image": "shopify://shop_images/ao-khoac.webp",
         "image_overlay_opacity": 30,
         "image_height": "large",
-        "image_behavior": "ambient",
+        "image_behavior": "none",
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": false,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "left",
         "show_text_below": false
@@ -111,49 +112,6 @@
         "padding_bottom": 72
       }
     },
-    "lookbook_MKqkBj": {
-      "type": "lookbook",
-      "blocks": {
-        "product_pin_kxQehk": {
-          "type": "product_pin",
-          "settings": {
-            "product": "ao-khoac",
-            "badge": "",
-            "top": 36,
-            "left": 34
-          }
-        },
-        "product_pin_TTYjek": {
-          "type": "product_pin",
-          "settings": {
-            "product": "quần-jeans",
-            "badge": "",
-            "top": 70,
-            "left": 60
-          }
-        }
-      },
-      "block_order": [
-        "product_pin_kxQehk",
-        "product_pin_TTYjek"
-      ],
-      "name": "t:sections.lookbook.name",
-      "settings": {
-        "image": "shopify://shop_images/vintage-style.jpg",
-        "eyebrow": "Shop the look",
-        "heading": "Effortless Everyday Ease",
-        "heading_size": "h1",
-        "text": "<p>A relaxed silhouette meets refined simplicity. Pair featured products into a complete look customers can shop in one place.</p>",
-        "enable_quick_add": true,
-        "desktop_media_width": "media-large",
-        "desktop_image_position": "right",
-        "mobile_layout": "image_first",
-        "image_height": 620,
-        "color_scheme": "",
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
-    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -182,188 +140,113 @@
         "padding_bottom": 72
       }
     },
-    "image_with_text_FcmanR": {
-      "type": "image-with-text",
+    "rich_text_dVymkg": {
+      "type": "rich-text",
       "blocks": {
-        "image_with_text_heading_B9xk4A": {
-          "type": "image-with-text-heading",
+        "image_with_text_caption_3x7W9k": {
+          "type": "image-with-text-caption",
+          "name": "t:sections.image-with-text.blocks.caption.name",
           "settings": {
-            "heading": "Winter collection",
+            "caption": "THE SUND84 EDIT",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          },
+          "blocks": {}
+        },
+        "email_signup_banner_heading_FdyPWt": {
+          "type": "email-signup-banner-heading",
+          "name": "t:sections.email-signup-banner.blocks.heading.name",
+          "settings": {
+            "heading": "Designed for the Everyday",
+            "heading_size": "hxl"
+          },
+          "blocks": {}
+        },
+        "newsletter_paragraph_JWCKYx": {
+          "type": "newsletter-paragraph",
+          "name": "t:sections.newsletter.blocks.paragraph.name",
+          "settings": {
+            "text": "<p>Clean proportions, versatile layers and considered details come together in a wardrobe designed to work beyond a  single season.</p>"
+          },
+          "blocks": {}
+        },
+        "banner_buttons_CyVP8f": {
+          "type": "banner-buttons",
+          "name": "t:sections.image-banner.blocks.buttons.name",
+          "settings": {
+            "button_label_1": "Shop Essentials",
+            "button_link_1": "shopify://collections/everyday-essentials",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "image_with_text_caption_3x7W9k",
+        "email_signup_banner_heading_FdyPWt",
+        "newsletter_paragraph_JWCKYx",
+        "banner_buttons_CyVP8f"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "newsletter_DeVVtC": {
+      "type": "newsletter",
+      "blocks": {
+        "banner_heading_ThFGqg": {
+          "type": "banner-heading",
+          "name": "t:sections.image-banner.blocks.heading.name",
+          "settings": {
+            "heading": "Stay in the Know",
             "heading_size": "h1"
           },
           "blocks": {}
         },
-        "image_with_text_text_CtjgTw": {
+        "image_with_text_text_yMGTMM": {
           "type": "image-with-text-text",
+          "name": "t:sections.image-with-text.blocks.text.name",
           "settings": {
-            "text": "<p>Embrace the season with our curated winter collection. Discover cozy essentials, timeless pieces, and statement styles designed to keep you warm and stylish through the coldest months.</p>",
+            "text": "<p>Sign up for new arrivals, seasonal edits and stories from the Sund84 studio.</p>",
             "text_style": "body"
           },
           "blocks": {}
         },
-        "image_with_text_button_MwYwY8": {
-          "type": "image-with-text-button",
-          "settings": {
-            "button_label": "ViewView",
-            "button_link": "shopify://collections/winter",
-            "button_style_secondary": false
-          },
+        "email_signup_banner_email_form_HynYzG": {
+          "type": "email-signup-banner-email-form",
+          "name": "t:sections.email-signup-banner.blocks.email_form.name",
+          "settings": {},
           "blocks": {}
         }
       },
       "block_order": [
-        "image_with_text_heading_B9xk4A",
-        "image_with_text_text_CtjgTw",
-        "image_with_text_button_MwYwY8"
+        "banner_heading_ThFGqg",
+        "image_with_text_text_yMGTMM",
+        "email_signup_banner_email_form_HynYzG"
       ],
-      "name": "t:sections.image-with-text.presets.name",
+      "name": "t:sections.newsletter.presets.name",
       "settings": {
-        "image": "shopify://shop_images/winter-collection.jpg",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "ambient",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "slideshow_fgcman": {
-      "type": "slideshow",
-      "blocks": {
-        "slideshow_slide_a66bLH": {
-          "type": "slideshow-slide",
-          "name": "t:sections.slideshow.blocks.slide.name",
-          "settings": {
-            "image_overlay_opacity": 0,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "",
-            "link": "shopify://collections",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          },
-          "blocks": {}
-        },
-        "slideshow_slide_VJAjNT": {
-          "type": "slideshow-slide",
-          "name": "t:sections.slideshow.blocks.slide.name",
-          "settings": {
-            "image": "shopify://shop_images/hero2.png",
-            "image_overlay_opacity": 0,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "View",
-            "link": "shopify://collections/winter",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "bottom-left",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-3"
-          },
-          "blocks": {}
-        },
-        "slideshow_slide_HkgTVK": {
-          "type": "slideshow-slide",
-          "name": "t:sections.slideshow.blocks.slide.name",
-          "settings": {
-            "image": "shopify://shop_images/hero3.jpg",
-            "image_overlay_opacity": 0,
-            "heading": "sadasd",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "slideshow_slide_a66bLH",
-        "slideshow_slide_VJAjNT",
-        "slideshow_slide_HkgTVK"
-      ],
-      "name": "t:sections.slideshow.presets.name",
-      "settings": {
-        "layout": "full_bleed",
-        "slide_height": "medium",
-        "slider_visual": "counter",
-        "auto_rotate": true,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Slideshow about our brand"
-      }
-    },
-    "lookbook_CMUJYh": {
-      "type": "lookbook",
-      "blocks": {
-        "product_pin_YGdWcY": {
-          "type": "product_pin",
-          "settings": {
-            "product": "quần-jeans",
-            "badge": "Jeans",
-            "top": 67,
-            "left": 52
-          }
-        },
-        "product_pin_yh8fzh": {
-          "type": "product_pin",
-          "settings": {
-            "product": "short-shirt",
-            "badge": "Shirt",
-            "top": 60,
-            "left": 24
-          }
-        }
-      },
-      "block_order": [
-        "product_pin_YGdWcY",
-        "product_pin_yh8fzh"
-      ],
-      "name": "t:sections.lookbook.name",
-      "settings": {
-        "image": "shopify://shop_images/winter-collection.jpg",
-        "eyebrow": "Shop the look",
-        "heading": "Effortless Everyday Ease",
-        "heading_size": "h1",
-        "text": "<p>A relaxed silhouette meets refined simplicity. Pair featured products into a complete look customers can shop in one place.</p>",
-        "enable_quick_add": true,
-        "desktop_media_width": "media-large",
-        "desktop_image_position": "left",
-        "mobile_layout": "image_first",
-        "image_height": 620,
-        "color_scheme": "",
-        "padding_top": 32,
-        "padding_bottom": 28
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
     "hero",
     "collection_tiles",
-    "lookbook_MKqkBj",
     "featured_collection",
-    "image_with_text_FcmanR",
-    "slideshow_fgcman",
-    "lookbook_CMUJYh"
+    "rich_text_dVymkg",
+    "newsletter_DeVVtC"
   ]
 }
