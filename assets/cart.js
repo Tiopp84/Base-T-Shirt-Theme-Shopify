@@ -16,7 +16,9 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   constructor() {
     super();
     this.lineItemStatusElement =
-      document.getElementById('shopping-cart-line-item-status') || document.getElementById('CartDrawer-LineItemStatus');
+      this.querySelector('#shopping-cart-line-item-status, #CartDrawer-LineItemStatus') ||
+      document.getElementById('shopping-cart-line-item-status') ||
+      document.getElementById('CartDrawer-LineItemStatus');
 
     const debouncedOnChange = debounce((event) => {
       this.onChange(event);
@@ -79,7 +81,8 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   resetQuantityInput(id) {
-    const input = this.querySelector(`#Quantity-${id}`);
+    const input = this.querySelector(`#Quantity-${id}`) || this.querySelector(`#Drawer-quantity-${id}`);
+    if (!input) return;
     input.value = input.getAttribute('value');
     this.isEnterPressed = false;
   }
@@ -109,21 +112,10 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     } else {
       event.target.setCustomValidity('');
       event.target.reportValidity();
-      if (this.tagName === 'CART-DRAWER-ITEMS') {
-        this.updateQuantity(
-          index,
-          inputValue,
-          event,
-          document.activeElement.getAttribute('name'),
-          event.target.dataset.quantityVariantId
-        );
-        return;
-      }
-
       this.queueQuantityUpdate({
         line: index,
         quantity: inputValue,
-        name: document.activeElement.getAttribute('name'),
+        name: document.activeElement?.getAttribute('name'),
         variantId: event.target.dataset.quantityVariantId,
         lineKey: event.target.dataset.quantityLineKey,
         previousQuantity: event.target.getAttribute('value'),
@@ -138,7 +130,8 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   queueQuantityUpdate(update) {
     this.pendingQuantityUpdates.set(update.line, update);
 
-    const lineItem = document.getElementById(`CartItem-${update.line}`);
+    const lineItem =
+      document.getElementById(`CartItem-${update.line}`) || document.getElementById(`CartDrawer-Item-${update.line}`);
     if (lineItem) lineItem.classList.add('cart-item--pending');
     this.updateOptimisticTotals();
 
@@ -157,8 +150,11 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     if (!updates.length) return;
 
     const cartPerformanceUpdateMarker = CartPerformance.createStartingMarker('change:batched-user-action');
-    const mainCartItems = document.getElementById('main-cart-items');
-    if (mainCartItems) mainCartItems.classList.add('cart__items--updating');
+    const cartItemsContainer =
+      this.querySelector('#main-cart-items, #CartDrawer-CartItems') ||
+      document.getElementById('main-cart-items') ||
+      document.getElementById('CartDrawer-CartItems');
+    if (cartItemsContainer) cartItemsContainer.classList.add('cart__items--updating');
     this.lineItemStatusElement.setAttribute('aria-hidden', false);
 
     const sectionsToRender = this.getSectionsToRender();
@@ -170,7 +166,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
 
     const body = JSON.stringify({
       updates: updateMap,
-      sections: sectionsToRender.map((section) => section.section),
+      sections: [...new Set(sectionsToRender.map((section) => section.section))],
       sections_url: window.location.pathname,
     });
 
@@ -194,13 +190,18 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
           const needsFullRender = this.hasServerAdjustedQuantities(updates, parsedState);
           const sectionsToPaint = needsFullRender
             ? sectionsToRender
-            : sectionsToRender.filter((section) => section.id !== 'main-cart-items' && section.id !== 'CartSummary');
+            : sectionsToRender.filter(
+                (section) =>
+                  section.id !== 'main-cart-items' && section.id !== 'CartSummary' && section.id !== 'CartDrawer',
+              );
 
           this.renderSections(sectionsToPaint, parsedState);
           this.updateLiveRegions(updates[0].line, '');
 
           const lastUpdate = updates[updates.length - 1];
-          const lineItem = document.getElementById(`CartItem-${lastUpdate.line}`);
+          const lineItem =
+            document.getElementById(`CartItem-${lastUpdate.line}`) ||
+            document.getElementById(`CartDrawer-Item-${lastUpdate.line}`);
           const focusTarget = lineItem?.querySelector(`[name="${lastUpdate.name}"]`);
           if (focusTarget) focusTarget.focus();
         });
@@ -216,9 +217,12 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
       })
       .finally(() => {
         updates.forEach((update) => {
-          document.getElementById(`CartItem-${update.line}`)?.classList.remove('cart-item--pending');
+          const lineItem =
+            document.getElementById(`CartItem-${update.line}`) ||
+            document.getElementById(`CartDrawer-Item-${update.line}`);
+          lineItem?.classList.remove('cart-item--pending');
         });
-        if (mainCartItems) mainCartItems.classList.remove('cart__items--updating');
+        if (cartItemsContainer) cartItemsContainer.classList.remove('cart__items--updating');
         this.lineItemStatusElement.setAttribute('aria-hidden', true);
         CartPerformance.measureFromMarker('change:batched-user-action', cartPerformanceUpdateMarker);
       });
@@ -226,7 +230,9 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
 
   rollbackPendingQuantityUpdates(updates) {
     updates.forEach((update) => {
-      const input = document.getElementById(`Quantity-${update.line}`);
+      const input =
+        document.getElementById(`Quantity-${update.line}`) ||
+        document.getElementById(`Drawer-quantity-${update.line}`);
       if (input && update.previousQuantity != null) input.value = update.previousQuantity;
     });
     this.updateOptimisticTotals();
@@ -254,9 +260,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     return dollars + cents;
   }
 
-  formatCartMoney(cents) {
-    const moneyFormat = this.dataset.moneyFormat;
-
+  formatCartMoney(cents, moneyFormat = this.dataset.moneyFormat) {
     if (moneyFormat) {
       const placeholder = moneyFormat.match(/\{\{\s*(\w+)\s*\}\}/)?.[1] || 'amount';
       let value;
@@ -301,8 +305,6 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   updateOptimisticTotals() {
-    if (this.tagName === 'CART-DRAWER-ITEMS') return;
-
     let subtotal = 0;
 
     this.querySelectorAll('[data-cart-item]').forEach((item) => {
@@ -318,7 +320,10 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     });
 
     document.querySelectorAll('[data-cart-summary-subtotal], [data-cart-summary-total]').forEach((target) => {
-      target.textContent = this.formatCartMoney(subtotal);
+      target.textContent = this.formatCartMoney(
+        subtotal,
+        this.dataset.summaryMoneyFormat || this.dataset.moneyFormat,
+      );
     });
   }
 
@@ -413,7 +418,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     const body = JSON.stringify({
       line,
       quantity,
-      sections: sectionsToRender.map((section) => section.section),
+      sections: [...new Set(sectionsToRender.map((section) => section.section))],
       sections_url: window.location.pathname,
     });
 
@@ -531,7 +536,10 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     this.lineItemStatusElement.setAttribute('aria-hidden', true);
 
     const cartStatus =
-      document.getElementById('cart-live-region-text') || document.getElementById('CartDrawer-LiveRegionText');
+      this.querySelector('#cart-live-region-text, #CartDrawer-LiveRegionText') ||
+      document.getElementById('cart-live-region-text') ||
+      document.getElementById('CartDrawer-LiveRegionText');
+    if (!cartStatus) return;
     cartStatus.setAttribute('aria-hidden', false);
 
     setTimeout(() => {

@@ -84,6 +84,9 @@
       <cart-drawer-items
         view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
         view-event-trigger="manual"
+        data-currency-code="{{ cart.currency.iso_code }}"
+        data-money-format="{{ shop.money_format | escape }}"
+        data-summary-money-format="{{ shop.money_with_currency_format | escape }}"
         {% if cart == empty %}
           class=" is-empty"
         {% endif %}
@@ -130,6 +133,8 @@
                       <tr
                         id="CartDrawer-Item-{{ item.index | plus: 1 }}"
                         class="cart-item{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
+                        data-cart-item
+                        data-unit-price="{{ item.final_price }}"
                         role="row"
                         {% if item.parent_relationship.parent != null %}
                           aria-label="{{- 'products.product.nested_label' | t: title: item.product.title, parent_title: item.parent_relationship.parent.title | escape -}}"
@@ -263,12 +268,12 @@
                                 <span class="visually-hidden">
                                   {{ 'products.product.price.sale_price' | t }}
                                 </span>
-                                <span class="price price--end">
+                                <span class="price price--end" data-cart-line-total>
                                   {{ item.final_line_price | money }}
                                 </span>
                               </div>
                             {%- else -%}
-                              <span class="price price--end">
+                              <span class="price price--end" data-cart-line-total>
                                 {{ item.original_line_price | money }}
                               </span>
                             {%- endif -%}
@@ -494,7 +499,7 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
-      <div class="drawer__footer">
+      <div id="CartDrawer-Footer" class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
             <summary>
@@ -535,7 +540,9 @@
 
           <div class="totals" role="status">
             <h2 class="totals__total">{{ 'sections.cart.estimated_total' | t }}</h2>
-            <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
+            <p class="totals__total-value" data-cart-summary-subtotal data-cart-summary-total>
+              {{ cart.total_price | money_with_currency }}
+            </p>
           </div>
 
           <small class="tax-note caption-large rte">

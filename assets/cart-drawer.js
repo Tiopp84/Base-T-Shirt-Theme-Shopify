@@ -131,6 +131,11 @@ class CartDrawerItems extends CartItems {
         selector: '.drawer__inner',
       },
       {
+        id: 'CartDrawer-Footer',
+        section: 'cart-drawer',
+        selector: '#CartDrawer-Footer',
+      },
+      {
         id: 'cart-icon-bubble',
         section: 'cart-icon-bubble',
         selector: '.shopify-section',
