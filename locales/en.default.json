@@ -371,7 +371,8 @@
     },
     "lookbook": {
       "eyebrow": "Styled together",
-      "view_product": "View {{ product_name }}"
+      "view_product": "View {{ product_name }}",
+      "add_to_cart": "Add {{ product_name }} to cart"
     },
     "collection_tiles": {
       "shop_collection": "Shop Collection"

@@ -2088,9 +2088,47 @@
         "image": {
           "label": "Lookbook image"
         },
+        "eyebrow": {
+          "label": "Eyebrow",
+          "default": "Shop the look"
+        },
         "heading": {
           "label": "Heading",
-          "default": "Shop the look"
+          "default": "Effortless Everyday Ease"
+        },
+        "text": {
+          "label": "Text",
+          "default": "<p>A relaxed silhouette meets refined simplicity. Pair featured products into a complete look customers can shop in one place.</p>"
+        },
+        "enable_quick_add": {
+          "label": "Enable quick add"
+        },
+        "layout_header": {
+          "content": "Layout"
+        },
+        "desktop_media_width": {
+          "label": "Desktop image width",
+          "options__1": {
+            "label": "Small"
+          },
+          "options__2": {
+            "label": "Medium"
+          },
+          "options__3": {
+            "label": "Large"
+          }
+        },
+        "mobile_layout": {
+          "label": "Mobile layout",
+          "options__1": {
+            "label": "Image first"
+          },
+          "options__2": {
+            "label": "Content first"
+          }
+        },
+        "image_height": {
+          "label": "Image height"
         }
       },
       "blocks": {
@@ -2099,6 +2137,9 @@
           "settings": {
             "product": {
               "label": "Product"
+            },
+            "badge": {
+              "label": "Badge"
             },
             "top": {
               "label": "Position top"
