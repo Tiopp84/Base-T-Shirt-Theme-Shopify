@@ -4,19 +4,22 @@
 
   const desktopMedia = window.matchMedia('(min-width: 990px)');
   const root = document.documentElement;
-  let footerGroup;
+  let footerSections = [];
   let footerObserver;
   let footerHeight = 0;
   let updateFrame;
 
   const setFooterInert = (isInert) => {
-    if (!footerGroup) return;
-    footerGroup.toggleAttribute('inert', isInert);
+    footerSections.forEach((section) => section.toggleAttribute('inert', isInert));
+  };
+
+  const clearFooterOffsets = () => {
+    footerSections.forEach((section) => section.style.removeProperty('--footer-reveal-offset'));
   };
 
   const updateFooterAccess = () => {
     updateFrame = undefined;
-    if (!footerGroup || !document.body.classList.contains('footer-reveal-enabled')) {
+    if (!footerSections.length || !document.body.classList.contains('footer-reveal-enabled')) {
       setFooterInert(false);
       return;
     }
@@ -32,9 +35,16 @@
   };
 
   const updateFooterReveal = () => {
-    if (!footerGroup) return;
+    if (!footerSections.length) return;
 
-    footerHeight = Math.ceil(footerGroup.getBoundingClientRect().height);
+    let nextOffset = 0;
+    for (let index = footerSections.length - 1; index >= 0; index -= 1) {
+      const section = footerSections[index];
+      section.style.setProperty('--footer-reveal-offset', `${nextOffset}px`);
+      nextOffset += Math.ceil(section.getBoundingClientRect().height);
+    }
+
+    footerHeight = nextOffset;
     const canReveal = desktopMedia.matches && footerHeight > 0 && footerHeight < window.innerHeight * 0.9;
 
     document.body.classList.toggle('footer-reveal-enabled', canReveal);
@@ -43,20 +53,28 @@
   };
 
   const initializeFooterReveal = () => {
-    const nextFooterGroup = document.querySelector('.shopify-section-group-footer-group');
-    if (!nextFooterGroup) {
+    const nextFooterSections = Array.from(document.querySelectorAll('.shopify-section-group-footer-group'));
+    if (!nextFooterSections.length) {
+      setFooterInert(false);
+      clearFooterOffsets();
+      footerObserver?.disconnect();
+      footerSections = [];
       document.body.classList.remove('footer-reveal-enabled');
       root.style.setProperty('--footer-reveal-height', '0px');
-      setFooterInert(false);
       return;
     }
 
-    if (nextFooterGroup !== footerGroup) {
+    const footerSectionsChanged =
+      nextFooterSections.length !== footerSections.length ||
+      nextFooterSections.some((section, index) => section !== footerSections[index]);
+
+    if (footerSectionsChanged) {
       setFooterInert(false);
+      clearFooterOffsets();
       footerObserver?.disconnect();
-      footerGroup = nextFooterGroup;
+      footerSections = nextFooterSections;
       footerObserver = new ResizeObserver(updateFooterReveal);
-      footerObserver.observe(footerGroup);
+      footerSections.forEach((section) => footerObserver.observe(section));
     }
 
     updateFooterReveal();
