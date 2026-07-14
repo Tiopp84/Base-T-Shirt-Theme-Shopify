@@ -6,6 +6,27 @@
   border-top: none;
 }
 
+@media screen and (min-width: 990px) {
+  body.footer-reveal-enabled #MainContent {
+    position: relative;
+    z-index: 2;
+    margin-bottom: var(--footer-reveal-height, 0px);
+    background: rgb(var(--color-background));
+    border-radius: 0 0 2rem 2rem;
+    box-shadow: 0 2rem 4rem rgba(var(--color-foreground), 0.14);
+  }
+
+  body.footer-reveal-enabled .shopify-section-group-footer-group {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: flow-root;
+    width: 100%;
+  }
+}
+
 .footer__content-top {
   padding-bottom: 5rem;
   display: block;
