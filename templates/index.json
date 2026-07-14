@@ -194,7 +194,6 @@
           "type": "slideshow-slide",
           "name": "t:sections.slideshow.blocks.slide.name",
           "settings": {
-            "image": "shopify://shop_images/hero1_0c5aecaf-7e75-4c9f-81f8-93f8cfdfe8f1.webp",
             "image_overlay_opacity": 0,
             "heading": "",
             "heading_size": "h1",
@@ -267,6 +266,48 @@
         "show_text_below": true,
         "accessibility_info": "Slideshow about our brand"
       }
+    },
+    "lookbook_CMUJYh": {
+      "type": "lookbook",
+      "blocks": {
+        "product_pin_YGdWcY": {
+          "type": "product_pin",
+          "settings": {
+            "product": "quần-jeans",
+            "badge": "Jeans",
+            "top": 67,
+            "left": 52
+          }
+        },
+        "product_pin_yh8fzh": {
+          "type": "product_pin",
+          "settings": {
+            "product": "short-shirt",
+            "badge": "Shirt",
+            "top": 60,
+            "left": 24
+          }
+        }
+      },
+      "block_order": [
+        "product_pin_YGdWcY",
+        "product_pin_yh8fzh"
+      ],
+      "name": "t:sections.lookbook.name",
+      "settings": {
+        "image": "shopify://shop_images/winter-collection.jpg",
+        "eyebrow": "Shop the look",
+        "heading": "Effortless Everyday Ease",
+        "heading_size": "h1",
+        "text": "<p>A relaxed silhouette meets refined simplicity. Pair featured products into a complete look customers can shop in one place.</p>",
+        "enable_quick_add": true,
+        "desktop_media_width": "media-large",
+        "mobile_layout": "image_first",
+        "image_height": 620,
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 28
+      }
     }
   },
   "order": [
@@ -274,6 +315,7 @@
     "collection_tiles",
     "featured_collection",
     "image_with_text_FcmanR",
-    "slideshow_fgcman"
+    "slideshow_fgcman",
+    "lookbook_CMUJYh"
   ]
 }
