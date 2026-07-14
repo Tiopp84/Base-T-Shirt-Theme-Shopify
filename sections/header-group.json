@@ -14,16 +14,16 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_PPd3dh": {
+        "announcement_BUMrmG": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
-            "link": "shopify://policies/privacy-policy"
+            "text": "Welcome to our storstore. Explore your style, favoritfavorite. We provide a highly service on fashion and your feeling!",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "announcement_PPd3dh"
+        "announcement_BUMrmG"
       ],
       "settings": {
         "auto_rotate": true,
