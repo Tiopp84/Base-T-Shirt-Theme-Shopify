@@ -123,27 +123,40 @@
 {% endstylesheet %}
 
 {% javascript %}
-  document.addEventListener('DOMContentLoaded', () => {
-    const buttons = document.querySelectorAll('.size-guide__button');
+  if (!window.sizeGuideEventsBound) {
+    window.sizeGuideEventsBound = true;
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const controls = button.getAttribute('aria-controls');
-        const dialog = document.getElementById(controls);
-        if (dialog) dialog.showModal();
-      });
-    });
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
 
-    // Close on backdrop click
-    const dialogs = document.querySelectorAll('.size-guide__modal');
-    dialogs.forEach(dialog => {
-      dialog.addEventListener('click', event => {
-        if (event.target === dialog) {
-          dialog.close();
+      const openButton = event.target.closest('.size-guide__button');
+      if (openButton) {
+        const dialogId = openButton.getAttribute('aria-controls');
+        const dialog = document.getElementById(dialogId);
+
+        if (dialog) {
+          dialog.showModal();
+          openButton.setAttribute('aria-expanded', 'true');
         }
-      });
+        return;
+      }
+
+      const dialog = event.target.closest('.size-guide__modal');
+      if (dialog && event.target === dialog) dialog.close();
     });
-  });
+
+    document.addEventListener(
+      'close',
+      (event) => {
+        if (!(event.target instanceof Element)) return;
+        if (!event.target.matches('.size-guide__modal')) return;
+
+        const button = document.querySelector(`[aria-controls="${CSS.escape(event.target.id)}"]`);
+        button?.setAttribute('aria-expanded', 'false');
+      },
+      true
+    );
+  }
 {% endjavascript %}
 
 {% schema %}
