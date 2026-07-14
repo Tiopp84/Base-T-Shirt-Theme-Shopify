@@ -1,6 +1,10 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
 <article class="article-template">
+  <div class="page-width page-width--narrow">
+    {% render 'breadcrumbs', parent_title: blog.title, parent_url: blog.url, current_title: article.title %}
+  </div>
+
   {% content_for 'blocks' %}
 
   <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">

@@ -14,7 +14,13 @@
 {%- liquid
   assign card_title = title | default: collection.title
   assign card_url = url | default: collection.url
-  assign card_image = image | default: collection.featured_image
+  assign card_image = image
+
+  if card_image == blank and collection.image != blank
+    assign card_image = collection.image
+  elsif card_image == blank and collection.featured_image != blank
+    assign card_image = collection.featured_image
+  endif
 -%}
 
 {%- if card_title != blank and card_url != blank -%}

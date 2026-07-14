@@ -13,10 +13,22 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "announcement_BUMrmG": {
+          "type": "announcement",
+          "settings": {
+            "text": "New season essentials — Explore the latest collection",
+            "link": "shopify://collections/new-arrivals"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_BUMrmG"
+      ],
       "settings": {
-        "auto_rotate": false,
+        "auto_rotate": true,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-6c488916-ff0e-4581-ba9d-f9d1c5d5dffe",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
@@ -29,26 +41,27 @@
         "logo_position": "middle-left",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "mega",
+        "menu_type_desktop": "dropdown",
         "sticky_header_type": "on-scroll-up",
         "show_discovery_cards": true,
+        "menu_card_collections": [],
         "menu_card_1_image": "shopify://shop_images/summers-collection.jpg",
         "menu_card_1_title": "New  Arrivals",
-        "menu_card_1_link": "shopify://collections/frontpage",
+        "menu_card_1_link": "shopify://collections/new-arrivals",
         "menu_card_2_image": "shopify://shop_images/example.jpg",
-        "menu_card_2_title": "Summer",
-        "menu_card_2_link": "shopify://collections/summer",
+        "menu_card_2_title": "Outerwear",
+        "menu_card_2_link": "shopify://collections/outerwear",
         "menu_card_3_title": "",
         "menu_card_3_link": "",
         "show_line_separator": true,
         "color_scheme": "scheme-1",
         "menu_color_scheme": "scheme-1",
-        "enable_country_selector": true,
+        "enable_country_selector": false,
         "enable_language_selector": true,
         "enable_customer_avatar": true,
         "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 16,
+        "padding_bottom": 16
       }
     }
   },

@@ -19,6 +19,9 @@
 {%- endif -%}
 
 <div class="customer login section-{{ section.id }}-padding">
+  {%- assign login_breadcrumb_title = 'customer.login_page.title' | t -%}
+  {% render 'breadcrumbs', current_title: login_breadcrumb_title %}
+
   <h1 id="recover" tabindex="-1">
     {{ 'customer.recover_password.title' | t }}
   </h1>

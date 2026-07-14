@@ -1,0 +1,46 @@
+{% doc %}
+  Renders page breadcrumbs.
+
+  @param {string} [parent_title] - Optional first level after home
+  @param {string} [parent_url] - Optional first level URL
+  @param {string} [child_title] - Optional second level after home
+  @param {string} [child_url] - Optional second level URL
+  @param {string} current_title - Current page title
+
+  @example
+  {% render 'breadcrumbs', parent_title: 'Shop', parent_url: routes.all_products_collection_url, current_title: collection.title %}
+{% enddoc %}
+
+<nav class="breadcrumbs" aria-label="{{ 'general.breadcrumbs.label' | t }}">
+  <ol class="breadcrumbs__list" role="list">
+    <li class="breadcrumbs__item">
+      <a class="breadcrumbs__link" href="{{ routes.root_url }}">{{ 'general.breadcrumbs.home' | t }}</a>
+    </li>
+
+    {%- if parent_title != blank -%}
+      <li class="breadcrumbs__item">
+        {%- if parent_url != blank -%}
+          <a class="breadcrumbs__link" href="{{ parent_url }}">{{ parent_title | escape }}</a>
+        {%- else -%}
+          <span class="breadcrumbs__current">{{ parent_title | escape }}</span>
+        {%- endif -%}
+      </li>
+    {%- endif -%}
+
+    {%- if child_title != blank -%}
+      <li class="breadcrumbs__item">
+        {%- if child_url != blank -%}
+          <a class="breadcrumbs__link" href="{{ child_url }}">{{ child_title | escape }}</a>
+        {%- else -%}
+          <span class="breadcrumbs__current">{{ child_title | escape }}</span>
+        {%- endif -%}
+      </li>
+    {%- endif -%}
+
+    {%- if current_title != blank -%}
+      <li class="breadcrumbs__item">
+        <span class="breadcrumbs__current" aria-current="page">{{ current_title | escape }}</span>
+      </li>
+    {%- endif -%}
+  </ol>
+</nav>

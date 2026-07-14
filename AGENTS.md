@@ -4,11 +4,11 @@ This file is the operating manual for every AI model or developer working on thi
 
 The project goal is to produce a production-grade, modern, reusable Shopify Online Store 2.0 theme that can be sold commercially or used internally across multiple stores. All work must preserve Shopify standards, performance, accessibility, merchant editability, and the project's Horizontal Architecture based on Theme Blocks.
 
-## Mandatory First Step
+<!-- ## Mandatory First Step
 
 When working with Liquid themes, call `learn_shopify_api` exactly once before making technical decisions, if that tool is available in the current environment.
 
-If the tool is not available, state that it is unavailable and continue using the rules in this file, Shopify Theme Check, and local project context.
+If the tool is not available, state that it is unavailable and continue using the rules in this file, Shopify Theme Check, and local project context. -->
 
 ## Product Standards
 

@@ -53,6 +53,11 @@
       "view_empty_cart": "View cart",
       "item_added": "Item added to your cart"
     },
+    "breadcrumbs": {
+      "label": "Breadcrumb",
+      "home": "Home",
+      "shop": "Shop"
+    },
     "share": {
       "close": "Close share",
       "copy_to_clipboard": "Copy link",
@@ -115,6 +120,11 @@
   },
   "products": {
     "product": {
+      "breadcrumbs": {
+        "label": "Breadcrumb",
+        "home": "Home",
+        "shop": "Shop"
+      },
       "secure_payment": "Secure payment",
       "easy_returns": "Easy 30-day returns",
       "free_shipping": "Free worldwide shipping",
@@ -277,7 +287,17 @@
     },
     "404": {
       "title": "Page not found",
-      "subtext": "404"
+      "subtext": "404",
+      "eyebrow": "Route missing",
+      "heading": "Lost in the urban jungle",
+      "description": "The piece you are looking for has moved, sold out, or never made it to this drop. Search the catalog or jump back into the latest products.",
+      "back_home": "Back to home",
+      "shop_new_arrivals": "Shop new arrivals",
+      "search_label": "Search the store",
+      "quick_links_label": "Helpful links",
+      "quick_link_shop": "Shop all products",
+      "quick_link_search": "Search",
+      "quick_link_home": "Home base"
     }
   },
   "sections": {
@@ -325,6 +345,12 @@
         "quantity": "Quantity",
         "image": "Product image"
       },
+      "summary": {
+        "title": "Order summary",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "shipping_note": "Calculated at checkout"
+      },
       "update": "Update",
       "login": {
         "title": "Have an account?",
@@ -344,7 +370,12 @@
       "view_all_label": "View all products in the {{ collection_name }} collection"
     },
     "lookbook": {
-      "view_product": "View {{ product_name }}"
+      "eyebrow": "Styled together",
+      "view_product": "View {{ product_name }}",
+      "add_to_cart": "Add {{ product_name }} to cart"
+    },
+    "collection_tiles": {
+      "shop_collection": "Shop Collection"
     },
     "collection_list": {
       "view_all": "View all"
@@ -352,7 +383,12 @@
     "collection_template": {
       "empty": "No products found",
       "title": "Collection",
-      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>"
+      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">remove all</a>",
+      "breadcrumbs": {
+        "label": "Breadcrumb",
+        "home": "Home",
+        "shop": "Shop"
+      }
     },
     "video": {
       "load_video": "Load video: {{ description }}"

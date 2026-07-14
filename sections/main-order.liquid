@@ -15,6 +15,12 @@
 {%- endstyle -%}
 
 <div class="customer order section-{{ section.id }}-padding">
+  {%- liquid
+    assign account_breadcrumb_title = 'customer.account.title' | t
+    assign order_breadcrumb_title = 'customer.order.title' | t: name: order.name
+  -%}
+  {% render 'breadcrumbs', parent_title: account_breadcrumb_title, parent_url: routes.account_url, current_title: order_breadcrumb_title %}
+
   <div>
     <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
     <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>

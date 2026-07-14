@@ -12,18 +12,19 @@
     "hero": {
       "type": "image-banner",
       "blocks": {
-        "heading": {
-          "type": "banner-heading",
+        "email_signup_banner_heading_p4YJU7": {
+          "type": "email-signup-banner-heading",
+          "name": "t:sections.email-signup-banner.blocks.heading.name",
           "settings": {
-            "heading": "Modern essentials, ready to wear",
-            "heading_size": "h0"
+            "heading": "Modern Layers. Everyday Ease.",
+            "heading_size": "hxxl"
           },
           "blocks": {}
         },
         "text": {
           "type": "banner-text",
           "settings": {
-            "text": "Build a confident first impression with a clean storefront, strong product focus, and fast shopping flow.",
+            "text": "A considered edit of refined essentials designed for effortless everyday dressing.",
             "text_style": "subtitle"
           },
           "blocks": {}
@@ -31,87 +32,97 @@
         "buttons": {
           "type": "banner-buttons",
           "settings": {
-            "button_label_1": "Shop new arrivals",
-            "button_link_1": "shopify://collections/all",
+            "button_label_1": "Shop New Arrivals",
+            "button_link_1": "shopify://collections/new-arrivals",
             "button_style_secondary_1": false,
-            "button_label_2": "Explore collections",
-            "button_link_2": "shopify://collections",
-            "button_style_secondary_2": true
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "heading",
+        "email_signup_banner_heading_p4YJU7",
         "text",
         "buttons"
       ],
       "settings": {
+        "image": "shopify://shop_images/ao-khoac.webp",
         "image_overlay_opacity": 30,
         "image_height": "large",
-        "image_behavior": "ambient",
+        "image_behavior": "none",
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": false,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "left",
         "show_text_below": false
       }
     },
-    "intro": {
-      "type": "rich-text",
+    "collection_tiles": {
+      "type": "collection-tiles",
       "blocks": {
-        "caption": {
-          "type": "rich-text-caption",
+        "collection_tile_ATUkxV": {
+          "type": "collection_tile",
           "settings": {
-            "caption": "Built for conversion",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "medium"
-          },
-          "blocks": {}
+            "collection": "outerwear",
+            "image": "shopify://shop_images/ao-khoac.webp",
+            "heading": "Outerwear",
+            "cta_label": "Shop Outerwear",
+            "link": ""
+          }
         },
-        "heading": {
-          "type": "rich-text-heading",
+        "collection_tile_9a3haB": {
+          "type": "collection_tile",
           "settings": {
-            "heading": "A polished base for modern commerce",
-            "heading_size": "h1"
-          },
-          "blocks": {}
+            "collection": "denim",
+            "image": "shopify://shop_images/jeans1.jpg",
+            "heading": "Denim",
+            "cta_label": "Shop Denim",
+            "link": ""
+          }
         },
-        "text": {
-          "type": "rich-text-text",
+        "tile_sale": {
+          "type": "collection_tile",
           "settings": {
-            "text": "<p>Use this theme as a premium starting point for apparel, lifestyle, accessories, and focused catalog stores.</p>"
-          },
-          "blocks": {}
+            "collection": "shirts",
+            "image": "shopify://shop_images/short-shirt.jpg",
+            "heading": "Shirts",
+            "cta_label": "Shop Shirts",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "caption",
-        "heading",
-        "text"
+        "collection_tile_ATUkxV",
+        "collection_tile_9a3haB",
+        "tile_sale"
       ],
       "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
+        "heading": "Shop by Category",
+        "heading_size": "h0",
+        "columns_desktop": 3,
+        "view_all_label": "View all",
+        "view_all_link": "shopify://collections",
+        "show_cta": true,
         "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 36
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
+        "collection": "everyday-essentials",
+        "products_to_show": 3,
+        "title": "Everyday Essentials",
         "heading_size": "h1",
-        "description": "",
-        "show_description": false,
+        "description": "<p>A considered edit of versatile wardrobe staples designed for everyday wear.</p>",
+        "show_description": true,
         "description_style": "body",
-        "columns_desktop": 4,
+        "columns_desktop": 3,
         "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
@@ -120,86 +131,122 @@
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
-        "show_vendor": true,
-        "show_rating": true,
-        "quick_add": "none",
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "padding_top": 28,
-        "padding_bottom": 52
+        "padding_top": 48,
+        "padding_bottom": 72
       }
     },
-    "lookbook": {
-      "type": "lookbook",
+    "rich_text_dVymkg": {
+      "type": "rich-text",
       "blocks": {
-        "product_pin_DVnQRF": {
-          "type": "product_pin",
+        "image_with_text_caption_3x7W9k": {
+          "type": "image-with-text-caption",
+          "name": "t:sections.image-with-text.blocks.caption.name",
           "settings": {
-            "product": "quần-jeans",
-            "top": 61,
-            "left": 27
-          }
+            "caption": "THE SUND84 EDIT",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          },
+          "blocks": {}
         },
-        "product_pin_AY6zeY": {
-          "type": "product_pin",
+        "email_signup_banner_heading_FdyPWt": {
+          "type": "email-signup-banner-heading",
+          "name": "t:sections.email-signup-banner.blocks.heading.name",
           "settings": {
-            "product": "short-shirt",
-            "top": 40,
-            "left": 18
-          }
+            "heading": "Designed for the Everyday",
+            "heading_size": "hxl"
+          },
+          "blocks": {}
+        },
+        "newsletter_paragraph_JWCKYx": {
+          "type": "newsletter-paragraph",
+          "name": "t:sections.newsletter.blocks.paragraph.name",
+          "settings": {
+            "text": "<p>Clean proportions, versatile layers and considered details come together in a wardrobe designed to work beyond a  single season.</p>"
+          },
+          "blocks": {}
+        },
+        "banner_buttons_CyVP8f": {
+          "type": "banner-buttons",
+          "name": "t:sections.image-banner.blocks.buttons.name",
+          "settings": {
+            "button_label_1": "Shop Essentials",
+            "button_link_1": "shopify://collections/everyday-essentials",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "product_pin_DVnQRF",
-        "product_pin_AY6zeY"
+        "image_with_text_caption_3x7W9k",
+        "email_signup_banner_heading_FdyPWt",
+        "newsletter_paragraph_JWCKYx",
+        "banner_buttons_CyVP8f"
       ],
+      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/slide_look_2.webp",
-        "heading": "Shop the look"
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
-    "newsletter": {
+    "newsletter_DeVVtC": {
       "type": "newsletter",
       "blocks": {
-        "heading": {
-          "type": "newsletter-heading",
+        "banner_heading_ThFGqg": {
+          "type": "banner-heading",
+          "name": "t:sections.image-banner.blocks.heading.name",
           "settings": {
-            "heading": "Get product drops and launch notes",
+            "heading": "Stay in the Know",
             "heading_size": "h1"
           },
           "blocks": {}
         },
-        "paragraph": {
-          "type": "newsletter-paragraph",
+        "image_with_text_text_yMGTMM": {
+          "type": "image-with-text-text",
+          "name": "t:sections.image-with-text.blocks.text.name",
           "settings": {
-            "text": "<p>Sign up for concise updates, new arrivals, and seasonal offers.</p>"
+            "text": "<p>Sign up for new arrivals, seasonal edits and stories from the Sund84 studio.</p>",
+            "text_style": "body"
           },
           "blocks": {}
         },
-        "form": {
-          "type": "newsletter-form",
+        "email_signup_banner_email_form_HynYzG": {
+          "type": "email-signup-banner-email-form",
+          "name": "t:sections.email-signup-banner.blocks.email_form.name",
           "settings": {},
           "blocks": {}
         }
       },
       "block_order": [
-        "heading",
-        "paragraph",
-        "form"
+        "banner_heading_ThFGqg",
+        "image_with_text_text_yMGTMM",
+        "email_signup_banner_email_form_HynYzG"
       ],
+      "name": "t:sections.newsletter.presets.name",
       "settings": {
         "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 56
+        "full_width": false,
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
   "order": [
     "hero",
-    "intro",
+    "collection_tiles",
     "featured_collection",
-    "lookbook",
-    "newsletter"
+    "rich_text_dVymkg",
+    "newsletter_DeVVtC"
   ]
 }

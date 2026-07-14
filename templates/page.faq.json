@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 56,
+        "padding_bottom": 16
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "shipping": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Shipping and delivery",
+            "icon": "truck",
+            "row_content": "<p>Use this row to explain delivery windows, shipping regions, and order tracking.</p>",
+            "page": ""
+          }
+        },
+        "returns": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Returns and exchanges",
+            "icon": "return",
+            "row_content": "<p>Use this row to explain your return window, exchange process, and final sale policy.</p>",
+            "page": ""
+          }
+        },
+        "sizing": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Sizing and fit",
+            "icon": "ruler",
+            "row_content": "<p>Use this row to guide customers through fit, garment measurements, and size recommendations.</p>",
+            "page": ""
+          }
+        },
+        "care": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Garment care",
+            "icon": "washing",
+            "row_content": "<p>Use this row to share wash, dry, and storage instructions for long-lasting wear.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "shipping",
+        "returns",
+        "sizing",
+        "care"
+      ],
+      "settings": {
+        "caption": "Support",
+        "heading": "Frequently asked questions",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "section",
+        "container_color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image": "",
+        "image_ratio": "large",
+        "desktop_layout": "image_second",
+        "padding_top": 48,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

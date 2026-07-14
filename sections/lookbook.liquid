@@ -1,3 +1,530 @@
+{%- liquid
+  assign products_count = 0
+  for block in section.blocks
+    if block.settings.product != blank
+      assign products_count = products_count | plus: 1
+    endif
+  endfor
+
+  assign has_quick_add = false
+  if section.settings.enable_quick_add and products_count > 0
+    assign has_quick_add = true
+  endif
+-%}
+
+{%- if has_quick_add -%}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .section-{{ section.id }}-padding .lookbook-shop__media {
+    --lookbook-image-height: {{ section.settings.image_height }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="lookbook-shop color-{{ section.settings.color_scheme }} gradient">
+  <div class="lookbook-shop__inner page-width section-{{ section.id }}-padding">
+    <div class="lookbook-shop__layout lookbook-shop__layout--{{ section.settings.desktop_media_width }} lookbook-shop__layout--desktop-image-{{ section.settings.desktop_image_position }} lookbook-shop__layout--mobile-{{ section.settings.mobile_layout }}">
+      <div class="lookbook-shop__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1800
+            | image_tag:
+              widths: '550, 750, 990, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 50vw, calc(100vw - 3rem)',
+              loading: 'lazy',
+              class: 'lookbook-shop__image'
+          }}
+        {%- else -%}
+          {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg lookbook-shop__image' }}
+        {%- endif -%}
+
+        {%- assign pin_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.product != blank -%}
+            {%- assign pin_index = pin_index | plus: 1 -%}
+            <a
+              class="lookbook-shop__pin"
+              href="#LookbookProduct-{{ section.id }}-{{ block.id }}"
+              style="--pin-top: {{ block.settings.top }}%; --pin-left: {{ block.settings.left }}%;"
+              aria-label="{{ 'sections.lookbook.view_product' | t: product_name: block.settings.product.title | escape }}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="lookbook-shop__pin-number">{{ pin_index }}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="lookbook-shop__content">
+        <div class="lookbook-shop__header">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="lookbook-shop__eyebrow caption-with-letter-spacing">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="lookbook-shop__heading {{ section.settings.heading_size }}">{{ section.settings.heading | escape }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.text != blank -%}
+            <div class="lookbook-shop__text rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+        </div>
+
+        <div class="lookbook-shop__products" role="list">
+          {%- assign product_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign lookbook_product = block.settings.product -%}
+            {%- if lookbook_product != blank -%}
+              {%- liquid
+                assign product_index = product_index | plus: 1
+                assign selected_variant = lookbook_product.selected_or_first_available_variant
+                assign first_option = lookbook_product.options_with_values | first
+                assign form_id = 'lookbook-product-form-' | append: section.id | append: '-' | append: block.id
+                assign product_image_alt = lookbook_product.featured_image.alt | default: lookbook_product.title | escape
+              -%}
+
+              <article
+                id="LookbookProduct-{{ section.id }}-{{ block.id }}"
+                class="lookbook-shop__product"
+                role="listitem"
+              >
+                <a class="lookbook-shop__product-media" href="{{ lookbook_product.url }}" aria-label="{{ lookbook_product.title | escape }}">
+                  <span class="lookbook-shop__product-index">{{ product_index }}</span>
+                  {%- if lookbook_product.featured_image != blank -%}
+                    {{
+                      lookbook_product.featured_image
+                      | image_url: width: 260
+                      | image_tag:
+                        widths: '120, 180, 260',
+                        sizes: '10rem',
+                        loading: 'lazy',
+                        alt: product_image_alt
+                    }}
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </a>
+
+                <div class="lookbook-shop__product-details">
+                  {%- if block.settings.badge != blank -%}
+                    <p class="lookbook-shop__badge">{{ block.settings.badge | escape }}</p>
+                  {%- endif -%}
+
+                  <a href="{{ lookbook_product.url }}" class="lookbook-shop__product-title">
+                    {{ lookbook_product.title | escape }}
+                  </a>
+
+                  <div class="lookbook-shop__product-price">
+                    {%- render 'price', product: lookbook_product, use_variant: true -%}
+                  </div>
+
+                  {%- if first_option != blank and first_option.values.size > 1 -%}
+                    <ul class="lookbook-shop__options" aria-label="{{ first_option.name | escape }}">
+                      {%- for value in first_option.values limit: 5 -%}
+                        <li class="lookbook-shop__option">{{ value | escape }}</li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+                {%- if section.settings.enable_quick_add -%}
+                  <product-form
+                    class="lookbook-shop__quick-add"
+                    data-section-id="{{ section.id }}"
+                  >
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <span class="svg-wrapper">
+                        {{- 'icon-error.svg' | inline_asset_content -}}
+                      </span>
+                      <span class="product-form__error-message"></span>
+                    </div>
+
+                    {%- form 'product',
+                      lookbook_product,
+                      id: form_id,
+                      class: 'form lookbook-shop__form',
+                      novalidate: 'novalidate',
+                      data-type: 'add-to-cart-form'
+                    -%}
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ selected_variant.id }}"
+                        {% if selected_variant == null or selected_variant.available == false %}
+                          disabled
+                        {% endif %}
+                        class="product-variant-id"
+                      >
+                      <button
+                        type="submit"
+                        name="add"
+                        class="lookbook-shop__add-button"
+                        aria-label="{{ 'sections.lookbook.add_to_cart' | t: product_name: lookbook_product.title | escape }}"
+                        {% if selected_variant == null or selected_variant.available == false %}
+                          disabled
+                        {% endif %}
+                      >
+                        <span class="svg-wrapper">
+                          {{- 'icon-cart.svg' | inline_asset_content -}}
+                        </span>
+                        <span class="visually-hidden">
+                          {%- if selected_variant == null -%}
+                            {{ 'products.product.unavailable' | t }}
+                          {%- elsif selected_variant.available == false -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- else -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- endif -%}
+                        </span>
+                        {%- render 'loading-spinner' -%}
+                      </button>
+                    {%- endform -%}
+                  </product-form>
+                {%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .lookbook-shop__layout {
+    display: grid;
+    gap: 3rem;
+    align-items: stretch;
+  }
+
+  .lookbook-shop__media {
+    position: relative;
+    min-height: min(var(--lookbook-image-height), 82vh);
+    overflow: hidden;
+    background: rgba(var(--color-foreground), 0.04);
+  }
+
+  .lookbook-shop__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: min(var(--lookbook-image-height), 82vh);
+    object-fit: cover;
+  }
+
+  .lookbook-shop__image.placeholder-svg {
+    min-height: min(var(--lookbook-image-height), 82vh);
+  }
+
+  .lookbook-shop__pin {
+    position: absolute;
+    top: var(--pin-top);
+    left: var(--pin-left);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.9rem;
+    height: 3.9rem;
+    border-radius: 50%;
+    color: rgb(var(--color-button-text));
+    background: rgb(var(--color-button));
+    box-shadow: 0 0 0 1.4rem rgba(var(--color-button), 0.22);
+    text-decoration: none;
+    transform: translate(-50%, -50%);
+    transition:
+      box-shadow var(--theme-transition-fast, 180ms ease),
+      transform var(--theme-transition-fast, 180ms ease);
+  }
+
+  .lookbook-shop__pin:hover,
+  .lookbook-shop__pin:focus-visible {
+    box-shadow: 0 0 0 1.8rem rgba(var(--color-button), 0.28);
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  .lookbook-shop__pin:focus-visible {
+    outline: 0.2rem solid rgb(var(--color-foreground));
+    outline-offset: 0.5rem;
+  }
+
+  .lookbook-shop__pin-number,
+  .lookbook-shop__product-index {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .lookbook-shop__content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .lookbook-shop__header {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 3.6rem;
+  }
+
+  .lookbook-shop__eyebrow,
+  .lookbook-shop__heading,
+  .lookbook-shop__text,
+  .lookbook-shop__badge {
+    margin: 0;
+  }
+
+  .lookbook-shop__eyebrow {
+    color: rgba(var(--color-foreground), 0.78);
+  }
+
+  .lookbook-shop__heading {
+    line-height: 1.08;
+  }
+
+  .lookbook-shop__text {
+    max-width: 62rem;
+    color: rgba(var(--color-foreground), 0.82);
+  }
+
+  .lookbook-shop__products {
+    display: grid;
+    gap: 2.2rem;
+  }
+
+  .lookbook-shop__product {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr) auto;
+    gap: 1.6rem;
+    align-items: center;
+    scroll-margin-block: 3rem;
+  }
+
+  .lookbook-shop__product-media {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    color: rgb(var(--color-button-text));
+    background: rgba(var(--color-foreground), 0.05);
+    text-decoration: none;
+  }
+
+  .lookbook-shop__product-media img,
+  .lookbook-shop__product-media svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .lookbook-shop__product-index {
+    position: absolute;
+    top: 0.9rem;
+    left: 0.9rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: rgb(var(--color-button));
+  }
+
+  .lookbook-shop__product-details {
+    display: grid;
+    gap: 0.8rem;
+    min-width: 0;
+  }
+
+  .lookbook-shop__badge {
+    justify-self: start;
+    padding: 0.3rem 0.7rem;
+    color: rgb(var(--color-button-text));
+    background: rgb(var(--color-button));
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .lookbook-shop__product-title {
+    color: rgb(var(--color-foreground));
+    font-size: 1.4rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .lookbook-shop__product-title:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+
+  .lookbook-shop__product-price .price {
+    font-size: 1.3rem;
+    letter-spacing: 0;
+  }
+
+  .lookbook-shop__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0.4rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .lookbook-shop__option {
+    min-width: 2.4rem;
+    padding: 0.3rem 0.6rem;
+    background: rgba(var(--color-foreground), 0.05);
+    color: rgba(var(--color-foreground), 0.82);
+    font-size: 1.1rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .lookbook-shop__quick-add {
+    justify-self: end;
+  }
+
+  .lookbook-shop__form {
+    margin: 0;
+  }
+
+  .lookbook-shop__add-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    padding: 0;
+    border: 0;
+    color: rgb(var(--color-button-text));
+    background: rgb(var(--color-button));
+    cursor: pointer;
+  }
+
+  .lookbook-shop__add-button:hover:not([disabled]) {
+    background: rgba(var(--color-button), 0.88);
+  }
+
+  .lookbook-shop__add-button:focus-visible {
+    outline: 0.2rem solid rgb(var(--color-foreground));
+    outline-offset: 0.3rem;
+  }
+
+  .lookbook-shop__add-button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .lookbook-shop__add-button .svg-wrapper {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .lookbook-shop__add-button .loading__spinner {
+    position: absolute;
+    inset: auto;
+    width: 2rem;
+  }
+
+  .lookbook-shop__add-button.loading .svg-wrapper:not(.loading__spinner) {
+    opacity: 0;
+  }
+
+  @media screen and (min-width: 990px) {
+    .lookbook-shop__layout {
+      grid-template-columns: minmax(0, 1fr) minmax(36rem, 0.95fr);
+      gap: 4.8rem;
+    }
+
+    .lookbook-shop__layout--media-large {
+      grid-template-columns: minmax(0, 1.1fr) minmax(34rem, 0.85fr);
+    }
+
+    .lookbook-shop__layout--media-small {
+      grid-template-columns: minmax(0, 0.9fr) minmax(38rem, 1fr);
+    }
+
+    .lookbook-shop__layout--desktop-image-right .lookbook-shop__media {
+      order: 2;
+    }
+
+    .lookbook-shop__layout--desktop-image-right .lookbook-shop__content {
+      order: 1;
+    }
+
+    .lookbook-shop__content {
+      justify-content: center;
+      padding-block: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 989px) {
+    .lookbook-shop__layout--mobile-content_first .lookbook-shop__content {
+      order: -1;
+    }
+
+    .lookbook-shop__media,
+    .lookbook-shop__image,
+    .lookbook-shop__image.placeholder-svg {
+      min-height: min(62rem, 120vw);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .lookbook-shop__layout {
+      gap: 2.4rem;
+    }
+
+    .lookbook-shop__header {
+      margin-bottom: 2.4rem;
+    }
+
+    .lookbook-shop__product {
+      grid-template-columns: 8rem minmax(0, 1fr) auto;
+      gap: 1.2rem;
+    }
+
+    .lookbook-shop__add-button {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .lookbook-shop__product {
+      grid-template-columns: 7.2rem minmax(0, 1fr);
+    }
+
+    .lookbook-shop__quick-add {
+      grid-column: 2;
+      justify-self: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lookbook-shop__pin {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "t:sections.lookbook.name",
@@ -11,9 +538,143 @@
     },
     {
       "type": "text",
+      "id": "eyebrow",
+      "label": "t:sections.lookbook.settings.eyebrow.label",
+      "default": "t:sections.lookbook.settings.eyebrow.default"
+    },
+    {
+      "type": "text",
       "id": "heading",
       "label": "t:sections.lookbook.settings.heading.label",
       "default": "t:sections.lookbook.settings.heading.default"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "t:sections.lookbook.settings.text.label",
+      "default": "t:sections.lookbook.settings.text.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "label": "t:sections.lookbook.settings.enable_quick_add.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.lookbook.settings.layout_header.content"
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_width",
+      "label": "t:sections.lookbook.settings.desktop_media_width.label",
+      "options": [
+        {
+          "value": "media-small",
+          "label": "t:sections.lookbook.settings.desktop_media_width.options__1.label"
+        },
+        {
+          "value": "media-medium",
+          "label": "t:sections.lookbook.settings.desktop_media_width.options__2.label"
+        },
+        {
+          "value": "media-large",
+          "label": "t:sections.lookbook.settings.desktop_media_width.options__3.label"
+        }
+      ],
+      "default": "media-large"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_position",
+      "label": "t:sections.lookbook.settings.desktop_image_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.lookbook.settings.desktop_image_position.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.lookbook.settings.desktop_image_position.options__2.label"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "t:sections.lookbook.settings.mobile_layout.label",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "t:sections.lookbook.settings.mobile_layout.options__1.label"
+        },
+        {
+          "value": "content_first",
+          "label": "t:sections.lookbook.settings.mobile_layout.options__2.label"
+        }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 420,
+      "max": 760,
+      "step": 20,
+      "unit": "px",
+      "label": "t:sections.lookbook.settings.image_height.label",
+      "default": 620
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 56
     }
   ],
   "blocks": [
@@ -27,6 +688,11 @@
           "label": "t:sections.lookbook.blocks.product_pin.settings.product.label"
         },
         {
+          "type": "text",
+          "id": "badge",
+          "label": "t:sections.lookbook.blocks.product_pin.settings.badge.label"
+        },
+        {
           "type": "range",
           "id": "top",
           "min": 0,
@@ -34,7 +700,7 @@
           "step": 1,
           "unit": "%",
           "label": "t:sections.lookbook.blocks.product_pin.settings.top.label",
-          "default": 50
+          "default": 38
         },
         {
           "type": "range",
@@ -51,182 +717,24 @@
   ],
   "presets": [
     {
-      "name": "t:sections.lookbook.name"
+      "name": "t:sections.lookbook.name",
+      "blocks": [
+        {
+          "type": "product_pin",
+          "settings": {
+            "top": 36,
+            "left": 34
+          }
+        },
+        {
+          "type": "product_pin",
+          "settings": {
+            "top": 70,
+            "left": 60
+          }
+        }
+      ]
     }
   ]
 }
 {% endschema %}
-
-<div class="lookbook page-width section-{{ section.id }}-padding">
-  {%- if section.settings.heading != blank -%}
-    <h2 class="lookbook__heading h2">{{ section.settings.heading | escape }}</h2>
-  {%- endif -%}
-
-  <div class="lookbook__image-container">
-    {%- if section.settings.image != blank -%}
-      {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'lookbook__image' }}
-    {%- else -%}
-      {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg lookbook__image' }}
-    {%- endif -%}
-
-    {%- for block in section.blocks -%}
-      {%- if block.settings.product != blank -%}
-        <div class="lookbook__pin" style="top: {{ block.settings.top }}%; left: {{ block.settings.left }}%;" {{ block.shopify_attributes }}>
-          <button class="lookbook__pin-button" aria-label="{{ 'sections.lookbook.view_product' | t: product_name: block.settings.product.title | escape }}">
-            <span class="lookbook__pin-icon"></span>
-          </button>
-          <div class="lookbook__product-card">
-            <a href="{{ block.settings.product.url }}" class="lookbook__product-link">
-              <div class="lookbook__product-image">
-                <img src="{{ block.settings.product.featured_image | image_url: width: 150 }}" width="150" height="{{ 150 | divided_by: block.settings.product.featured_image.aspect_ratio | ceil }}" alt="{{ block.settings.product.title | escape }}">
-              </div>
-              <div class="lookbook__product-info">
-                <span class="lookbook__product-title">{{ block.settings.product.title }}</span>
-                <span class="lookbook__product-price">{{ block.settings.product.price | money }}</span>
-              </div>
-            </a>
-          </div>
-        </div>
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
-</div>
-
-{% stylesheet %}
-  .lookbook {
-    margin-top: 5rem;
-    margin-bottom: 5rem;
-  }
-  
-  .lookbook__heading {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  
-  .lookbook__image-container {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  
-  .lookbook__image {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .lookbook__pin {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-  }
-  
-  .lookbook__pin-button {
-    background: rgba(255, 255, 255, 0.95);
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .lookbook__pin-button:hover {
-    transform: scale(1.15);
-  }
-  
-  .lookbook__pin-icon {
-    display: block;
-    width: 12px;
-    height: 12px;
-    background: #111;
-    border-radius: 50%;
-  }
-
-  .lookbook__pin-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.8);
-    animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
-  }
-
-  @keyframes pulse {
-    to {
-      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
-    }
-  }
-  
-  .lookbook__product-card {
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-15px);
-    background: #fff;
-    padding: 1.2rem;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    width: 220px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), visibility 0.3s;
-    pointer-events: none;
-  }
-  
-  .lookbook__pin:hover .lookbook__product-card,
-  .lookbook__pin:focus-within .lookbook__product-card {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(-25px);
-    pointer-events: auto;
-  }
-  
-  .lookbook__product-card::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 10px;
-    border-style: solid;
-    border-color: #fff transparent transparent transparent;
-  }
-  
-  .lookbook__product-link {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .lookbook__product-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-    display: block;
-  }
-  
-  .lookbook__product-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height: 1.3;
-    display: block;
-  }
-  
-  .lookbook__product-price {
-    font-size: 1.3rem;
-    color: rgba(var(--color-foreground), 0.75);
-    font-weight: 500;
-  }
-{% endstylesheet %}

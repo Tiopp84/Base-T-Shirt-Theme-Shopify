@@ -11,14 +11,16 @@
   {%- liquid
     assign has_drawer_cards = false
     if section.settings.show_discovery_cards
-      if section.settings.menu_card_1_title != blank and section.settings.menu_card_1_link != blank
+      if section.settings.menu_card_collections != blank
         assign has_drawer_cards = true
-      endif
-      if section.settings.menu_card_2_title != blank and section.settings.menu_card_2_link != blank
-        assign has_drawer_cards = true
-      endif
-      if section.settings.menu_card_3_title != blank and section.settings.menu_card_3_link != blank
-        assign has_drawer_cards = true
+      else
+        if section.settings.menu_card_1_title != blank and section.settings.menu_card_1_link != blank
+          assign has_drawer_cards = true
+        elsif section.settings.menu_card_2_title != blank and section.settings.menu_card_2_link != blank
+          assign has_drawer_cards = true
+        elsif section.settings.menu_card_3_title != blank and section.settings.menu_card_3_link != blank
+          assign has_drawer_cards = true
+        endif
       endif
     endif
   -%}
@@ -38,24 +40,40 @@
           <nav class="menu-drawer__navigation">
             {%- if has_drawer_cards -%}
               <div class="menu-drawer__cards">
-                {%- render 'collection-menu-card',
-                  image: section.settings.menu_card_1_image,
-                  title: section.settings.menu_card_1_title,
-                  url: section.settings.menu_card_1_link,
-                  class: 'collection-menu-card--drawer'
-                -%}
-                {%- render 'collection-menu-card',
-                  image: section.settings.menu_card_2_image,
-                  title: section.settings.menu_card_2_title,
-                  url: section.settings.menu_card_2_link,
-                  class: 'collection-menu-card--drawer'
-                -%}
-                {%- render 'collection-menu-card',
-                  image: section.settings.menu_card_3_image,
-                  title: section.settings.menu_card_3_title,
-                  url: section.settings.menu_card_3_link,
-                  class: 'collection-menu-card--drawer'
-                -%}
+                {%- for menu_card_collection in section.settings.menu_card_collections limit: 3 -%}
+                  {%- liquid
+                    assign card_index = forloop.index
+                    assign image_setting = 'menu_card_' | append: card_index | append: '_image'
+                    assign title_setting = 'menu_card_' | append: card_index | append: '_title'
+                    assign link_setting = 'menu_card_' | append: card_index | append: '_link'
+                  -%}
+                  {%- render 'collection-menu-card',
+                    collection: menu_card_collection,
+                    image: section.settings[image_setting],
+                    title: section.settings[title_setting],
+                    url: section.settings[link_setting],
+                    class: 'collection-menu-card--drawer'
+                  -%}
+                {%- else -%}
+                  {%- render 'collection-menu-card',
+                    image: section.settings.menu_card_1_image,
+                    title: section.settings.menu_card_1_title,
+                    url: section.settings.menu_card_1_link,
+                    class: 'collection-menu-card--drawer'
+                  -%}
+                  {%- render 'collection-menu-card',
+                    image: section.settings.menu_card_2_image,
+                    title: section.settings.menu_card_2_title,
+                    url: section.settings.menu_card_2_link,
+                    class: 'collection-menu-card--drawer'
+                  -%}
+                  {%- render 'collection-menu-card',
+                    image: section.settings.menu_card_3_image,
+                    title: section.settings.menu_card_3_title,
+                    url: section.settings.menu_card_3_link,
+                    class: 'collection-menu-card--drawer'
+                  -%}
+                {%- endfor -%}
               </div>
             {%- endif -%}
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">

@@ -12,27 +12,24 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "product-text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          },
-          "blocks": {}
-        },
         "title": {
           "type": "product-title",
-          "settings": {},
-          "blocks": {}
-        },
-        "rating": {
-          "type": "product-rating",
           "settings": {},
           "blocks": {}
         },
         "price": {
           "type": "product-price",
           "settings": {},
+          "blocks": {}
+        },
+        "product_inventory_GdjJgt": {
+          "type": "product-inventory",
+          "name": "t:sections.main-product.blocks.inventory.name",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 5,
+            "show_inventory_quantity": true
+          },
           "blocks": {}
         },
         "variant_picker": {
@@ -47,25 +44,27 @@
           "type": "size-guide-popup",
           "settings": {
             "button_text": "Size guide",
-            "page": "size-chart"
+            "page": "size-guide"
           },
           "blocks": {}
         },
-        "quantity_selector": {
+        "product_quantity_selector_mCGwJJ": {
           "type": "product-quantity-selector",
+          "name": "t:sections.main-product.blocks.quantity_selector.name",
           "settings": {},
           "blocks": {}
         },
         "buy_buttons": {
           "type": "product-buy-buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           },
           "blocks": {}
         },
-        "trust_badges": {
+        "trust_badges_aW4T6V": {
           "type": "trust-badges",
+          "name": "t:sections.main-product.blocks.trust_badges.name",
           "settings": {
             "show_secure_payment": true,
             "show_returns": true,
@@ -73,94 +72,50 @@
           },
           "blocks": {}
         },
-        "description": {
+        "product_description_iHBJR9": {
           "type": "product-description",
+          "name": "t:sections.main-product.blocks.description.name",
           "settings": {},
           "blocks": {}
         },
-        "details": {
+        "product_collapsible_tab_jQyfLC": {
           "type": "product-collapsible-tab",
+          "name": "t:sections.main-product.blocks.collapsible_tab.name",
           "settings": {
-            "heading": "Details",
-            "icon": "check_mark",
-            "content": "<p>Add product details, materials, care instructions, or sizing notes.</p>",
-            "page": ""
-          },
-          "blocks": {}
-        },
-        "shipping": {
-          "type": "product-collapsible-tab",
-          "settings": {
-            "heading": "Shipping and returns",
+            "heading": "Shipping & returns",
             "icon": "truck",
-            "content": "<p>Share fulfillment timelines, return windows, and exchange policies.</p>",
-            "page": ""
-          },
-          "blocks": {}
-        },
-        "complementary": {
-          "type": "product-complementary",
-          "settings": {
-            "block_heading": "Complete the look",
-            "make_collapsible_row": false,
-            "icon": "price_tag",
-            "product_list_limit": 6,
-            "products_per_page": 3,
-            "pagination_style": "dots",
-            "image_ratio": "square",
-            "enable_quick_add": false
-          },
-          "blocks": {}
-        },
-        "share": {
-          "type": "product-share",
-          "settings": {
-            "share_label": "Share"
+            "content": "",
+            "page": "shipping-returns"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "vendor",
         "title",
-        "rating",
         "price",
+        "product_inventory_GdjJgt",
         "variant_picker",
         "size_guide",
-        "quantity_selector",
+        "product_quantity_selector_mCGwJJ",
         "buy_buttons",
-        "trust_badges",
-        "description",
-        "details",
-        "shipping",
-        "complementary",
-        "share"
+        "trust_badges_aW4T6V",
+        "product_description_iHBJR9",
+        "product_collapsible_tab_jQyfLC"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
+        "media_fit": "cover",
         "gallery_layout": "thumbnail_slider",
-        "mobile_thumbnails": "show",
+        "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 28,
-        "padding_bottom": 20
-      }
-    },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "heading": "Product disclosures",
-        "heading_size": "h2",
-        "open_by_default": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 24,
-        "padding_bottom": 0
+        "padding_bottom": 48
       }
     },
     "related-products": {
@@ -168,23 +123,22 @@
       "settings": {
         "heading": "You may also like",
         "heading_size": "h1",
-        "products_to_show": 4,
-        "columns_desktop": 4,
+        "products_to_show": 3,
+        "columns_desktop": 3,
         "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "image_shape": "default",
         "show_secondary_image": true,
-        "show_vendor": true,
-        "show_rating": true,
-        "padding_top": 44,
-        "padding_bottom": 44
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
     "main",
-    "disclosures",
     "related-products"
   ]
 }

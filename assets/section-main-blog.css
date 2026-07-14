@@ -1,19 +1,24 @@
 .blog-articles {
   display: grid;
   grid-gap: 1rem;
-  column-gap: var(--grid-mobile-horizontal-spacing);
-  row-gap: var(--grid-mobile-vertical-spacing);
+  column-gap: clamp(1.6rem, 3vw, 3.2rem);
+  row-gap: clamp(2.4rem, 4vw, 4.8rem);
 }
 
 .blog-articles .card-wrapper {
   width: 100%;
 }
 
+.main-blog .title--primary {
+  margin-bottom: clamp(3.2rem, 5vw, 6.4rem);
+  text-transform: uppercase;
+}
+
 @media screen and (min-width: 750px) {
   .blog-articles {
     grid-template-columns: 1fr 1fr;
-    column-gap: var(--grid-desktop-horizontal-spacing);
-    row-gap: var(--grid-desktop-vertical-spacing);
+    column-gap: clamp(2.4rem, 3vw, 4rem);
+    row-gap: clamp(3.2rem, 5vw, 5.6rem);
   }
 
   .blog-articles--collage > *:nth-child(3n + 1),

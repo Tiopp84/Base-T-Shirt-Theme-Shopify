@@ -174,10 +174,6 @@ details[open].menu-opening > .menu-drawer__submenu {
   padding-bottom: 1.8rem;
 }
 
-.menu-drawer__cards .collection-menu-card:nth-child(n + 3) {
-  display: none;
-}
-
 .collection-menu-card--drawer .collection-menu-card__title {
   font-size: 1.2rem;
 }
