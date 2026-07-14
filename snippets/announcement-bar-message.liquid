@@ -2,6 +2,7 @@
   Renders the text and optional link for a legacy announcement section block.
 
   @param {object} announcement - Announcement section block containing text and link settings
+  @param {boolean} [duplicate] - Removes the repeated ticker copy from the keyboard tab order
 {% enddoc %}
 
 {%- if announcement.settings.text != blank -%}
@@ -9,6 +10,9 @@
     <a
       href="{{ announcement.settings.link }}"
       class="announcement-bar__link link link--text focus-inset animate-arrow"
+      {% if duplicate %}
+        tabindex="-1"
+      {% endif %}
     >
   {%- endif -%}
   <p class="announcement-bar__message h5">
