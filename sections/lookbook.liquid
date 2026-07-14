@@ -36,7 +36,7 @@
 
 <div class="lookbook-shop color-{{ section.settings.color_scheme }} gradient">
   <div class="lookbook-shop__inner page-width section-{{ section.id }}-padding">
-    <div class="lookbook-shop__layout lookbook-shop__layout--{{ section.settings.desktop_media_width }} lookbook-shop__layout--mobile-{{ section.settings.mobile_layout }}">
+    <div class="lookbook-shop__layout lookbook-shop__layout--{{ section.settings.desktop_media_width }} lookbook-shop__layout--desktop-image-{{ section.settings.desktop_image_position }} lookbook-shop__layout--mobile-{{ section.settings.mobile_layout }}">
       <div class="lookbook-shop__media">
         {%- if section.settings.image != blank -%}
           {{
@@ -461,6 +461,14 @@
       grid-template-columns: minmax(0, 0.9fr) minmax(38rem, 1fr);
     }
 
+    .lookbook-shop__layout--desktop-image-right .lookbook-shop__media {
+      order: 2;
+    }
+
+    .lookbook-shop__layout--desktop-image-right .lookbook-shop__content {
+      order: 1;
+    }
+
     .lookbook-shop__content {
       justify-content: center;
       padding-block: 2rem;
@@ -595,6 +603,22 @@
         }
       ],
       "default": "media-large"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_position",
+      "label": "t:sections.lookbook.settings.desktop_image_position.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.lookbook.settings.desktop_image_position.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.lookbook.settings.desktop_image_position.options__2.label"
+        }
+      ],
+      "default": "left"
     },
     {
       "type": "select",

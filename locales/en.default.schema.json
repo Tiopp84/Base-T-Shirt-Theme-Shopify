@@ -2118,6 +2118,15 @@
             "label": "Large"
           }
         },
+        "desktop_image_position": {
+          "label": "Desktop image position",
+          "options__1": {
+            "label": "Left"
+          },
+          "options__2": {
+            "label": "Right"
+          }
+        },
         "mobile_layout": {
           "label": "Mobile layout",
           "options__1": {
