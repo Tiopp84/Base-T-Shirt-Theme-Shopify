@@ -33,6 +33,7 @@ if (!customElements.get('quick-add-modal')) {
 
             this.preprocessHTML(productElement);
             HTMLUpdateUtility.setInnerHTML(this.modalContent, productElement.outerHTML);
+            this.initializeSizeGuide();
 
             if (window.Shopify && Shopify.PaymentButton) {
               Shopify.PaymentButton.init();
@@ -60,6 +61,29 @@ if (!customElements.get('quick-add-modal')) {
         this.removeGalleryListSemantic(productElement);
         this.updateImageSizes(productElement);
         this.preventVariantURLSwitching(productElement);
+      }
+
+      initializeSizeGuide() {
+        this.modalContent.querySelectorAll('.size-guide__button').forEach((button) => {
+          const dialogId = button.getAttribute('aria-controls');
+          if (!dialogId) return;
+
+          const dialog = this.modalContent.querySelector(`#${CSS.escape(dialogId)}`);
+          if (!dialog) return;
+
+          button.addEventListener('click', () => {
+            dialog.showModal();
+            button.setAttribute('aria-expanded', 'true');
+          });
+
+          dialog.addEventListener('click', (event) => {
+            if (event.target === dialog) dialog.close();
+          });
+
+          dialog.addEventListener('close', () => {
+            button.setAttribute('aria-expanded', 'false');
+          });
+        });
       }
 
       preventVariantURLSwitching(productElement) {
