@@ -124,8 +124,8 @@
     "currency_code_enabled": true,
     "cart_type": "drawer",
     "show_vendor": false,
-    "show_cart_note": true,
-    "cart_drawer_collection": "",
+    "show_cart_note": false,
+    "cart_drawer_collection": "new-arrivals",
     "cart_color_scheme": "scheme-1",
     "sections": {
       "main-password-header": {
