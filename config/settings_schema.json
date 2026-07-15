@@ -1475,16 +1475,7 @@
   {
     "name": "t:settings_schema.t_shirt_base.name",
     "settings": [
-      {
-        "type": "header",
-        "content": "t:settings_schema.t_shirt_base.settings.color_swatches.content"
-      },
-      {
-        "type": "checkbox",
-        "id": "enable_color_swatches",
-        "label": "t:settings_schema.t_shirt_base.settings.enable_color_swatches.label",
-        "default": true
-      },
+
       {
         "type": "header",
         "content": "t:settings_schema.t_shirt_base.settings.size_guide.content"

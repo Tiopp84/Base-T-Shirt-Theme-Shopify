@@ -23,22 +23,7 @@
     {{ block.shopify_attributes }}
   >
     {%- for option in product.options_with_values -%}
-      {%- liquid
-        assign is_custom_color = false
-        assign option_name_downcase = option.name | downcase
-        if settings.enable_color_swatches
-          if option_name_downcase contains 'color'
-            assign is_custom_color = true
-          elsif option_name_downcase contains 'colour'
-            assign is_custom_color = true
-          elsif option_name_downcase contains 'màu'
-            assign is_custom_color = true
-          endif
-        endif
-      -%}
-      {%- if is_custom_color -%}
-        {% render 'color-swatches', option: option, show_swatches: true, product_form_id: product_form_id %}
-      {%- else -%}
+      
         {%- liquid
           assign swatch_count = option.values | map: 'swatch' | compact | size
           assign picker_type = block.settings.picker_type
@@ -106,7 +91,6 @@
             </div>
           </div>
         {%- endif -%}
-      {%- endif -%}
     {%- endfor -%}
 
     <script type="application/json" data-selected-variant>
