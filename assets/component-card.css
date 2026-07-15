@@ -9,6 +9,7 @@
   border: 0;
   border-radius: var(--urban-radius);
   overflow: hidden;
+  position: relative;
 }
 
 .product-card-wrapper .card__inner::after {
@@ -54,8 +55,8 @@
   position: relative;
 }
 
-.product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add {
-  bottom: 100%;
+.product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add {
+  bottom: 0;
   left: 0;
   margin: 1.2rem;
   opacity: 0;
@@ -66,23 +67,23 @@
   z-index: 2;
 }
 
-.product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
-.product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > product-form {
+.product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add > modal-opener,
+.product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add > product-form {
   display: block;
   transform: translateY(1rem);
   transition: transform var(--duration-default) ease;
 }
 
-.product-card-wrapper:hover .card:not(.card--horizontal) > .card__content > .quick-add,
-.product-card-wrapper:focus-within .card:not(.card--horizontal) > .card__content > .quick-add {
+.product-card-wrapper:hover .card:not(.card--horizontal) > .card__inner > .quick-add,
+.product-card-wrapper:has(:focus-visible) .card:not(.card--horizontal) > .card__inner > .quick-add {
   opacity: 1;
   pointer-events: auto;
 }
 
-.product-card-wrapper:hover .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
-.product-card-wrapper:hover .card:not(.card--horizontal) > .card__content > .quick-add > product-form,
-.product-card-wrapper:focus-within .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
-.product-card-wrapper:focus-within .card:not(.card--horizontal) > .card__content > .quick-add > product-form {
+.product-card-wrapper:hover .card:not(.card--horizontal) > .card__inner > .quick-add > modal-opener,
+.product-card-wrapper:hover .card:not(.card--horizontal) > .card__inner > .quick-add > product-form,
+.product-card-wrapper:has(:focus-visible) .card:not(.card--horizontal) > .card__inner > .quick-add > modal-opener,
+.product-card-wrapper:has(:focus-visible) .card:not(.card--horizontal) > .card__inner > .quick-add > product-form {
   transform: translateY(0);
 }
 
@@ -97,14 +98,14 @@
 }
 
 @media screen and (max-width: 749px) {
-  .product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add {
+  .product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add {
     margin: 0.8rem;
     opacity: 1;
     pointer-events: auto;
   }
 
-  .product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
-  .product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > product-form {
+  .product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add > modal-opener,
+  .product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add > product-form {
     transform: none;
   }
 }
