@@ -12,9 +12,9 @@
     "hero": {
       "type": "image-banner",
       "blocks": {
-        "email_signup_banner_heading_p4YJU7": {
-          "type": "email-signup-banner-heading",
-          "name": "t:sections.email-signup-banner.blocks.heading.name",
+        "banner_heading_p4YJU7": {
+          "type": "banner-heading",
+          "name": "t:sections.image-banner.blocks.heading.name",
           "settings": {
             "heading": "Modern Layers. Everyday Ease.",
             "heading_size": "hxxl"
@@ -43,7 +43,7 @@
         }
       },
       "block_order": [
-        "email_signup_banner_heading_p4YJU7",
+        "banner_heading_p4YJU7",
         "text",
         "buttons"
       ],
@@ -143,9 +143,9 @@
     "rich_text_dVymkg": {
       "type": "rich-text",
       "blocks": {
-        "image_with_text_caption_3x7W9k": {
-          "type": "image-with-text-caption",
-          "name": "t:sections.image-with-text.blocks.caption.name",
+        "rich_text_caption_3x7W9k": {
+          "type": "rich-text-caption",
+          "name": "t:sections.rich-text.blocks.caption.name",
           "settings": {
             "caption": "THE SUND84 EDIT",
             "text_style": "caption-with-letter-spacing",
@@ -153,30 +153,30 @@
           },
           "blocks": {}
         },
-        "email_signup_banner_heading_FdyPWt": {
-          "type": "email-signup-banner-heading",
-          "name": "t:sections.email-signup-banner.blocks.heading.name",
+        "rich_text_heading_FdyPWt": {
+          "type": "rich-text-heading",
+          "name": "t:sections.rich-text.blocks.heading.name",
           "settings": {
             "heading": "Designed for the Everyday",
             "heading_size": "hxl"
           },
           "blocks": {}
         },
-        "newsletter_paragraph_JWCKYx": {
-          "type": "newsletter-paragraph",
-          "name": "t:sections.newsletter.blocks.paragraph.name",
+        "rich_text_text_JWCKYx": {
+          "type": "rich-text-text",
+          "name": "t:sections.rich-text.blocks.text.name",
           "settings": {
             "text": "<p>Clean proportions, versatile layers and considered details come together in a wardrobe designed to work beyond a  single season.</p>"
           },
           "blocks": {}
         },
-        "banner_buttons_CyVP8f": {
-          "type": "banner-buttons",
-          "name": "t:sections.image-banner.blocks.buttons.name",
+        "rich_text_buttons_CyVP8f": {
+          "type": "rich-text-buttons",
+          "name": "t:sections.rich-text.blocks.buttons.name",
           "settings": {
-            "button_label_1": "Shop Essentials",
-            "button_link_1": "shopify://collections/everyday-essentials",
-            "button_style_secondary_1": true,
+            "button_label": "Shop Essentials",
+            "button_link": "shopify://collections/everyday-essentials",
+            "button_style_secondary": true,
             "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
@@ -185,10 +185,10 @@
         }
       },
       "block_order": [
-        "image_with_text_caption_3x7W9k",
-        "email_signup_banner_heading_FdyPWt",
-        "newsletter_paragraph_JWCKYx",
-        "banner_buttons_CyVP8f"
+        "rich_text_caption_3x7W9k",
+        "rich_text_heading_FdyPWt",
+        "rich_text_text_JWCKYx",
+        "rich_text_buttons_CyVP8f"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -203,35 +203,34 @@
     "newsletter_DeVVtC": {
       "type": "newsletter",
       "blocks": {
-        "banner_heading_ThFGqg": {
-          "type": "banner-heading",
-          "name": "t:sections.image-banner.blocks.heading.name",
+        "newsletter_heading_ThFGqg": {
+          "type": "newsletter-heading",
+          "name": "t:sections.newsletter.blocks.heading.name",
           "settings": {
             "heading": "Stay in the Know",
             "heading_size": "h1"
           },
           "blocks": {}
         },
-        "image_with_text_text_yMGTMM": {
-          "type": "image-with-text-text",
-          "name": "t:sections.image-with-text.blocks.text.name",
+        "newsletter_paragraph_yMGTMM": {
+          "type": "newsletter-paragraph",
+          "name": "t:sections.newsletter.blocks.paragraph.name",
           "settings": {
-            "text": "<p>Sign up for new arrivals, seasonal edits and stories from the Sund84 studio.</p>",
-            "text_style": "body"
+            "text": "<p>Sign up for new arrivals, seasonal edits and stories from the Sund84 studio.</p>"
           },
           "blocks": {}
         },
-        "email_signup_banner_email_form_HynYzG": {
-          "type": "email-signup-banner-email-form",
-          "name": "t:sections.email-signup-banner.blocks.email_form.name",
+        "newsletter_form_HynYzG": {
+          "type": "newsletter-form",
+          "name": "t:sections.newsletter.blocks.email_form.name",
           "settings": {},
           "blocks": {}
         }
       },
       "block_order": [
-        "banner_heading_ThFGqg",
-        "image_with_text_text_yMGTMM",
-        "email_signup_banner_email_form_HynYzG"
+        "newsletter_heading_ThFGqg",
+        "newsletter_paragraph_yMGTMM",
+        "newsletter_form_HynYzG"
       ],
       "name": "t:sections.newsletter.presets.name",
       "settings": {
