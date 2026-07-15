@@ -1239,7 +1239,7 @@ product-info .page-width {
   }
 }
 
-.product-form__input input[type='radio'] + label {
+.product-form__input:not(.product-form__input--swatch) input[type='radio'] + label {
   min-height: 4.4rem;
   border-radius: 0.2rem;
   font-size: 1.2rem;
@@ -1248,14 +1248,14 @@ product-info .page-width {
   text-transform: uppercase;
 }
 
-.product-form__input input[type='radio']:checked + label {
+.product-form__input:not(.product-form__input--swatch) input[type='radio']:checked + label {
   background: var(--urban-primary);
   border-color: var(--urban-primary);
   color: #fff;
 }
 
-.product-form__input input[type='radio'].disabled + label,
-.product-form__input input[type='radio']:disabled + label {
+.product-form__input:not(.product-form__input--swatch) input[type='radio'].disabled + label,
+.product-form__input:not(.product-form__input--swatch) input[type='radio']:disabled + label {
   opacity: 0.45;
 }
 
