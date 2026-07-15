@@ -3,6 +3,9 @@
 :root {
   --popup-corner-radius: 12px;
   --card-corner-radius: 8px;
+  --theme-shadow-soft: 0 1.2rem 3rem rgba(var(--color-shadow), 0.08);
+  --theme-shadow-lifted: 0 1.6rem 4rem rgba(var(--color-shadow), 0.12);
+  --theme-shadow-border: 0 0 0 0.1rem rgba(var(--color-foreground), 0.06);
 }
 
 /* Smooth Image Hover Effects */
@@ -12,6 +15,39 @@
 
 .card-wrapper:hover .media--hover-effect img {
   transform: scale(1.05);
+}
+
+.card-wrapper .card,
+.collection-card-wrapper .card,
+.article-card-wrapper .card {
+  box-shadow: var(--theme-shadow-border), var(--theme-shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-wrapper:hover .card,
+.card-wrapper:focus-within .card,
+.collection-card-wrapper:hover .card,
+.collection-card-wrapper:focus-within .card,
+.article-card-wrapper:hover .card,
+.article-card-wrapper:focus-within .card {
+  box-shadow: var(--theme-shadow-border), var(--theme-shadow-lifted);
+}
+
+.mega-menu__content,
+.predictive-search,
+.search-modal__content,
+.cart-notification,
+.menu-drawer,
+.disclosure__list-wrapper,
+.localization-form__select .disclosure__list-wrapper {
+  box-shadow: var(--theme-shadow-lifted);
+}
+
+.field__input,
+.select__select,
+.quantity,
+.product-form__input--pill label {
+  box-shadow: var(--theme-shadow-border);
 }
 
 /* Button Micro-Animations */
