@@ -30,22 +30,52 @@
           "name": "Tiêu đề sản phẩm"
         },
         "price": {
-          "name": "Giá bán"
+          "name": "Giá sản phẩm"
         },
         "buy_buttons": {
-          "name": "Nút mua hàng"
+          "name": "Nút mua sản phẩm"
         },
         "description": {
-          "name": "Mô tả"
+          "name": "Mô tả sản phẩm"
         },
         "variant_picker": {
-          "name": "Tùy chọn phiên bản"
+          "name": "Tùy chọn phiên bản sản phẩm"
         },
         "quantity_selector": {
-          "name": "Số lượng"
+          "name": "Số lượng sản phẩm"
         },
         "share": {
-          "name": "Nút chia sẻ"
+          "name": "Chia sẻ sản phẩm"
+        },
+        "text": {
+          "name": "Văn bản sản phẩm"
+        },
+        "inventory": {
+          "name": "Tồn kho sản phẩm"
+        },
+        "trust_badges": {
+          "name": "Huy hiệu tin cậy sản phẩm"
+        },
+        "collapsible_tab": {
+          "name": "Hàng thu gọn sản phẩm"
+        },
+        "popup": {
+          "name": "Cửa sổ bật lên sản phẩm"
+        },
+        "sku": {
+          "name": "SKU sản phẩm"
+        },
+        "rating": {
+          "name": "Đánh giá sản phẩm"
+        },
+        "complementary_products": {
+          "name": "Sản phẩm bổ sung"
+        },
+        "size_guide": {
+          "name": "Hướng dẫn kích cỡ sản phẩm"
+        },
+        "icon_with_text": {
+          "name": "Biểu tượng kèm văn bản sản phẩm"
         }
       }
     },
@@ -53,10 +83,63 @@
       "name": "Bộ sưu tập nổi bật"
     },
     "image-banner": {
-      "name": "Banner hình ảnh"
+      "name": "Banner hình ảnh",
+      "blocks": {
+        "heading": {
+          "name": "Tiêu đề banner hình ảnh"
+        },
+        "text": {
+          "name": "Văn bản banner hình ảnh"
+        },
+        "buttons": {
+          "name": "Nút banner hình ảnh"
+        }
+      }
     },
     "rich-text": {
-      "name": "Văn bản đa dạng"
+      "name": "Văn bản đa dạng",
+      "blocks": {
+        "heading": {
+          "name": "Tiêu đề văn bản đa dạng"
+        },
+        "caption": {
+          "name": "Chú thích văn bản đa dạng"
+        },
+        "text": {
+          "name": "Nội dung văn bản đa dạng"
+        },
+        "buttons": {
+          "name": "Nút văn bản đa dạng"
+        }
+      }
+    },
+    "newsletter": {
+      "name": "Đăng ký nhận tin",
+      "blocks": {
+        "heading": {
+          "name": "Tiêu đề đăng ký nhận tin"
+        },
+        "paragraph": {
+          "name": "Văn bản đăng ký nhận tin"
+        },
+        "email_form": {
+          "name": "Biểu mẫu email đăng ký nhận tin"
+        }
+      }
+    },
+    "email-signup-banner": {
+      "name": "Banner đăng ký email",
+      "blocks": {
+        "heading": {
+          "name": "Tiêu đề banner đăng ký email"
+        },
+        "paragraph": {
+          "name": "Văn bản banner đăng ký email"
+        },
+        "email_form": {
+          "name": "Biểu mẫu banner đăng ký email"
+        }
+      }
     }
   }
 }
