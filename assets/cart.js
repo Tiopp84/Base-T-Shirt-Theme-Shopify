@@ -79,7 +79,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
 
   setValidity(event, index, message) {
     event.target.setCustomValidity(message);
-    event.target.reportValidity();
+    this.updateLiveRegions(index, message);
     this.resetQuantityInput(index);
     event.target.select();
   }
@@ -101,7 +101,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
       this.setValidity(event, index, message);
     } else {
       event.target.setCustomValidity('');
-      event.target.reportValidity();
+      this.updateLiveRegions(index, '');
       this.queueQuantityUpdate({
         line: index,
         quantity: inputValue,

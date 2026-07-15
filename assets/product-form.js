@@ -21,6 +21,15 @@ if (!customElements.get('product-form')) {
         evt.preventDefault();
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
+        if (!this.form.checkValidity()) {
+          for (let i = 0; i < this.form.elements.length; i++) {
+            if (!this.form.elements[i].validity.valid) {
+              this.handleErrorMessage(this.form.elements[i].validationMessage);
+              return;
+            }
+          }
+        }
+
         this.handleErrorMessage();
 
         this.submitButton.setAttribute('aria-disabled', true);
