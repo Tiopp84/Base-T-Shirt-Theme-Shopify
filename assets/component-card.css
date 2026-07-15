@@ -37,20 +37,52 @@
   font-size: 1.4rem;
 }
 
-.product-card-wrapper .quick-add {
-  bottom: 1.2rem;
-  left: 1.2rem;
+.product-card-wrapper .card:not(.card--horizontal) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.product-card-wrapper .card:not(.card--horizontal) > .card__inner {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.product-card-wrapper .card:not(.card--horizontal) > .card__content {
+  grid-column: 1;
+  grid-row: 2;
+  position: relative;
+}
+
+.product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add {
+  bottom: 100%;
+  left: 0;
+  margin: 1.2rem;
   opacity: 0;
+  pointer-events: none;
   position: absolute;
-  right: 1.2rem;
-  transform: translateY(1rem);
-  transition: opacity var(--duration-default) ease, transform var(--duration-default) ease;
+  right: 0;
+  transition: opacity var(--duration-default) ease;
   z-index: 2;
 }
 
-.product-card-wrapper:hover .quick-add,
-.product-card-wrapper:focus-within .quick-add {
+.product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
+.product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > product-form {
+  display: block;
+  transform: translateY(1rem);
+  transition: transform var(--duration-default) ease;
+}
+
+.product-card-wrapper:hover .card:not(.card--horizontal) > .card__content > .quick-add,
+.product-card-wrapper:focus-within .card:not(.card--horizontal) > .card__content > .quick-add {
   opacity: 1;
+  pointer-events: auto;
+}
+
+.product-card-wrapper:hover .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
+.product-card-wrapper:hover .card:not(.card--horizontal) > .card__content > .quick-add > product-form,
+.product-card-wrapper:focus-within .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
+.product-card-wrapper:focus-within .card:not(.card--horizontal) > .card__content > .quick-add > product-form {
   transform: translateY(0);
 }
 
@@ -65,11 +97,15 @@
 }
 
 @media screen and (max-width: 749px) {
-  .product-card-wrapper .quick-add {
+  .product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add {
+    margin: 0.8rem;
     opacity: 1;
-    position: static;
+    pointer-events: auto;
+  }
+
+  .product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > modal-opener,
+  .product-card-wrapper .card:not(.card--horizontal) > .card__content > .quick-add > product-form {
     transform: none;
-    margin-top: 1.2rem;
   }
 }
 

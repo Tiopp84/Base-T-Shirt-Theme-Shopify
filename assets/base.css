@@ -671,8 +671,11 @@ details > * {
   --duration-extra-longer: 750ms;
   --duration-extended: 3s;
   --ease-out-slow: cubic-bezier(0, 0, 0.3, 1);
-  --animation-slide-in: slideIn var(--duration-extra-long) var(--ease-out-slow) forwards;
-  --animation-fade-in: fadeIn var(--duration-extra-long) var(--ease-out-slow);
+  --animation-reveal-duration: 950ms;
+  --animation-reveal-distance: 4.8rem;
+  --animation-reveal-side-distance: 3.6rem;
+  --animation-slide-in: slideIn var(--animation-reveal-duration) var(--ease-out-slow) forwards;
+  --animation-fade-in: fadeIn 850ms var(--ease-out-slow);
 }
 
 .underlined-link,
@@ -3371,12 +3374,23 @@ details-disclosure > details {
   }
 
   .scroll-trigger.animate--fade-in,
-  .scroll-trigger.animate--slide-in {
-    opacity: 0.01;
+  .scroll-trigger.animate--slide-in,
+  .scroll-trigger.animate--slide-in-left,
+  .scroll-trigger.animate--slide-in-right {
+    opacity: 0;
+    will-change: opacity, transform;
   }
 
   .scroll-trigger.animate--slide-in {
-    transform: translateY(2rem);
+    transform: translateY(var(--animation-reveal-distance));
+  }
+
+  .scroll-trigger.animate--slide-in-left {
+    transform: translate(-var(--animation-reveal-side-distance), var(--animation-reveal-distance));
+  }
+
+  .scroll-trigger.animate--slide-in-right {
+    transform: translate(var(--animation-reveal-side-distance), var(--animation-reveal-distance));
   }
 
   .scroll-trigger:not(.scroll-trigger--offscreen).animate--fade-in {
@@ -3386,11 +3400,23 @@ details-disclosure > details {
 
   .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in {
     animation: var(--animation-slide-in);
-    animation-delay: calc(var(--animation-order) * 75ms);
+    animation-delay: min(calc(var(--animation-order, 0) * 110ms), 770ms);
+  }
+
+  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-left {
+    animation: slideInLeft var(--animation-reveal-duration) var(--ease-out-slow) forwards;
+    animation-delay: min(calc(var(--animation-order, 0) * 110ms), 770ms);
+  }
+
+  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-right {
+    animation: slideInRight var(--animation-reveal-duration) var(--ease-out-slow) forwards;
+    animation-delay: min(calc(var(--animation-order, 0) * 110ms), 770ms);
   }
 
   .scroll-trigger.scroll-trigger--design-mode.animate--fade-in,
   .scroll-trigger.scroll-trigger--design-mode.animate--slide-in,
+  .scroll-trigger.scroll-trigger--design-mode.animate--slide-in-left,
+  .scroll-trigger.scroll-trigger--design-mode.animate--slide-in-right,
   .scroll-trigger.scroll-trigger--design-mode .slider,
   .scroll-trigger:not(.scroll-trigger--offscreen).scroll-trigger--cancel {
     opacity: 1;
@@ -3405,8 +3431,8 @@ details-disclosure > details {
 
   @keyframes slideIn {
     from {
-      transform: translateY(2rem);
-      opacity: 0.01;
+      transform: translateY(var(--animation-reveal-distance));
+      opacity: 0;
     }
     to {
       transform: translateY(0);
@@ -3416,11 +3442,46 @@ details-disclosure > details {
 
   @keyframes fadeIn {
     from {
-      opacity: 0.01;
+      opacity: 0;
     }
     to {
       opacity: 1;
     }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translate(-var(--animation-reveal-side-distance), var(--animation-reveal-distance));
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translate(var(--animation-reveal-side-distance), var(--animation-reveal-distance));
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 749px) and (prefers-reduced-motion: no-preference) {
+  .scroll-trigger.animate--slide-in-left,
+  .scroll-trigger.animate--slide-in-right {
+    transform: translateY(var(--animation-reveal-distance));
+  }
+
+  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-left,
+  .scroll-trigger:not(.scroll-trigger--offscreen).animate--slide-in-right {
+    animation: var(--animation-slide-in);
+    animation-delay: min(calc(var(--animation-order, 0) * 110ms), 770ms);
   }
 }
 
