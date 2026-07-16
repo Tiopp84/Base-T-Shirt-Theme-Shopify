@@ -163,6 +163,65 @@
         "padding_bottom": 36
       }
     },
+    "multirow_APFNng": {
+      "type": "multirow",
+      "blocks": {
+        "row_X7JVAM": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/vintage-style.jpg",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Explore",
+            "button_link": "shopify://collections/everyday-essentials"
+          }
+        },
+        "row_pQNBgF": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/denim.jpg",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Explore",
+            "button_link": "shopify://collections/denim"
+          }
+        },
+        "row_gge4tj": {
+          "type": "row",
+          "settings": {
+            "image": "shopify://shop_images/modern-camel-car-coat.jpg",
+            "caption": "Caption",
+            "heading": "Row",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "button_label": "Explore",
+            "button_link": "shopify://collections/outerwear"
+          }
+        }
+      },
+      "block_order": [
+        "row_X7JVAM",
+        "row_pQNBgF",
+        "row_gge4tj"
+      ],
+      "name": "t:sections.multirow.presets.name",
+      "settings": {
+        "image_height": "medium",
+        "desktop_image_width": "medium",
+        "image_layout": "alternate-left",
+        "heading_size": "h1",
+        "text_style": "body",
+        "button_style": "secondary",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "row_color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -296,6 +355,7 @@
     "hero",
     "collection_tiles",
     "image_with_text_Mreei9",
+    "multirow_APFNng",
     "featured_collection",
     "rich_text_dVymkg",
     "newsletter_DeVVtC"
