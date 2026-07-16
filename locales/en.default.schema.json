@@ -356,6 +356,9 @@
           "collection": {
             "label": "Collection",
             "info": "Shown when cart drawer is empty"
+          },
+          "show_reassurance": {
+            "label": "Show checkout reassurance"
           }
         }
       }
@@ -715,8 +718,29 @@
           "default": "Find your next wardrobe move",
           "label": "Heading"
         },
+        "layout_style": {
+          "label": "Layout style",
+          "options__1": {
+            "label": "Equal grid"
+          },
+          "options__2": {
+            "label": "Editorial mosaic"
+          },
+          "options__3": {
+            "label": "Feature left"
+          },
+          "options__4": {
+            "label": "Feature right"
+          }
+        },
         "columns_desktop": {
           "label": "Desktop columns"
+        },
+        "view_all_label": {
+          "label": "View all label"
+        },
+        "view_all_link": {
+          "label": "View all link"
         },
         "show_cta": {
           "label": "Show CTA"
@@ -737,6 +761,21 @@
             },
             "cta_label": {
               "label": "CTA label"
+            },
+            "tile_size": {
+              "label": "Tile size",
+              "options__1": {
+                "label": "Standard"
+              },
+              "options__2": {
+                "label": "Wide"
+              },
+              "options__3": {
+                "label": "Tall"
+              },
+              "options__4": {
+                "label": "Feature"
+              }
             },
             "link": {
               "label": "Link override"
@@ -1135,6 +1174,15 @@
         }
       },
       "settings": {
+        "layout_style": {
+          "label": "Layout style",
+          "options__1": {
+            "label": "Editorial"
+          },
+          "options__2": {
+            "label": "Compact"
+          }
+        },
         "newsletter_enable": {
           "label": "Email signup"
         },
@@ -1314,6 +1362,24 @@
         "image_overlay_opacity": {
           "label": "Overlay opacity"
         },
+        "overlay_style": {
+          "label": "Overlay style",
+          "options__1": {
+            "label": "Solid"
+          },
+          "options__2": {
+            "label": "Gradient from left"
+          },
+          "options__3": {
+            "label": "Gradient from bottom"
+          },
+          "options__4": {
+            "label": "Editorial vignette"
+          },
+          "options__5": {
+            "label": "None"
+          }
+        },
         "image_height": {
           "label": "Height",
           "options__1": {
@@ -1331,6 +1397,24 @@
         },
         "content": {
           "content": "Content"
+        },
+        "hero_style": {
+          "label": "Hero style",
+          "options__1": {
+            "label": "Campaign"
+          },
+          "options__2": {
+            "label": "Editorial"
+          },
+          "options__3": {
+            "label": "Minimal"
+          }
+        },
+        "content_width": {
+          "label": "Content width"
+        },
+        "text_reveal": {
+          "label": "Reveal text in sequence"
         },
         "desktop_content_position": {
           "options__1": {
@@ -2136,6 +2220,15 @@
             "label": "Content first"
           }
         },
+        "mobile_products_layout": {
+          "label": "Mobile products",
+          "options__1": {
+            "label": "Swipe"
+          },
+          "options__2": {
+            "label": "Stack"
+          }
+        },
         "image_height": {
           "label": "Image height"
         }
@@ -2856,6 +2949,24 @@
       "settings": {
         "full_width": {
           "label": "Full width"
+        },
+        "layout_style": {
+          "label": "Layout style",
+          "options__1": {
+            "label": "Minimal"
+          },
+          "options__2": {
+            "label": "Editorial split"
+          },
+          "options__3": {
+            "label": "Full bleed image"
+          }
+        },
+        "image": {
+          "label": "Image"
+        },
+        "image_overlay_opacity": {
+          "label": "Image overlay opacity"
         },
         "paragraph": {
           "content": "Signups add [customer profiles](https://help.shopify.com/manual/customers/manage-customers)"

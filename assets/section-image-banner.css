@@ -10,6 +10,11 @@
   text-align: center;
 }
 
+.banner--style-campaign,
+.banner--style-editorial {
+  overflow: hidden;
+}
+
 /* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
 .banner__box.gradient {
   transform: perspective(0);
@@ -38,6 +43,12 @@
   .banner--content-align-right.banner--desktop-transparent .banner__box,
   .banner--medium.banner--desktop-transparent .banner__box {
     max-width: 68rem;
+  }
+
+  .banner--style-campaign.banner--desktop-transparent .banner__box,
+  .banner--style-editorial.banner--desktop-transparent .banner__box,
+  .banner--style-minimal.banner--desktop-transparent .banner__box {
+    max-width: var(--banner-content-max-width);
   }
 }
 
@@ -93,8 +104,16 @@
     min-height: 56rem;
   }
 
-  .banner--large:not(.banner--adapt) {
+.banner--large:not(.banner--adapt) {
     min-height: max(72rem, calc(100vh - var(--header-height, 0px)));
+  }
+
+  .banner--style-campaign.banner--large:not(.banner--adapt) {
+    min-height: max(76rem, calc(100vh - var(--header-height, 0px)));
+  }
+
+  .banner--style-editorial.banner--large:not(.banner--adapt) {
+    min-height: max(70rem, calc(92vh - var(--header-height, 0px)));
   }
 
   .banner__content.banner__content--top-left {
@@ -349,6 +368,12 @@
   z-index: 1;
 }
 
+.banner--style-campaign .banner__box,
+.banner--style-editorial .banner__box {
+  display: grid;
+  gap: 0;
+}
+
 .banner--mobile-bottom .banner__box {
   padding: 4rem 3.5rem;
 }
@@ -365,6 +390,18 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
+  }
+
+  .banner--style-campaign .banner__box {
+    max-width: var(--banner-content-max-width);
+  }
+
+  .banner--style-editorial .banner__box {
+    max-width: min(var(--banner-content-max-width), 78rem);
+  }
+
+  .banner--style-minimal .banner__box {
+    max-width: min(var(--banner-content-max-width), 64rem);
   }
 
   .banner--desktop-transparent .button--secondary {
@@ -393,6 +430,31 @@
   z-index: 1;
   width: 100%;
   height: 100%;
+}
+
+.banner--overlay-none::after,
+.banner--overlay-none .banner__media::after {
+  display: none;
+}
+
+.banner--overlay-solid::after {
+  background: #000000;
+}
+
+.banner--overlay-gradient-left::after {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.76) 0%, rgba(0, 0, 0, 0.42) 42%, rgba(0, 0, 0, 0.08) 78%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.34));
+}
+
+.banner--overlay-gradient-bottom::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.36) 52%, rgba(0, 0, 0, 0.78) 100%);
+}
+
+.banner--overlay-editorial::after {
+  background:
+    radial-gradient(circle at 78% 28%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 42%, rgba(0, 0, 0, 0.58) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.1) 62%);
 }
 
 .banner__box > * + .banner__text {
@@ -438,11 +500,33 @@
   text-transform: uppercase;
 }
 
+.banner--style-campaign .banner__heading,
+.banner--style-editorial .banner__heading {
+  max-width: 11ch;
+  text-wrap: balance;
+}
+
 .banner__heading.h0 {
   font-size: clamp(4.2rem, 7vw, 8rem);
   font-weight: 900;
   letter-spacing: 0;
   line-height: 0.95;
+}
+
+.banner--style-campaign .banner__heading.hxxl,
+.banner--style-campaign .banner__heading.hxl,
+.banner--style-campaign .banner__heading.h0 {
+  line-height: 0.92;
+}
+
+.banner--style-editorial .banner__heading.hxxl,
+.banner--style-editorial .banner__heading.hxl,
+.banner--style-editorial .banner__heading.h0 {
+  line-height: 0.96;
+}
+
+.banner--style-minimal .banner__heading {
+  max-width: 16ch;
 }
 
 .banner__text {
@@ -458,6 +542,11 @@
   margin-top: 1.6rem;
 }
 
+.banner--style-campaign .banner__box .banner__heading + *,
+.banner--style-editorial .banner__box .banner__heading + * {
+  margin-top: 2rem;
+}
+
 .banner__buttons {
   display: inline-flex;
   flex-wrap: wrap;
@@ -467,10 +556,53 @@
 }
 
 .banner__buttons .button {
-  min-height: 3.2rem;
-  padding: 0.9rem 1.8rem;
-  font-size: 1rem;
-  letter-spacing: 0.08rem;
+  min-height: 4.4rem;
+  padding: 1.1rem 2.4rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+}
+
+.banner--style-campaign .banner__buttons .button,
+.banner--style-editorial .banner__buttons .button {
+  min-height: 4.8rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .banner--style-campaign .banner__media > img,
+  .banner--style-editorial .banner__media > img {
+    animation: bannerImageSettle 1400ms var(--ease-out-slow) both;
+  }
+
+  .banner--reveal-stagger .banner__content.scroll-trigger--offscreen .banner__box > * {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+
+  .banner--reveal-stagger .banner__content:not(.scroll-trigger--offscreen) .banner__box > * {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 680ms var(--ease-out-slow),
+      transform 780ms var(--ease-out-slow);
+  }
+
+  .banner--reveal-stagger .banner__content:not(.scroll-trigger--offscreen) .banner__box > *:nth-child(2) {
+    transition-delay: 90ms;
+  }
+
+  .banner--reveal-stagger .banner__content:not(.scroll-trigger--offscreen) .banner__box > *:nth-child(3) {
+    transition-delay: 180ms;
+  }
+
+  @keyframes bannerImageSettle {
+    from {
+      transform: scale(1.045);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
 }
 
 @media screen and (max-width: 749px) {
@@ -480,6 +612,22 @@
 
   .banner__heading.h0 {
     font-size: clamp(3.4rem, 12vw, 5.2rem);
+  }
+
+  .banner--style-campaign .banner__heading,
+  .banner--style-editorial .banner__heading,
+  .banner--style-minimal .banner__heading {
+    max-width: 12ch;
+  }
+
+  .banner--overlay-gradient-left::after,
+  .banner--overlay-editorial::after {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.46) 48%, rgba(0, 0, 0, 0.82) 100%);
+  }
+
+  .banner--style-campaign .banner__box,
+  .banner--style-editorial .banner__box {
+    padding-bottom: 5.2rem;
   }
 }
 

@@ -12,15 +12,22 @@
   }
 {%- endstyle -%}
 
-<div class="collection-tiles color-{{ section.settings.color_scheme }} gradient">
+<div class="collection-tiles collection-tiles--layout-{{ section.settings.layout_style | default: 'equal_grid' }} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-tiles__inner page-width section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank or section.settings.view_all_label != blank -%}
+    {%- if section.settings.subheading != blank or section.settings.heading != blank or section.settings.view_all_label != blank -%}
       <div class="collection-tiles__header">
-        {%- if section.settings.heading != blank -%}
-          <h2 class="collection-tiles__heading {{ section.settings.heading_size }}">
-            {{ section.settings.heading | escape }}
-          </h2>
-        {%- endif -%}
+        <div class="collection-tiles__header-text">
+          {%- if section.settings.subheading != blank -%}
+            <p class="collection-tiles__subheading">
+              {{ section.settings.subheading | escape }}
+            </p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="collection-tiles__heading {{ section.settings.heading_size }}">
+              {{ section.settings.heading | escape }}
+            </h2>
+          {%- endif -%}
+        </div>
         {%- if section.settings.view_all_label != blank -%}
           <a class="collection-tiles__view-all" href="{{ section.settings.view_all_link | default: routes.collections_url }}">
             {{ section.settings.view_all_label | escape }}
@@ -41,6 +48,7 @@
           assign tile_title = block.settings.heading
           assign tile_url = block.settings.link
           assign cta_label = block.settings.cta_label
+          assign tile_size = block.settings.tile_size | default: 'standard'
 
           if tile_image == blank and tile_collection.featured_image != blank
             assign tile_image = tile_collection.featured_image
@@ -59,7 +67,7 @@
           endif
         -%}
         <li
-          class="collection-tiles__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          class="collection-tiles__item collection-tiles__item--{{ tile_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           {{ block.shopify_attributes }}
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
@@ -122,9 +130,27 @@
     margin-bottom: clamp(3.2rem, 5vw, 6.4rem);
   }
 
+  .collection-tiles__header-text {
+    display: grid;
+    gap: 1.2rem;
+    max-width: 82rem;
+  }
+
+  .collection-tiles__subheading {
+    margin: 0;
+    color: rgba(var(--color-foreground), 0.68);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.14rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
   .collection-tiles__heading {
     margin: 0;
     text-transform: uppercase;
+    max-width: 11ch;
+    text-wrap: balance;
   }
 
   .collection-tiles__view-all {
@@ -137,6 +163,14 @@
     padding-bottom: 0.4rem;
     text-decoration: none;
     text-transform: uppercase;
+    transition:
+      border-color var(--theme-transition-fast),
+      color var(--theme-transition-fast),
+      transform var(--theme-transition-fast);
+  }
+
+  .collection-tiles__view-all:hover {
+    transform: translateY(-0.1rem);
   }
 
   .collection-tiles__grid {
@@ -159,11 +193,27 @@
     border-radius: 0;
   }
 
+  .collection-tiles__card::before {
+    content: '';
+    position: absolute;
+    inset: 1.2rem;
+    z-index: 1;
+    border: 0.1rem solid rgba(255, 255, 255, 0.28);
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.985);
+    transition:
+      opacity var(--theme-transition-smooth, 300ms ease),
+      transform var(--theme-transition-smooth, 300ms ease);
+  }
+
   .collection-tiles__card::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.58));
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.62)),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0));
     pointer-events: none;
   }
 
@@ -176,7 +226,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--theme-transition-smooth, 400ms ease);
+    transition: transform var(--theme-transition-slower, 600ms ease);
   }
 
   .collection-tiles__content {
@@ -191,10 +241,11 @@
 
   .collection-tiles__title {
     font-family: var(--font-heading-family);
-    font-size: clamp(1.5rem, 1.6vw, 2.4rem);
+    font-size: clamp(1.8rem, 1.8vw, 3rem);
     font-weight: 800;
     line-height: 1.05;
     text-transform: uppercase;
+    text-wrap: balance;
   }
 
   .collection-tiles__cta {
@@ -217,7 +268,13 @@
   }
 
   .collection-tiles__card:hover .collection-tiles__image {
-    transform: scale(1.08);
+    transform: scale(1.06);
+  }
+
+  .collection-tiles__card:hover::before,
+  .collection-tiles__card:focus-visible::before {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .collection-tiles__card:hover .collection-tiles__cta,
@@ -243,6 +300,72 @@
     }
   }
 
+  @media screen and (min-width: 990px) {
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__grid,
+    .collection-tiles--layout-feature_left .collection-tiles__grid,
+    .collection-tiles--layout-feature_right .collection-tiles__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-auto-flow: dense;
+      grid-auto-rows: minmax(18rem, auto);
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--wide,
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--feature {
+      grid-column: span 2;
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--tall,
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--feature {
+      grid-row: span 2;
+    }
+
+    .collection-tiles--layout-feature_left .collection-tiles__item:first-child,
+    .collection-tiles--layout-feature_right .collection-tiles__item:last-child,
+    .collection-tiles--layout-feature_left .collection-tiles__item--feature,
+    .collection-tiles--layout-feature_right .collection-tiles__item--feature {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .collection-tiles--layout-feature_right .collection-tiles__item:last-child {
+      grid-column: 3 / span 2;
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__media,
+    .collection-tiles--layout-feature_left .collection-tiles__media,
+    .collection-tiles--layout-feature_right .collection-tiles__media {
+      height: 100%;
+      min-height: 36rem;
+      aspect-ratio: auto;
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--feature .collection-tiles__media,
+    .collection-tiles--layout-feature_left .collection-tiles__item:first-child .collection-tiles__media,
+    .collection-tiles--layout-feature_right .collection-tiles__item:last-child .collection-tiles__media,
+    .collection-tiles--layout-feature_left .collection-tiles__item--feature .collection-tiles__media,
+    .collection-tiles--layout-feature_right .collection-tiles__item--feature .collection-tiles__media {
+      min-height: 58rem;
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--wide .collection-tiles__media {
+      min-height: 28rem;
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--tall .collection-tiles__media {
+      min-height: 58rem;
+    }
+
+    .collection-tiles--layout-editorial_mosaic .collection-tiles__item--feature .collection-tiles__title,
+    .collection-tiles--layout-feature_left .collection-tiles__item:first-child .collection-tiles__title,
+    .collection-tiles--layout-feature_right .collection-tiles__item:last-child .collection-tiles__title,
+    .collection-tiles--layout-feature_left .collection-tiles__item--feature .collection-tiles__title,
+    .collection-tiles--layout-feature_right .collection-tiles__item--feature .collection-tiles__title {
+      font-size: clamp(2.8rem, 4vw, 5.8rem);
+      line-height: 0.96;
+      max-width: 9ch;
+    }
+  }
+
   @media screen and (max-width: 749px) {
     .collection-tiles__header {
       align-items: flex-start;
@@ -252,6 +375,10 @@
 
     .collection-tiles__grid {
       grid-template-columns: 1fr;
+    }
+
+    .collection-tiles__heading {
+      max-width: 12ch;
     }
 
     .collection-tiles__cta {
@@ -268,6 +395,11 @@
     .collection-tiles__card:hover .collection-tiles__image {
       transform: none;
     }
+
+    .collection-tiles__card::before,
+    .collection-tiles__cta {
+      transition: none;
+    }
   }
 {% endstylesheet %}
 
@@ -280,6 +412,12 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "t:sections.collection-tiles.settings.subheading.default",
+      "label": "t:sections.collection-tiles.settings.subheading.label"
+    },
     {
       "type": "text",
       "id": "heading",
@@ -307,6 +445,30 @@
       "label": "t:sections.all.heading_size.label"
     },
     {
+      "type": "select",
+      "id": "layout_style",
+      "options": [
+        {
+          "value": "equal_grid",
+          "label": "t:sections.collection-tiles.settings.layout_style.options__1.label"
+        },
+        {
+          "value": "editorial_mosaic",
+          "label": "t:sections.collection-tiles.settings.layout_style.options__2.label"
+        },
+        {
+          "value": "feature_left",
+          "label": "t:sections.collection-tiles.settings.layout_style.options__3.label"
+        },
+        {
+          "value": "feature_right",
+          "label": "t:sections.collection-tiles.settings.layout_style.options__4.label"
+        }
+      ],
+      "default": "equal_grid",
+      "label": "t:sections.collection-tiles.settings.layout_style.label"
+    },
+    {
       "type": "range",
       "id": "columns_desktop",
       "min": 2,
@@ -318,13 +480,13 @@
     {
       "type": "text",
       "id": "view_all_label",
-      "label": "View all label",
+      "label": "t:sections.collection-tiles.settings.view_all_label.label",
       "default": "View all"
     },
     {
       "type": "url",
       "id": "view_all_link",
-      "label": "View all link"
+      "label": "t:sections.collection-tiles.settings.view_all_link.label"
     },
     {
       "type": "checkbox",
@@ -387,6 +549,30 @@
           "type": "text",
           "id": "cta_label",
           "label": "t:sections.collection-tiles.blocks.collection_tile.settings.cta_label.label"
+        },
+        {
+          "type": "select",
+          "id": "tile_size",
+          "options": [
+            {
+              "value": "standard",
+              "label": "t:sections.collection-tiles.blocks.collection_tile.settings.tile_size.options__1.label"
+            },
+            {
+              "value": "wide",
+              "label": "t:sections.collection-tiles.blocks.collection_tile.settings.tile_size.options__2.label"
+            },
+            {
+              "value": "tall",
+              "label": "t:sections.collection-tiles.blocks.collection_tile.settings.tile_size.options__3.label"
+            },
+            {
+              "value": "feature",
+              "label": "t:sections.collection-tiles.blocks.collection_tile.settings.tile_size.options__4.label"
+            }
+          ],
+          "default": "standard",
+          "label": "t:sections.collection-tiles.blocks.collection_tile.settings.tile_size.label"
         },
         {
           "type": "url",

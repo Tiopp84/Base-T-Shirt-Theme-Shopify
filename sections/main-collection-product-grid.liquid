@@ -131,15 +131,21 @@
           {%- if collection.products.size == 0 -%}
             <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
               <div class="loading-overlay gradient"></div>
-              <div class="title-wrapper center">
-                <h2 class="title title--primary">
+              <div class="title-wrapper center empty-state-wrapper">
+                <span class="empty-state-icon" style="display: block; margin-bottom: 2rem; color: rgba(var(--color-foreground), 0.3);">
+                  <svg aria-hidden="true" focusable="false" style="width: 4.8rem; height: 4.8rem;" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                  </svg>
+                </span>
+                <h2 class="title title--primary h3">
                   {{ 'sections.collection_template.empty' | t -}}
-                  <br>
+                </h2>
+                <div class="empty-state-subtext" style="margin-top: 2rem;">
                   {{
                     'sections.collection_template.use_fewer_filters_html'
-                    | t: link: collection.url, class: 'underlined-link link'
+                    | t: link: collection.url, class: 'button button--secondary'
                   }}
-                </h2>
+                </div>
               </div>
             </div>
           {%- else -%}
@@ -179,8 +185,7 @@
                       lazy_load: lazy_load,
                       skip_styles: skip_card_product_styles,
                       quick_add: section.settings.quick_add,
-                      section_id: section.id,
-                      product_view_context: 'collection'
+                      section_id: section.id
                     %}
                   </li>
                   {%- assign skip_card_product_styles = true -%}

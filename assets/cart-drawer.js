@@ -26,26 +26,40 @@ class CartDrawer extends HTMLElement {
   }
 
   open(triggeredBy) {
-    if (this.classList.contains('active')) return;
+    const drawerInner = this.querySelector('.drawer__inner');
+    const cartLink = document.querySelector('#cart-icon-bubble');
+    if (this.classList.contains('active')) {
+      drawerInner?.setAttribute('aria-hidden', 'false');
+      cartLink?.setAttribute('aria-expanded', 'true');
+      return;
+    }
     if (triggeredBy) this.setActiveElement(triggeredBy);
     const cartDrawerNote = this.querySelector('[id^="Details-"] summary');
     if (cartDrawerNote && !cartDrawerNote.hasAttribute('role')) this.setSummaryAccessibility(cartDrawerNote);
-    // here the animation doesn't seem to always get triggered. A timeout seem to help
+    drawerInner?.setAttribute('aria-hidden', 'false');
+    cartLink?.setAttribute('aria-expanded', 'true');
+
     setTimeout(() => {
       this.classList.add('animate', 'active');
     });
 
-    this.addEventListener(
+    let focusIsTrapped = false;
+    const activateFocusTrap = () => {
+      if (focusIsTrapped || !this.classList.contains('active')) return;
+      focusIsTrapped = true;
+      const containerToTrapFocusOn = this.classList.contains('is-empty')
+        ? this.querySelector('.drawer__inner-empty')
+        : document.getElementById('CartDrawer');
+      const focusElement = drawerInner || this.querySelector('.drawer__close');
+      trapFocus(containerToTrapFocusOn, focusElement);
+    };
+
+    drawerInner?.addEventListener(
       'transitionend',
-      () => {
-        const containerToTrapFocusOn = this.classList.contains('is-empty')
-          ? this.querySelector('.drawer__inner-empty')
-          : document.getElementById('CartDrawer');
-        const focusElement = this.querySelector('.drawer__inner') || this.querySelector('.drawer__close');
-        trapFocus(containerToTrapFocusOn, focusElement);
-      },
+      activateFocusTrap,
       { once: true },
     );
+    setTimeout(activateFocusTrap, 450);
 
     document.body.classList.add('overflow-hidden');
 
@@ -57,6 +71,8 @@ class CartDrawer extends HTMLElement {
 
   close() {
     this.classList.remove('active');
+    this.querySelector('.drawer__inner')?.setAttribute('aria-hidden', 'true');
+    document.querySelector('#cart-icon-bubble')?.setAttribute('aria-expanded', 'false');
     removeTrapFocus(this.activeElement);
     document.body.classList.remove('overflow-hidden');
   }

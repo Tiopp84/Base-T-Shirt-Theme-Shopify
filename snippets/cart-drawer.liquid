@@ -31,6 +31,7 @@
       class="drawer__inner gradient color-{{ settings.cart_color_scheme }}"
       role="dialog"
       aria-modal="true"
+      aria-hidden="true"
       aria-label="{{ 'sections.cart.title' | t }}"
       tabindex="-1"
     >
@@ -69,7 +70,12 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <div class="drawer__title-group">
+          <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+          <span class="drawer__count">
+            {{- 'sections.header.cart_count' | t: count: cart.item_count -}}
+          </span>
+        </div>
         <button
           class="drawer__close"
           type="button"
@@ -597,6 +603,19 @@
               {%- endif -%}
             {%- endif -%}
           </small>
+
+          {%- if settings.show_cart_reassurance -%}
+            <ul class="cart-drawer__reassurance list-unstyled" role="list">
+              <li>
+                {{- 'icon-lock.svg' | inline_asset_content -}}
+                <span>{{ 'sections.cart.secure_checkout' | t }}</span>
+              </li>
+              <li>
+                {% render 'icon-shipping' %}
+                <span>{{ 'sections.cart.shipping_at_checkout' | t }}</span>
+              </li>
+            </ul>
+          {%- endif -%}
         </div>
 
         <!-- CTAs -->

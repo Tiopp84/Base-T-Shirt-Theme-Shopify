@@ -599,14 +599,16 @@ button.facets__button {
 
 span.active-facets__button-inner {
   color: rgb(var(--color-foreground));
-  box-shadow: 0 0 0 0.1rem rgb(var(--color-foreground));
+  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
+  background-color: rgba(var(--color-foreground), 0.04);
   border-radius: 2.6rem;
   font-size: 1rem;
   min-height: 0;
   min-width: 0;
-  padding: 0.25rem 1.25rem;
+  padding: 0.4rem 1.4rem;
   display: flex;
   align-items: center;
+  transition: box-shadow var(--duration-short) ease, background-color var(--duration-short) ease;
 }
 
 span.active-facets__button-inner:before,
@@ -659,7 +661,8 @@ span.active-facets__button-inner:after {
 }
 
 .active-facets__button:hover .active-facets__button-inner {
-  box-shadow: 0 0 0 0.2rem rgb(var(--color-foreground));
+  box-shadow: 0 0 0 0.2rem rgba(var(--color-foreground), 1);
+  background-color: rgba(var(--color-foreground), 0.08);
 }
 
 .active-facets__button--light .active-facets__button-inner {

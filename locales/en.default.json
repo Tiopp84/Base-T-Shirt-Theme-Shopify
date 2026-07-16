@@ -326,6 +326,8 @@
       "new_estimated_total": "New estimated total",
       "note": "Order special instructions",
       "checkout": "Check out",
+      "secure_checkout": "Secure checkout",
+      "shipping_at_checkout": "Shipping calculated at checkout",
       "empty": "Your cart is empty",
       "product_disclosure": "Product disclosure",
       "product_disclosures": "Product disclosures",

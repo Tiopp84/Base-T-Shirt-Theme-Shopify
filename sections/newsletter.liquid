@@ -7,6 +7,10 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+  #Newsletter-{{ section.id }} {
+    --newsletter-image-overlay-opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  }
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -15,9 +19,27 @@
   }
 {%- endstyle -%}
 
-<div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}">
+<div
+  id="Newsletter-{{ section.id }}"
+  class="newsletter newsletter--layout-{{ section.settings.layout_style | default: 'minimal' }} center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif %}"
+>
   <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding">
+    {%- if section.settings.image != blank -%}
+      <div class="newsletter__media media">
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            widths: '375, 550, 750, 1100, 1500, 1800',
+            sizes: '(min-width: 990px) 42vw, 100vw',
+            loading: 'lazy',
+            class: 'newsletter__image'
+        }}
+      </div>
+    {%- endif -%}
+    <div class="newsletter__content">
       {% content_for 'blocks' %}
+    </div>
   </div>
 </div>
 
@@ -39,6 +61,41 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "options": [
+        {
+          "value": "minimal",
+          "label": "t:sections.newsletter.settings.layout_style.options__1.label"
+        },
+        {
+          "value": "editorial_split",
+          "label": "t:sections.newsletter.settings.layout_style.options__2.label"
+        },
+        {
+          "value": "full_bleed",
+          "label": "t:sections.newsletter.settings.layout_style.options__3.label"
+        }
+      ],
+      "default": "minimal",
+      "label": "t:sections.newsletter.settings.layout_style.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.newsletter.settings.image.label"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 10,
+      "unit": "%",
+      "default": 20,
+      "label": "t:sections.newsletter.settings.image_overlay_opacity.label"
     },
     {
       "type": "checkbox",
