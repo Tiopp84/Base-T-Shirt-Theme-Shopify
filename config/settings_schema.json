@@ -1469,6 +1469,12 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_reassurance",
+        "label": "t:settings_schema.cart.settings.cart_drawer.show_reassurance.label",
+        "default": true
       }
     ]
   },

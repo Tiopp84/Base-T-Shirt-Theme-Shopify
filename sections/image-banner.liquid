@@ -27,9 +27,20 @@
   #Banner-{{ section.id }}::after {
     opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
   }
+
+  #Banner-{{ section.id }} {
+    --banner-content-max-width: {{ section.settings.content_width | default: 72 }}rem;
+  }
 {%- endstyle -%}
 
 {%- liquid
+  assign hero_style = section.settings.hero_style | default: 'campaign'
+  assign overlay_style = section.settings.overlay_style | default: 'gradient-left'
+  assign text_reveal = section.settings.text_reveal
+  if text_reveal == nil
+    assign text_reveal = true
+  endif
+
   assign full_width = '100vw'
   assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
 
@@ -53,7 +64,7 @@
 
 <div
   id="Banner-{{ section.id }}"
-  class="banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.image_height == 'adapt' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+  class="banner banner--style-{{ hero_style }} banner--overlay-{{ overlay_style }}{% if text_reveal %} banner--reveal-stagger{% endif %} banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.stack_images_on_mobile and section.settings.image != blank and section.settings.image_2 != blank %} banner--stacked{% endif %}{% if section.settings.image_height == 'adapt' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
 >
   {%- if section.settings.image != blank -%}
     <div class="banner__media media{% if section.settings.image == blank and section.settings.image_2 == blank %} placeholder{% endif %}{% if section.settings.image_2 != blank %} banner__media-half{% endif %}{% if section.settings.image_behavior != 'none' %} animate--{{ section.settings.image_behavior }}{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
@@ -153,6 +164,34 @@
     },
     {
       "type": "select",
+      "id": "overlay_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:sections.image-banner.settings.overlay_style.options__1.label"
+        },
+        {
+          "value": "gradient-left",
+          "label": "t:sections.image-banner.settings.overlay_style.options__2.label"
+        },
+        {
+          "value": "gradient-bottom",
+          "label": "t:sections.image-banner.settings.overlay_style.options__3.label"
+        },
+        {
+          "value": "editorial",
+          "label": "t:sections.image-banner.settings.overlay_style.options__4.label"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.image-banner.settings.overlay_style.options__5.label"
+        }
+      ],
+      "default": "gradient-left",
+      "label": "t:sections.image-banner.settings.overlay_style.label"
+    },
+    {
+      "type": "select",
       "id": "image_height",
       "options": [
         {
@@ -202,6 +241,42 @@
     {
       "type": "header",
       "content": "t:sections.image-banner.settings.content.content"
+    },
+    {
+      "type": "select",
+      "id": "hero_style",
+      "options": [
+        {
+          "value": "campaign",
+          "label": "t:sections.image-banner.settings.hero_style.options__1.label"
+        },
+        {
+          "value": "editorial",
+          "label": "t:sections.image-banner.settings.hero_style.options__2.label"
+        },
+        {
+          "value": "minimal",
+          "label": "t:sections.image-banner.settings.hero_style.options__3.label"
+        }
+      ],
+      "default": "campaign",
+      "label": "t:sections.image-banner.settings.hero_style.label"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 42,
+      "max": 96,
+      "step": 2,
+      "unit": "rem",
+      "default": 72,
+      "label": "t:sections.image-banner.settings.content_width.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "text_reveal",
+      "default": true,
+      "label": "t:sections.image-banner.settings.text_reveal.label"
     },
     {
       "type": "select",

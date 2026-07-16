@@ -22,20 +22,21 @@
 }
 
 .product-card-wrapper .card__information {
-  padding: 1.6rem 0 0;
+  padding: 1.8rem 0 0;
 }
 
 .product-card-wrapper .card__heading {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: var(--font-body-weight-bold);
-  letter-spacing: 0.04rem;
+  letter-spacing: 0.06rem;
   line-height: 1.25;
   text-transform: uppercase;
 }
 
 .product-card-wrapper .card-information > .price {
-  color: rgba(var(--color-foreground), 0.72);
-  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.76);
+  font-size: 1.35rem;
+  margin-top: 0.7rem;
 }
 
 .product-card-wrapper .card:not(.card--horizontal) {
@@ -63,7 +64,7 @@
   pointer-events: none;
   position: absolute;
   right: 0;
-  transition: opacity var(--duration-default) ease;
+  transition: opacity var(--theme-transition-smooth);
   z-index: 2;
 }
 
@@ -71,7 +72,7 @@
 .product-card-wrapper .card:not(.card--horizontal) > .card__inner > .quick-add > product-form {
   display: block;
   transform: translateY(1rem);
-  transition: transform var(--duration-default) ease;
+  transition: transform var(--theme-transition-smooth);
 }
 
 .product-card-wrapper:hover .card:not(.card--horizontal) > .card__inner > .quick-add,
@@ -89,7 +90,7 @@
 
 .product-card-wrapper .quick-add__submit {
   min-height: 4.2rem;
-  border-radius: 0.2rem;
+  border-radius: var(--urban-radius);
   background: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
   font-size: 1.1rem;
@@ -490,12 +491,12 @@
 @media screen and (min-width: 990px) {
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
-    transition: transform var(--theme-transition-smooth);
+    transition: transform var(--theme-transition-slower);
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
   .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
-    transform: scale(1.025);
+    transform: scale(1.04);
   }
 
   .card-wrapper:hover .media.media--hover-effect > img:first-child:not(:only-child) {
@@ -504,8 +505,8 @@
 
   .card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
-    transition: transform var(--theme-transition-smooth);
-    transform: scale(1.025);
+    transition: transform var(--theme-transition-slower);
+    transform: scale(1.04);
   }
 
   .underline-links-hover:hover a {
